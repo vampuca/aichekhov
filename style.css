@@ -1,54 +1,90 @@
+/* === Fonts === */
+@font-face {
+  font-family: "Hanken Grotesk";
+  src: url("assets/fonts/hanken-grotesk-variable.ttf") format("truetype");
+  font-weight: 100 900; /* variable font range */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* === Base === */
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,Arial,sans-serif;color:#fff;background:#000;}
-.bg-video{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2;background:#000;}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:-1;}
-
-.logo{
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  max-width: 180px;
-  padding: 8px 12px;
-  background: rgba(0,0,0,0.4);
-  border-radius: 8px;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
-  z-index: 10;
+body{
+  margin:0;
+  font-family:"Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight:100; /* тонкое начертание по умолчанию */
+  color:#fff;
+  background:#000;
 }
 
+/* === Background video === */
+.bg-video{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  object-fit:cover;z-index:-2;background:#000;
+}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.30);z-index:-1;}
+
+/* === Layout === */
 .content{
   min-height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:6rem 1.5rem 3rem;
-  gap:3rem;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:4rem 1.5rem 3rem;
+  gap:2.5rem;
 }
 
+/* Верхняя строка (слоган) — чуть выше, уже по ширине */
 .tagline{
   font-size:clamp(20px,2.5vw,28px);
-  max-width:70%;
-  margin:0 auto;
+  max-width:68%;
+  margin:0 auto 0;
+  line-height:1.35;
 }
 
+/* Блок "Кто мы" — уже и с лёгким overlap на лице */
 .about{
-  max-width:60%;
+  max-width:44%;
+  margin:-6vh auto 0; /* поднимаем блок чтобы «заезжал» */
   background:rgba(0,0,0,.45);
   backdrop-filter:saturate(120%) blur(2px);
-  padding:1.25rem;
+  padding:1.1rem 1.25rem;
   border-radius:12px;
-  margin:0 auto;
+  position:relative;z-index:1;
 }
-.about h2{margin:.2rem 0 0.6rem;font-size:1.1rem;letter-spacing:.02em;text-transform:uppercase;opacity:.9}
-.about p{margin:.2rem 0 0 0;font-size:1.05rem;line-height:1.6}
+.about p{margin:.2rem 0 0;font-size:1.05rem;line-height:1.6}
 
-.contact{max-width:900px;background:rgba(0,0,0,.45);backdrop-filter:saturate(120%) blur(2px);padding:1.25rem;border-radius:12px}
-.contact h2{margin:.2rem 0 0.6rem;font-size:1.1rem;letter-spacing:.02em;text-transform:uppercase;opacity:.9}
-.contact p{margin:.2rem 0 0 0;font-size:1.05rem;line-height:1.6}
+/* Контактный блок без заголовка */
+.contact{
+  max-width:900px;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:saturate(120%) blur(2px);
+  padding:1.1rem 1.25rem;
+  border-radius:12px;
+}
+.contact p{margin:.2rem 0 0;font-size:1.05rem;line-height:1.6}
 
+/* Логотип внизу над email, без подложки */
+.logo-bottom{
+  display:block;
+  max-width:180px;
+  margin:0 auto 0.75rem;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));
+}
+
+/* Links & footer */
 a{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.5)}
 a:hover{opacity:.85}
-
 .footer{opacity:.75;font-size:.9rem;margin-top:auto}
+
+/* Доступность: скрытый заголовок секции */
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .tagline{max-width:92%}
+  .about{max-width:88%; margin:-2vh auto 0;}
+  .logo-bottom{max-width:150px}
+}
