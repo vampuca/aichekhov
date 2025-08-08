@@ -1,27 +1,28 @@
 <!doctype html>
 <html lang="ru">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Студия искусственного интеллекта имени А.П. Чехова</title>
-    <meta name="description" content="Студия ИИ им. А.П. Чехова — графические новеллы, видео, исследовательские прототипы.">
-    <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Студия искусственного интеллекта им. А.П. Чехова</title>
+    <meta name="description" content="Студия ИИ им. А.П. Чехова — графические новеллы, видео, исследовательские прототипы." />
+    <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <img src="assets/img/logo.png" alt="Логотип Студии" class="logo">
-
     <video id="bg-video" class="bg-video" autoplay muted loop playsinline poster="assets/img/poster.jpg">
-      <source src="assets/video/background.mp4" type="video/mp4">
+      <source src="assets/video/background.mp4" type="video/mp4" />
     </video>
     <div class="overlay"></div>
+
     <main class="content" role="main">
       <header class="hero">
-        <p class="tagline">Создаём истории и визуальные миры на стыке сценарного мастерства и машинного обучения.</p>
+        <p class="tagline">
+          Создаём истории и визуальные миры на стыке сценарного мастерства и машинного обучения.
+        </p>
       </header>
 
       <section class="about" id="about">
-        <h2>Кто мы</h2>
+        <h2 class="sr-only">Кто мы</h2>
         <p>
           Мы творческая лаборатория, работающая с генеративными моделями: графические новеллы, короткие фильмы,
           интерактивные форматы и исследовательские прототипы. Комбинируем режиссуру, дизайн и код — чтобы технологии
@@ -30,21 +31,9 @@
       </section>
 
       <section class="contact" id="contact">
-        <h2>Контакты</h2>
-        <p>Пишите нам: <a href="mailto:hello@aichekhov.ru">hello@aichekhov.ru</a></p>
+        <img src="assets/img/logo.png" alt="Логотип студии" class="contact-logo" />
+        <p class="contact-text">Пишите нам: <a href="mailto:hello@aichekhov.ru">hello@aichekhov.ru</a></p>
       </section>
 
       <footer class="footer">
-        <p>© <span id="year"></span> Студия ИИ им. А.П. Чехова</p>
-      </footer>
-    </main>
-
-    <script>
-      document.getElementById('year').textContent = new Date().getFullYear();
-      document.addEventListener('touchend', () => {
-        const v = document.getElementById('bg-video');
-        if (v && v.paused) { v.play().catch(()=>{}); }
-      }, { once: true });
-    </script>
-  </body>
-</html>
+        <p>© <span
