@@ -9,52 +9,80 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <video id="bg-video" class="bg-video" autoplay muted loop playsinline poster="assets/img/poster.jpg">
-      <source src="assets/video/background.mp4" type="video/mp4" />
-    </video>
-    <div class="overlay"></div>
+    <!-- FIXED UI -->
+    <a class="brand reveal" data-reveal="fade" href="#top" aria-label="На начало">
+      <img src="assets/img/logo.png" alt="Логотип студии" />
+    </a>
+    <a class="contact-fixed reveal" data-reveal="up" href="mailto:hello@aichekhov.ru" aria-label="Написать нам">Пишите нам</a>
 
-    <main class="content" role="main">
-      <header class="hero">
-        <p class="tagline">
-          Создаём истории и визуальные миры на стыке сценарного мастерства и машинного обучения.
-        </p>
-      </header>
+    <!-- 1) HERO (статичный) -->
+    <section id="top" class="hero" role="banner">
+      <div class="hero-inner">
+        <h1 class="reveal" data-reveal="up">Создаём истории и визуальные миры</h1>
+        <p class="subtitle reveal" data-reveal="up" data-delay="120">На стыке сценарного мастерства и машинного обучения</p>
+      </div>
+    </section>
 
-      <section class="about" id="about">
-        <h2 class="sr-only">Кто мы</h2>
-        <p>
-          Мы творческая лаборатория, работающая с генеративными моделями: графические новеллы, короткие фильмы,
+    <!-- 2) ABOUT with VIDEO (full screen) -->
+    <section class="about-video" aria-labelledby="about-title">
+      <video class="bg-video" autoplay muted loop playsinline poster="assets/img/poster.jpg">
+        <source src="assets/video/background.mp4" type="video/mp4" />
+      </video>
+      <div class="video-overlay" aria-hidden="true"></div>
+      <div class="about-content">
+        <h2 id="about-title" class="sr-only">Кто мы</h2>
+        <p class="reveal" data-reveal="fade">
+          Мы — творческая лаборатория, работающая с генеративными моделями: графические новеллы, короткие фильмы,
           интерактивные форматы и исследовательские прототипы. Комбинируем режиссуру, дизайн и код — чтобы технологии
           помогали рассказывать простые, понятные и сильные истории.
         </p>
-      </section>
+      </div>
+    </section>
 
-      <!-- Контакты у низа страницы -->
-      <section class="contact-section" id="contact">
-        <!-- Лого отдельным блоком -->
-        <img src="assets/img/logo.png" alt="Логотип студии" class="contact-logo" />
+    <!-- Контакты у низа -->
+    <section class="contact-section" id="contact">
+      <img src="assets/img/logo.png" alt="Логотип студии" class="contact-logo reveal" data-reveal="fade" />
+      <div class="contact reveal" data-reveal="up">
+        <p class="contact-text">
+          Пишите нам: <a href="mailto:hello@aichekhov.ru">hello@aichekhov.ru</a>
+        </p>
+      </div>
+    </section>
 
-        <!-- Прямоугольник с email -->
-        <div class="contact">
-          <p class="contact-text">
-            Пишите нам: <a href="mailto:hello@aichekhov.ru">hello@aichekhov.ru</a>
-          </p>
-        </div>
-      </section>
-
-      <footer class="footer">
-        <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
-      </footer>
-    </main>
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
+    </footer>
 
     <script>
+      // Год в футере
       document.getElementById("year").textContent = new Date().getFullYear();
-      // для iOS, если вдруг не автоплейнется
+
+      // iOS fallback для автоплея
       document.addEventListener("touchend", () => {
-        const v = document.getElementById("bg-video");
-        if (v && v.paused) v.play().catch(() => {});
+        document.querySelectorAll("video").forEach(v => { if (v.paused) v.play().catch(()=>{}); });
       }, { once: true });
+
+      // Мягкие появления: IntersectionObserver
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!prefersReduced && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              // задержка из data-delay (мс)
+              const delay = parseInt(el.dataset.delay || "0", 10);
+              if (delay) el.style.transitionDelay = delay + "ms";
+              el.classList.add("in");
+              obs.unobserve(el);
+            }
+          });
+        }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 });
+
+        document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+      } else {
+        // Без анимаций — сразу показываем
+        document.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
+      }
     </script>
   </body>
 </html>
