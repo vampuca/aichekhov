@@ -32,8 +32,16 @@
 
       <section class="contact" id="contact">
         <img src="assets/img/logo.png" alt="Логотип студии" class="contact-logo" />
-        <p class="contact-text">Пишите нам: <a href="mailto:hello@aichekhov.ru">hello@aichekhov.ru</a></p>
+        <p class="contact-text"><a href="mailto:hello@aichekhov.ru">Пишите нам</a></p>
       </section>
 
       <footer class="footer">
-        <p>© <span
+        <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
+      </footer>
+    </main>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
