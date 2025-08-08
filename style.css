@@ -13,7 +13,7 @@ html,body{height:100%}
 body{
   margin:0;
   font-family:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  font-weight:100;
+  font-weight:100; /* тонкий по умолчанию */
   color:#fff; background:#000;
 }
 
@@ -38,9 +38,10 @@ body{
   line-height:1.35;
 }
 
+/* "Кто мы" — опускаем ниже, чтобы был зазор после слогана */
 .about{
   max-width:44%;
-  margin:-6vh auto 0;
+  margin: clamp(24px, 3vh, 56px) auto 0; /* вместо отрицательного overlap */
   background:rgba(0,0,0,.45);
   backdrop-filter:saturate(120%) blur(2px);
   padding:1.1rem 1.25rem;
@@ -49,7 +50,24 @@ body{
 }
 .about p{ margin:.2rem 0 0; font-size:1.05rem; line-height:1.6; }
 
-/* Контактный блок */
+/* ===== Контакты у низа ===== */
+.contact-section{
+  width:100%;
+  display:flex; flex-direction:column; align-items:center;
+  text-align:center;
+  margin-top:auto; /* прижимает блок контактов к низу внутри .content */
+}
+
+/* Лого отдельно, над прямоугольником */
+.contact-logo{
+  display:block;
+  max-width:140px;
+  height:auto;
+  margin:0 auto 16px;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));
+}
+
+/* Прямоугольник с email */
 .contact{
   max-width:900px;
   background:rgba(0,0,0,.45);
@@ -57,19 +75,12 @@ body{
   padding:1.1rem 1.25rem;
   border-radius:12px;
 }
-.contact-logo{
-  display:block;
-  max-width:140px;
-  height:auto;
-  margin:0 auto 10px;
-  filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));
-}
-.contact-text{ margin:.2rem 0 0; font-size:1.05rem; line-height:1.6; }
+.contact-text{ margin:0; font-size:1.05rem; line-height:1.6; }
 
 /* Ссылки и футер */
 a{ color:#fff; text-decoration:underline; text-decoration-color:rgba(255,255,255,.5) }
 a:hover{ opacity:.85 }
-.footer{ opacity:.75; font-size:.9rem; margin-top:auto }
+.footer{ opacity:.75; font-size:.9rem; margin-top:12px }
 
 /* Доступность */
 .sr-only{
@@ -80,6 +91,6 @@ a:hover{ opacity:.85 }
 /* ===== Responsive ===== */
 @media (max-width: 900px){
   .tagline{ max-width:92% }
-  .about{ max-width:88%; margin:-2vh auto 0; }
+  .about{ max-width:88%; margin: clamp(16px, 2vh, 40px) auto 0; }
   .contact-logo{ max-width:120px }
 }
