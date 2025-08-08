@@ -27,10 +27,7 @@ body{
 }
 .reveal[data-reveal="fade"]{ transform:none }
 .reveal[data-reveal="up"]{ transform: translateY(14px) }
-.reveal.in{
-  opacity:1;
-  transform: none;
-}
+.reveal.in{ opacity:1; transform: none; }
 
 /* ===== Fixed UI ===== */
 .brand{
@@ -41,33 +38,35 @@ body{
   display:block; width:120px; height:auto;
   filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));
 }
+
+/* морфик-кнопка вверху справа */
 .contact-fixed{
   position:fixed; top:20px; right:20px; z-index:20;
-  display:inline-block; padding:10px 14px;
-  background:rgba(0,0,0,.45); border-radius:10px;
-  text-decoration:none; color:#fff; font-size:14px; line-height:1;
-  backdrop-filter:saturate(120%) blur(2px);
+  display:inline-block; padding:10px 16px;
+  background: linear-gradient(135deg, #6EE7F9 0%, #A78BFA 50%, #F472B6 100%);
+  color:#0b0b0b;
+  border-radius:999px;
+  text-decoration:none; font-size:14px; line-height:1; font-weight:700;
+  box-shadow: 0 6px 24px rgba(167, 139, 250, .45), 0 2px 8px rgba(0,0,0,.25);
 }
-.contact-fixed:hover{opacity:.9}
+.contact-fixed:hover{ filter:brightness(1.05) }
 
 /* ===== Sections ===== */
 section{width:100%; min-height:100vh;}
 
-/* 1) HERO */
+/* 1) HERO — светлее оверлеи */
 .hero{
   display:grid; place-items:center;
-  background: radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,.10), rgba(0,0,0,0) 60%)
-              ,linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.20) 100%);
+  background: radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%)
+            , linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.12) 100%);
 }
 .hero-inner{ text-align:center; padding:0 24px; max-width:1000px; }
 .hero h1{
   margin:0 0 16px; font-size:clamp(36px,6vw,72px); line-height:1.04; font-weight:200;
 }
-.subtitle{
-  margin:0; font-size:clamp(16px,2.2vw,22px); opacity:.9;
-}
+.subtitle{ margin:0; font-size:clamp(16px,2.2vw,22px); opacity:.9; }
 
-/* 2) ABOUT with VIDEO */
+/* 2) ABOUT with VIDEO — светлее затемнение */
 .about-video{ position:relative; overflow:hidden; }
 .bg-video{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; background:#000;
@@ -75,8 +74,8 @@ section{width:100%; min-height:100vh;}
 .video-overlay{
   position:absolute; inset:0; z-index:-1;
   background:
-    radial-gradient(1000px 400px at 50% 0%, rgba(0,0,0,.0), rgba(0,0,0,.55) 70%),
-    linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.65) 100%);
+    radial-gradient(1000px 420px at 50% 0%, rgba(0,0,0,.0), rgba(0,0,0,.40) 70%),
+    linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.42) 100%);
 }
 .about-content{
   min-height:100vh;
@@ -87,42 +86,37 @@ section{width:100%; min-height:100vh;}
 .about-content p{
   max-width:760px; margin:0;
   font-size:clamp(18px,2vw,22px); line-height:1.6;
-  background:rgba(0,0,0,.45);
+  background:rgba(0,0,0,.35);
   backdrop-filter:saturate(120%) blur(2px);
   padding:16px 18px; border-radius:12px;
 }
 
-/* Контакты у низа */
+/* Контакты у низа (без лого) */
 .contact-section{
   width:100%;
   display:flex; flex-direction:column; align-items:center;
   text-align:center;
   margin-top:auto;
 }
-.contact-logo{
-  display:block;
-  max-width:140px;
-  height:auto;
-  margin:0 auto 16px;
-  filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));
-}
 .contact{
   max-width:900px;
-  background:rgba(0,0,0,.45);
+  background:rgba(0,0,0,.35);
   backdrop-filter:saturate(120%) blur(2px);
   padding:1.1rem 1.25rem;
   border-radius:12px;
 }
 .contact-text{ margin:0; font-size:1.05rem; line-height:1.6; }
+.contact-text a{ color:#fff; text-decoration:underline; text-decoration-color:rgba(255,255,255,.55) }
 
-/* Footer */
+/* Footer — поднят выше */
 .site-footer{
   display:grid; place-items:center;
-  min-height:30vh; padding:24px; text-align:center;
+  min-height:18vh; /* было 30vh — подняли */
+  padding:20px; text-align:center;
   color:rgba(255,255,255,.8);
 }
 
-/* Accessibility helper */
+/* Доступность */
 .sr-only{
   position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
   clip:rect(0,0,0,0); white-space:nowrap; border:0;
@@ -137,8 +131,7 @@ section{width:100%; min-height:100vh;}
 /* Mobile tweaks */
 @media (max-width: 900px){
   .brand img{ width:100px }
-  .contact-fixed{ padding:8px 12px; font-size:13px }
+  .contact-fixed{ padding:8px 14px; font-size:13px }
   .hero h1{ font-size:clamp(28px,8vw,48px) }
   .about-content p{ max-width:92% }
-  .contact-logo{ max-width:120px }
 }

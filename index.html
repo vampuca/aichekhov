@@ -18,8 +18,10 @@
     <!-- 1) HERO (статичный) -->
     <section id="top" class="hero" role="banner">
       <div class="hero-inner">
-        <h1 class="reveal" data-reveal="up">Создаём истории и визуальные миры</h1>
-        <p class="subtitle reveal" data-reveal="up" data-delay="120">На стыке сценарного мастерства и машинного обучения</p>
+        <h1 class="reveal" data-reveal="up">Новый язык сторителлинга</h1>
+        <p class="subtitle reveal" data-reveal="up" data-delay="120">
+          Первая в России творческая AI-студия, основанная профессионалами ТВ и кино.
+        </p>
       </div>
     </section>
 
@@ -32,16 +34,16 @@
       <div class="about-content">
         <h2 id="about-title" class="sr-only">Кто мы</h2>
         <p class="reveal" data-reveal="fade">
-          Мы — творческая лаборатория, работающая с генеративными моделями: графические новеллы, короткие фильмы,
-          интерактивные форматы и исследовательские прототипы. Комбинируем режиссуру, дизайн и код — чтобы технологии
-          помогали рассказывать простые, понятные и сильные истории.
+          Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда».
+          Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс, освободившись
+          от громоздкой административной цепочки традиционного производства. Мы приглашаем вас сделать вместе с нами шаг
+          в будущее, где точно не будет скучно. Апчхи.
         </p>
       </div>
     </section>
 
-    <!-- Контакты у низа -->
+    <!-- Контакты у низа (без лого) -->
     <section class="contact-section" id="contact">
-      <img src="assets/img/logo.png" alt="Логотип студии" class="contact-logo reveal" data-reveal="fade" />
       <div class="contact reveal" data-reveal="up">
         <p class="contact-text">
           Пишите нам: <a href="mailto:hello@aichekhov.ru">hello@aichekhov.ru</a>
@@ -54,7 +56,7 @@
     </footer>
 
     <script>
-      // Год в футере
+      // Год
       document.getElementById("year").textContent = new Date().getFullYear();
 
       // iOS fallback для автоплея
@@ -62,14 +64,13 @@
         document.querySelectorAll("video").forEach(v => { if (v.paused) v.play().catch(()=>{}); });
       }, { once: true });
 
-      // Мягкие появления: IntersectionObserver
+      // Мягкие появления
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (!prefersReduced && "IntersectionObserver" in window) {
         const io = new IntersectionObserver((entries, obs) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               const el = entry.target;
-              // задержка из data-delay (мс)
               const delay = parseInt(el.dataset.delay || "0", 10);
               if (delay) el.style.transitionDelay = delay + "ms";
               el.classList.add("in");
@@ -80,7 +81,6 @@
 
         document.querySelectorAll(".reveal").forEach(el => io.observe(el));
       } else {
-        // Без анимаций — сразу показываем
         document.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
       }
     </script>
