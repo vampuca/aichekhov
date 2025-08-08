@@ -17,7 +17,7 @@
       Пишите нам
     </button>
 
-    <!-- 1) HERO (ниже лого, виден «кусочек» видео) -->
+    <!-- 1) HERO (ниже лого; виден «кусочек» видео ближе к заголовку) -->
     <section id="top" class="hero" role="banner">
       <div class="hero-inner">
         <h1>
@@ -29,31 +29,34 @@
       </div>
     </section>
 
-    <!-- 2) ABOUT с видео (скругление у видео, исчезает при скролле) -->
+    <!-- 2) ABOUT с видео: скругление у видео, исчезает при скролле -->
     <section class="about-video" aria-labelledby="about-title">
       <video class="bg-video" autoplay muted loop playsinline poster="assets/img/poster.jpg">
         <source src="assets/video/background.mp4" type="video/mp4" />
       </video>
       <div class="video-overlay" aria-hidden="true"></div>
+
       <div class="about-content">
         <h2 id="about-title" class="sr-only">Кто мы</h2>
         <p>
-          Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда».
+          Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда».<br><br>
           Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс, освободившись
-          от громоздкой административной цепочки традиционного производства.
-        </p>
-        <p>
-          Мы приглашаем вас сделать вместе с нами шаг в будущее, где точно не будет скучно. Апчхи.
+          от громоздкой административной цепочки традиционного производства. Мы приглашаем вас сделать вместе с нами шаг
+          в будущее, где точно не будет скучно. Апчхи.
         </p>
       </div>
     </section>
 
-    <!-- Контакты внизу (без лого) -->
+    <!-- Контакты внизу: только иконка почты -->
     <section class="contact-section" id="contact">
       <div class="contact">
-        <p class="contact-text">
-          Пишите нам: <a href="mailto:hello@aichekhov.ru">hello@aichekhov.ru</a>
-        </p>
+        <a class="mail-icon" href="mailto:hello@aichekhov.ru" aria-label="Написать на hello@aichekhov.ru">
+          <!-- Простая иконка конверта (SVG) -->
+          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.6" />
+            <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.6" />
+          </svg>
+        </a>
       </div>
     </section>
 
@@ -78,7 +81,7 @@
     </aside>
 
     <script>
-      // Год в футере
+      // год в футере
       document.getElementById("year").textContent = new Date().getFullYear();
 
       // iOS автоплей подстраховка
@@ -124,9 +127,8 @@
         });
       })();
 
-      // Снятие скругления у видео при скролле (как у Morphic)
+      // Снятие скругления у видео при скролле
       (function(){
-        const hero  = document.querySelector('.hero');
         const about = document.querySelector('.about-video');
         function onScroll(){
           const top = about.getBoundingClientRect().top;
