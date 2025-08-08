@@ -17,7 +17,7 @@
       Пишите нам
     </button>
 
-    <!-- 1) HERO (чуть меньше 100vh, чтобы был виден «кусочек» видео) -->
+    <!-- 1) HERO (ниже лого, виден «кусочек» видео) -->
     <section id="top" class="hero" role="banner">
       <div class="hero-inner">
         <h1>
@@ -29,7 +29,7 @@
       </div>
     </section>
 
-    <!-- 2) ABOUT с видео (full screen, скругление 15%) -->
+    <!-- 2) ABOUT с видео (скругление у видео, исчезает при скролле) -->
     <section class="about-video" aria-labelledby="about-title">
       <video class="bg-video" autoplay muted loop playsinline poster="assets/img/poster.jpg">
         <source src="assets/video/background.mp4" type="video/mp4" />
@@ -40,13 +40,15 @@
         <p>
           Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда».
           Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс, освободившись
-          от громоздкой административной цепочки традиционного производства. Мы приглашаем вас сделать вместе с нами шаг
-          в будущее, где точно не будет скучно. Апчхи.
+          от громоздкой административной цепочки традиционного производства.
+        </p>
+        <p>
+          Мы приглашаем вас сделать вместе с нами шаг в будущее, где точно не будет скучно. Апчхи.
         </p>
       </div>
     </section>
 
-    <!-- Контакты у низа (без лого) -->
+    <!-- Контакты внизу (без лого) -->
     <section class="contact-section" id="contact">
       <div class="contact">
         <p class="contact-text">
@@ -76,7 +78,7 @@
     </aside>
 
     <script>
-      // год в футере
+      // Год в футере
       document.getElementById("year").textContent = new Date().getFullYear();
 
       // iOS автоплей подстраховка
@@ -84,7 +86,7 @@
         document.querySelectorAll("video").forEach(v => { if (v.paused) v.play().catch(()=>{}); });
       }, { once: true });
 
-      // drawer open/close
+      // Drawer open/close
       (function(){
         const openBtn = document.getElementById('contactOpen');
         const drawer  = document.getElementById('contactDrawer');
@@ -112,7 +114,6 @@
         scrim.addEventListener('click', closeDrawer);
         document.addEventListener('keydown', e => { if(e.key==='Escape' && !drawer.hidden) closeDrawer(); });
 
-        // простой mailto submit
         document.getElementById('contactForm').addEventListener('submit', e=>{
           e.preventDefault();
           const data = new FormData(e.target);
@@ -121,6 +122,19 @@
           window.location.href = `mailto:hello@aichekhov.ru?subject=${subject}&body=${body}`;
           closeDrawer();
         });
+      })();
+
+      // Снятие скругления у видео при скролле (как у Morphic)
+      (function(){
+        const hero  = document.querySelector('.hero');
+        const about = document.querySelector('.about-video');
+        function onScroll(){
+          const top = about.getBoundingClientRect().top;
+          if (top <= 60) about.classList.add('unrounded');
+          else about.classList.remove('unrounded');
+        }
+        window.addEventListener('scroll', onScroll, {passive:true});
+        onScroll();
       })();
     </script>
   </body>
