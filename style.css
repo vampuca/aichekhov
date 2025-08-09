@@ -21,7 +21,7 @@ body{
 
 /* Цвета по аналогии с Morphic */
 h1,h2,.title{ color:#E0E0E0 }     /* заголовки — светло-серые */
-.subtitle,.section-subtitle,.about-kicker,p,.desc{ color:#B0B0B0 }
+.subtitle,.section-subtitle,.about-kicker{ color:#A8A8A8 } /* подзаголовки немного «серее» */
 
 /* ===== Sticky Header ===== */
 .site-header{
@@ -36,7 +36,7 @@ h1,h2,.title{ color:#E0E0E0 }     /* заголовки — светло-сер�
 
 .main-nav{ display:flex; gap:18px; align-items:center; }
 .main-nav a{
-  color:#B0B0B0;                 /* тёмно-серый по умолчанию */
+  color:#6F6F6F;                 /* темно-серый в меню по умолчанию */
   text-decoration:none; font-weight:700; font-size:14px;
   padding:8px 10px; border-radius:10px; transition:color .15s ease, background .15s ease;
 }
@@ -54,40 +54,44 @@ h1,h2,.title{ color:#E0E0E0 }     /* заголовки — светло-сер�
 }
 .contact-btn:hover{ opacity:.9; }
 
-/* ===== ABOUT hero (видео фон, без плашки) ===== */
-.about-hero{
-  position:relative; min-height:88vh; display:flex; align-items:flex-end;
-  padding-top:72px; /* чтобы шапка не перекрывала */
+/* ===== HERO (только заголовок) ===== */
+.head-hero{
+  position:relative; min-height:72vh; display:flex; align-items:flex-end;
+  padding-top:72px;
 }
-.about-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; background:#000; }
-.about-dim{
+.head-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; background:#000; }
+.head-dim{
   position:absolute; inset:0;
   background:
-    radial-gradient(120% 80% at 50% 10%, rgba(0,0,0,.20) 0%, rgba(0,0,0,.65) 70%),
-    linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.55) 100%);
-  z-index:-1;
+    radial-gradient(120% 80% at 50% 10%, rgba(0,0,0,.25) 0%, rgba(0,0,0,.70) 75%),
+    linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.60) 100%);
+  z-index:-1;                     /* видео слегка видно */
 }
-.about-inner{
-  width:100%; padding:12vh 16px 8vh;
+.head-inner{
+  width:100%; padding:12vh 16px 10vh;
   display:flex; flex-direction:column; align-items:center; text-align:center; gap:18px;
 }
-.about-title{
-  font-size:clamp(42px,8vw,84px); line-height:1.05; font-weight:300; letter-spacing:.2px;
-  text-shadow:0 2px 24px rgba(0,0,0,.35);
-  margin-top:6vh; /* держим заголовок ниже глаз девушки */
+
+/* ===== О нас (отдельная секция) ===== */
+.about-section{
+  padding:6vh 16px 2vh;
+  display:flex; justify-content:center;
 }
-.about-kicker{ font-size:clamp(16px,2.2vw,20px) }
-.about-copy{ max-width:44%; text-align:justify; text-justify:inter-word; color:#D2D2D2 }
+.about-copy{
+  max-width:44%;
+  text-align:justify; text-justify:inter-word;
+  color:#D8D8D8;                  /* светло-серый текст, как просила */
+}
 .about-copy p{ margin:.6rem 0 0; line-height:1.65 }
 
 /* ===== Секция заголовка перед проектами ===== */
-.section-intro{ max-width:1100px; margin:8vh auto 0; padding:0 16px; text-align:center }
+.section-intro{ max-width:1100px; margin:6vh auto 0; padding:0 16px; text-align:center }
 .section-title{ font-weight:800; font-size:clamp(26px,4.2vw,40px); margin:0 0 .25rem }
 .section-subtitle{ font-size:clamp(16px,2.2vw,20px) }
 
 /* ===== Portfolio tiles ===== */
 .portfolio{
-  width:100%; max-width:1200px; margin:5vh auto 3.5rem;
+  width:100%; max-width:1200px; margin:4.5vh auto 3.5rem;
   display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:0 16px;
 }
 .tile{
@@ -103,15 +107,14 @@ h1,h2,.title{ color:#E0E0E0 }     /* заголовки — светло-сер�
     radial-gradient(100% 60% at 50% 10%, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.35) 100%);
   pointer-events:none;
 }
-.tile-overlay.static{ background:rgba(0,0,0,.35) }
+/* Заголовки на плитках — БЕЗ подложки */
 .tile-title{
-  position:absolute; left:14px; right:14px; bottom:46px;
+  position:absolute; left:14px; right:14px; bottom:42px;
   font-weight:800; font-size:clamp(16px,2.2vw,22px); color:#E0E0E0;
-  background:rgba(0,0,0,.32); backdrop-filter:blur(3px);
-  padding:8px 12px; border-radius:10px;
+  text-shadow:0 1px 6px rgba(0,0,0,.5);
 }
 .tile-badge{
-  position:absolute; left:14px; bottom:12px;
+  position:absolute; left:14px; bottom:10px;
   border:1px solid #fff; border-radius:999px; padding:6px 10px;
   font-size:12px; line-height:1; background:#0b0b0b; color:#E0E0E0;
 }

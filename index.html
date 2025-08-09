@@ -21,32 +21,34 @@
       <a href="#projects" data-link="projects">Проекты</a>
     </nav>
 
-    <!-- Кнопка открывает форму -->
     <button class="contact-btn" type="button" id="open-contact">Пишите нам</button>
     <noscript><a class="contact-btn" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></noscript>
   </header>
 
-  <!-- ===== О НАС (видео фон, без плашки) ===== -->
-  <section class="about-hero" id="about" aria-label="О нас">
-    <video class="about-bg" autoplay muted loop playsinline poster="assets/img/poster.jpg">
+  <!-- ===== HERO: только заголовок + слегка видимое видео ===== -->
+  <section class="head-hero" aria-label="Вступление">
+    <video class="head-bg" autoplay muted loop playsinline poster="assets/img/poster.jpg">
       <source src="assets/video/background.mp4" type="video/mp4" />
     </video>
-    <div class="about-dim"></div>
+    <div class="head-dim"></div>
 
-    <div class="about-inner">
+    <div class="head-inner">
       <h1 class="about-title">Новый язык<br/>сторителлинга</h1>
       <p class="about-kicker subtitle">Первая в России творческая AI-студия, основанная профессионалами ТВ и кино.</p>
+    </div>
+  </section>
 
-      <div class="about-copy">
-        <p>
-          Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда».
-          Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс,
-          освободившись от громоздкой административной цепочки традиционного производства.
-        </p>
-        <p>
-          Мы приглашаем вас сделать вместе с нами шаг в будущее, где точно не будет скучно. Апчхи.
-        </p>
-      </div>
+  <!-- ===== О НАС: отдельная секция с текстом (светло-серый) ===== -->
+  <section class="about-section" id="about" aria-label="О нас">
+    <div class="about-copy">
+      <p>
+        Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда».
+        Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс,
+        освободившись от громоздкой административной цепочки традиционного производства.
+      </p>
+      <p>
+        Мы приглашаем вас сделать вместе с нами шаг в будущее, где точно не будет скучно. Апчхи.
+      </p>
     </div>
   </section>
 
@@ -166,7 +168,7 @@
       backdrop && backdrop.addEventListener('click', closeModal);
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.getAttribute('aria-hidden')==='false') closeModal(); });
 
-      // тост после отправки
+      // Тост после отправки
       if (new URLSearchParams(location.search).get('sent')==='1') {
         const toast = document.createElement('div');
         toast.textContent = 'Спасибо! Сообщение отправлено.';
@@ -204,11 +206,10 @@
         v.className = 'tile-bg';
         v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
         v.addEventListener('canplay', ()=> tile.prepend(v), { once:true });
-        v.addEventListener('error', ()=>{/* молча остаёмся на статике */}, { once:true });
+        v.addEventListener('error', ()=>{/* остаёмся на статике */}, { once:true });
         const source = document.createElement('source');
         source.src = src; source.type = 'video/mp4';
         v.appendChild(source);
-        // Начинаем грузить, но добавляем в DOM только при canplay
         v.load();
       });
     })();
