@@ -1,3 +1,4 @@
+/* ===== Локальный Hanken (если положен в assets/fonts) ===== */
 @font-face{
   font-family:"Hanken Grotesk";
   src:url("assets/fonts/HankenGrotesk-VariableFont_wght.ttf") format("truetype");
@@ -6,9 +7,10 @@
 
 :root{
   --text: rgba(255,255,255,.92);
-  --nav: #5a5a5a;
-  --nav-active: #e0e0e0;
-  --subtitle: #8f8f8f;
+  --nav: #5a5a5a;        /* тёмно-серый */
+  --nav-active: #e0e0e0; /* светлее при ховере/активе */
+  --subtitle: #444;      /* подзаголовки темнее, как просила */
+  --about-offset: -110px;/* поднять блок "О нас" — верх рамки чуть выше линии лба */
 }
 
 *{box-sizing:border-box}
@@ -16,34 +18,43 @@ html,body{height:100%}
 html{scroll-behavior:smooth}
 body{
   margin:0; background:#000; color:var(--text);
-  font-family:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-family:"Hanken Grotesk","Hanken Grotesk Variable",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   font-weight:100;
 }
 
-/* Верх */
+/* ===== Верх ===== */
 .brand{ position:fixed; top:20px; left:20px; z-index:30 }
 .brand img{ width:120px; height:auto; display:block; filter:drop-shadow(0 2px 8px rgba(0,0,0,.5)) }
 
 .top-nav{
   position:fixed; top:28px; left:50%; transform:translateX(-50%); z-index:30;
-  display:flex; gap:18px; background:rgba(0,0,0,.55);
-  padding:6px 10px; border-radius:12px; border:1px solid rgba(255,255,255,.06);
-  backdrop-filter:saturate(120%) blur(8px);
+  display:flex; gap:18px;
+  /* убрали массивную «плашку» под меню */
+  background:transparent; border-radius:12px;
 }
 .top-nav a{
   color:var(--nav); text-decoration:none; font-weight:800; font-size:14px;
-  padding:8px 10px; border-radius:10px; transition:color .15s ease, background .15s ease;
+  padding:8px 10px; border-radius:10px;
+  /* кнопки почти прозрачные */
+  background:rgba(255,255,255,.04);
+  transition:color .15s ease, background .15s ease;
 }
-.top-nav a:hover, .top-nav a:focus, .top-nav a.active{ color:var(--nav-active); background:rgba(255,255,255,.08) }
+.top-nav a:hover, .top-nav a:focus, .top-nav a.active{
+  color:var(--nav-active);
+  background:rgba(255,255,255,.10);
+}
 
 .contact-fixed{
   position:fixed; top:28px; right:20px; z-index:30;
-  background:#0b0b0b; color:var(--nav); border:1.5px solid #fff;
+  background:rgba(255,255,255,.04); color:var(--nav); border:1.5px solid rgba(255,255,255,.35);
   border-radius:999px; padding:10px 14px; font-size:13px; font-weight:800; cursor:pointer;
+  transition:color .15s ease, background .15s ease, border-color .15s ease;
 }
-.contact-fixed:hover, .contact-fixed:focus{ color:var(--nav-active) }
+.contact-fixed:hover, .contact-fixed:focus{
+  color:var(--nav-active); background:rgba(255,255,255,.10); border-color:#fff;
+}
 
-/* HERO */
+/* ===== HERO ===== */
 .hero{
   min-height:80vh; display:flex; align-items:flex-start; justify-content:center;
   padding-top:clamp(156px, 21vh, 236px);
@@ -56,7 +67,7 @@ body{
 .hero h1{ margin:0 0 16px; font-size:clamp(44px, 9vw, 92px); line-height:1.04; font-weight:200 }
 .subtitle{ margin:0; font-size:clamp(16px,2.2vw,22px); color:var(--subtitle); font-weight:700 }
 
-/* ABOUT + video */
+/* ===== ABOUT + video ===== */
 .about-video{ position:relative; margin:0 3vw; min-height:100vh; --video-radius:28px }
 .bg-video{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000;
@@ -72,23 +83,25 @@ body{
 .about-video.unrounded .bg-video,
 .about-video.unrounded .video-overlay{ border-radius:0 }
 
+/* Карточка «О нас» — сдвиг вверх до линии лба */
 .about-content{
   min-height:100vh; display:grid; align-content:start; justify-items:center;
   padding: clamp(12vh, 18vh, 22vh) 24px 24px; text-align:center;
+  margin-top: var(--about-offset); /* ключевой сдвиг */
 }
 .about-content p{
   max-width:760px; margin:0; font-size:clamp(18px,2vw,22px); line-height:1.6;
   text-align:justify; text-justify:inter-word;
   background:rgba(0,0,0,.35); backdrop-filter:saturate(120%) blur(2px);
-  padding:38px 22px 18px; border-radius:12px;
+  padding:38px 22px 18px; border-radius:12px; border:1px solid rgba(255,255,255,.08);
 }
 
-/* Intro before tiles */
+/* ===== Интро перед плитками ===== */
 .section-intro{ max-width:1100px; margin:6vh auto 0; padding:0 16px; text-align:center }
 .section-title{ font-weight:800; font-size:clamp(26px,4.2vw,40px); margin:0 0 .25rem; color:#e0e0e0 }
 .section-subtitle{ font-size:clamp(16px,2.2vw,20px); color:var(--subtitle); font-weight:700 }
 
-/* Tiles */
+/* ===== Плитки ===== */
 .portfolio{
   width:100%; max-width:1200px; margin:4.5vh auto 3.5rem;
   display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:0 16px;
@@ -115,7 +128,7 @@ body{
 .tile-badge{
   position:absolute; left:14px; bottom:10px;
   border:1px solid #fff; border-radius:999px; padding:6px 10px;
-  font-size:12px; background:#0b0b0b; color:#e0e0e0;
+  font-size:12px; background:rgba(0,0,0,.6); color:#e0e0e0;
 }
 @media (hover:hover){
   .tile-bg{ transition:transform .35s ease }
@@ -123,18 +136,17 @@ body{
   .tile:hover{ border-color:rgba(255,255,255,.18) }
 }
 
-/* Низ */
+/* ===== Низ ===== */
 .contact-section{ display:flex; flex-direction:column; align-items:center; text-align:center; margin-top:auto }
 .contact{
   max-width:900px; background:rgba(0,0,0,.35); backdrop-filter:saturate(120%) blur(2px);
-  padding:.85rem 1rem; border-radius:12px;
+  padding:.85rem 1rem; border-radius:12px; border:1px solid rgba(255,255,255,.08);
 }
 .mail-link{ display:inline-flex; align-items:center; gap:12px; color:var(--text); text-decoration:none }
 .mail-text{ font-size:1.2rem; line-height:1 }
-
 .site-footer{ display:grid; place-items:center; min-height:18vh; padding:20px; text-align:center; color:rgba(255,255,255,.8) }
 
-/* Drawer */
+/* ===== Drawer ===== */
 .scrim{ position:fixed; inset:0; background:rgba(0,0,0,.35); opacity:0; transition:opacity .2s ease; z-index:40 }
 .scrim.is-visible{ opacity:1 }
 .drawer{
@@ -156,7 +168,7 @@ body{
 }
 .contact-submit{ padding:12px 16px; border:0; border-radius:999px; cursor:pointer; background:#2563EB; color:var(--text); font-weight:700 }
 
-/* Mobile */
+/* ===== Мобилка ===== */
 @media (max-width: 900px){
   .brand img{ width:100px }
   .top-nav{ transform:none; left:auto; right:120px }

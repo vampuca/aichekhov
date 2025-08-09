@@ -7,9 +7,13 @@
   <meta name="description" content="AI студия им. А.П. Чехова — графические новеллы, сериалы и экспериментальный контент. От идеи до готовой истории." />
   <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Локальный Hanken подключаем через @font-face в CSS; здесь — фолбэк на CDN при отсутствии локального файла -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- ВЕРХ -->
+
+  <!-- ВЕРХ (фиксированный) -->
   <a class="brand" href="#top" aria-label="На начало">
     <img src="assets/img/logo.png" alt="Логотип студии" />
   </a>
@@ -41,7 +45,9 @@
     <div class="about-content">
       <h2 id="about-title" class="sr-only">Кто мы</h2>
       <p>
-        Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда». Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс, освободившись от громоздкой административной цепочки традиционного производства.
+        Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда».
+        Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс,
+        освободившись от громоздкой административной цепочки традиционного производства.
         <br><br>
         Мы приглашаем вас сделать вместе с нами шаг в будущее, где точно не будет скучно. Апчхи.
       </p>
@@ -54,7 +60,7 @@
     <p class="section-subtitle">От идеи до готовой истории.</p>
   </section>
 
-  <!-- ПЛИТКИ -->
+  <!-- ПЛИТКИ ПРОЕКТОВ -->
   <section class="portfolio" aria-label="Проекты студии">
     <!-- Сериалы -->
     <a class="tile tile-video" href="assets/series/" aria-label="Сериалы">
@@ -66,7 +72,7 @@
       <div class="tile-badge">Смотреть</div>
     </a>
 
-    <!-- Графические новеллы (КАРТИНКА-ПРЕВЬЮ) -->
+    <!-- Графические новеллы (новая картинка без рамок) -->
     <a class="tile tile-visual" href="assets/novellas/" aria-label="Графические новеллы">
       <img class="tile-bg-img" src="assets/novellas/novella-preview.jpg" alt="" />
       <div class="tile-overlay"></div>
@@ -74,7 +80,7 @@
       <div class="tile-badge">В разработке</div>
     </a>
 
-    <!-- AI-контент (ВИДЕО-ПРЕВЬЮ) -->
+    <!-- AI-контент (видео-превью) -->
     <a class="tile tile-video" href="assets/content/" aria-label="AI-контент">
       <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
         <source src="assets/content/content-preview.mp4" type="video/mp4" />
@@ -122,10 +128,10 @@
     // Год
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Автоплей превью после первого взаимодействия (подстраховка iOS/браузеров)
+    // Автоплей подстраховка (iOS/браузеры)
     function kickVideos(){ document.querySelectorAll('video').forEach(v=>{ if(v.paused) v.play().catch(()=>{}); }); }
     document.addEventListener('touchend', kickVideos, { once:true });
-    document.addEventListener('click', kickVideos, { once:true });
+    document.addEventListener('click',    kickVideos, { once:true });
 
     // Drawer open/close
     (function(){
@@ -162,7 +168,7 @@
       });
     })();
 
-    // Актив в меню — только по клику (без залипания)
+    // Актив в меню — только по клику
     (function(){
       const links=[...document.querySelectorAll('.top-nav a')];
       links.forEach(a=>a.classList.remove('active'));
@@ -172,6 +178,18 @@
           a.classList.add('active');
         });
       });
+    })();
+
+    // Снятие скругления у about-видео при скролле
+    (function(){
+      const about = document.querySelector('.about-video');
+      const onScroll = ()=>{
+        const top = about.getBoundingClientRect().top;
+        if (top <= 60) about.classList.add('unrounded');
+        else about.classList.remove('unrounded');
+      };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
     })();
   </script>
 </body>
