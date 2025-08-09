@@ -9,14 +9,19 @@
 
 /* ===== Base ===== */
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 html,body{height:100%}
 body{
   margin:0;
   font-family:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   font-weight:100;
-  color:rgba(255,255,255,.92);
   background:#000;
+  color:#B0B0B0;                 /* базовый тёмно-серый */
 }
+
+/* Цвета по аналогии с Morphic */
+h1,h2,.title{ color:#E0E0E0 }     /* заголовки — светло-серые */
+.subtitle,.section-subtitle,.about-kicker,p,.desc{ color:#B0B0B0 }
 
 /* ===== Sticky Header ===== */
 .site-header{
@@ -28,57 +33,61 @@ body{
   border-bottom:1px solid rgba(255,255,255,.06);
 }
 .site-header .brand img{ width:120px; height:auto; display:block; filter:drop-shadow(0 1px 6px rgba(0,0,0,.5)); }
+
 .main-nav{ display:flex; gap:18px; align-items:center; }
 .main-nav a{
-  color:rgba(255,255,255,.9); text-decoration:none; font-weight:700;
-  font-size:14px; padding:8px 10px; border-radius:10px;
+  color:#B0B0B0;                 /* тёмно-серый по умолчанию */
+  text-decoration:none; font-weight:700; font-size:14px;
+  padding:8px 10px; border-radius:10px; transition:color .15s ease, background .15s ease;
 }
-.main-nav a:hover{ background:rgba(255,255,255,.08); }
+.main-nav a:hover,
+.main-nav a:focus,
+.main-nav a.active{
+  color:#E0E0E0;                 /* светло-серый при наведении/активе */
+  background:rgba(255,255,255,.08);
+}
+
 .contact-btn{
-  background:#0b0b0b; color:#fff; text-decoration:none; font-weight:800;
+  background:#0b0b0b; color:#E0E0E0; text-decoration:none; font-weight:800;
   border:1.5px solid #fff; border-radius:999px; padding:10px 14px; font-size:13px;
-  white-space:nowrap;
+  white-space:nowrap; cursor:pointer;
 }
 .contact-btn:hover{ opacity:.9; }
 
-/* ===== ABOUT hero (видео фон) ===== */
-.about-hero{ position:relative; min-height:88vh; display:flex; align-items:flex-end; }
+/* ===== ABOUT hero (видео фон, без плашки) ===== */
+.about-hero{
+  position:relative; min-height:88vh; display:flex; align-items:flex-end;
+  padding-top:72px; /* чтобы шапка не перекрывала */
+}
 .about-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; background:#000; }
-.about-dim{ position:absolute; inset:0; background:radial-gradient(120% 80% at 50% 10%, rgba(0,0,0,.35) 0%, rgba(0,0,0,.75) 75%); z-index:-1; }
-
+.about-dim{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(120% 80% at 50% 10%, rgba(0,0,0,.20) 0%, rgba(0,0,0,.65) 70%),
+    linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.55) 100%);
+  z-index:-1;
+}
 .about-inner{
-  width:100%; padding:12vh 16px 7vh;
+  width:100%; padding:12vh 16px 8vh;
   display:flex; flex-direction:column; align-items:center; text-align:center; gap:18px;
 }
 .about-title{
   font-size:clamp(42px,8vw,84px); line-height:1.05; font-weight:300; letter-spacing:.2px;
   text-shadow:0 2px 24px rgba(0,0,0,.35);
-  margin-top:6vh; /* опускаем заголовок, чтобы не заходил на глаза */
+  margin-top:6vh; /* держим заголовок ниже глаз девушки */
 }
-.about-kicker{ font-size:clamp(16px,2.2vw,20px); opacity:.9 }
-
-.about-card{
-  max-width:44%;
-  background:rgba(0,0,0,.45);
-  backdrop-filter:saturate(120%) blur(2px);
-  padding:1.1rem 1.25rem;
-  border-radius:12px;
-  text-align:justify;
-}
-.about-card p{ margin:.6rem 0 0; line-height:1.6 }
+.about-kicker{ font-size:clamp(16px,2.2vw,20px) }
+.about-copy{ max-width:44%; text-align:justify; text-justify:inter-word; color:#D2D2D2 }
+.about-copy p{ margin:.6rem 0 0; line-height:1.65 }
 
 /* ===== Секция заголовка перед проектами ===== */
-.section-intro{
-  max-width:1100px; margin:8vh auto 0; padding:0 16px; text-align:center;
-}
-.section-title{
-  font-weight:800; font-size:clamp(26px,4.2vw,40px); margin:0 0 .25rem;
-}
-.section-subtitle{ opacity:.85; font-size:clamp(16px,2.2vw,20px) }
+.section-intro{ max-width:1100px; margin:8vh auto 0; padding:0 16px; text-align:center }
+.section-title{ font-weight:800; font-size:clamp(26px,4.2vw,40px); margin:0 0 .25rem }
+.section-subtitle{ font-size:clamp(16px,2.2vw,20px) }
 
 /* ===== Portfolio tiles ===== */
 .portfolio{
-  width:100%; max-width:1200px; margin:5vh auto 4rem;
+  width:100%; max-width:1200px; margin:5vh auto 3.5rem;
   display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:0 16px;
 }
 .tile{
@@ -97,25 +106,60 @@ body{
 .tile-overlay.static{ background:rgba(0,0,0,.35) }
 .tile-title{
   position:absolute; left:14px; right:14px; bottom:46px;
-  font-weight:800; font-size:clamp(16px,2.2vw,22px);
-  background:rgba(0,0,0,.35); backdrop-filter:blur(3px);
+  font-weight:800; font-size:clamp(16px,2.2vw,22px); color:#E0E0E0;
+  background:rgba(0,0,0,.32); backdrop-filter:blur(3px);
   padding:8px 12px; border-radius:10px;
 }
 .tile-badge{
   position:absolute; left:14px; bottom:12px;
   border:1px solid #fff; border-radius:999px; padding:6px 10px;
-  font-size:12px; line-height:1; background:#0b0b0b;
+  font-size:12px; line-height:1; background:#0b0b0b; color:#E0E0E0;
 }
 @media (hover:hover){
   .tile-video .tile-bg{ transition:transform .35s ease }
   .tile:hover .tile-bg{ transform:scale(1.02) }
   .tile:hover{ border-color:rgba(255,255,255,.18) }
 }
+
+/* ===== Нижний email с иконкой ===== */
+.contact-inline{ display:flex; justify-content:center; padding:8px 16px 18px }
+.mail-link{
+  display:inline-flex; align-items:center; gap:10px;
+  color:#E0E0E0; text-decoration:none; background:rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.15); border-radius:12px; padding:10px 12px;
+}
+.mail-icon{ display:block }
+.mail-text{ font-size:1.05rem; line-height:1 }
+
+/* ===== Contact Modal ===== */
+.contact-modal[aria-hidden="true"]{ display:none }
+.contact-modal[aria-hidden="false"]{ display:block }
+.contact-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.5); backdrop-filter: blur(4px); z-index:98 }
+.contact-panel{
+  position:fixed; right:16px; top:78px; bottom:16px; width:min(420px, calc(100% - 32px));
+  background:#0f0f0f; border:1px solid rgba(255,255,255,.12); border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.45); z-index:99;
+  display:flex; flex-direction:column; overflow:hidden;
+}
+.contact-head{ display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.08) }
+.contact-head h3{ margin:0; font-size:18px; font-weight:800 }
+.contact-close{ background:transparent; border:0; color:#fff; font-size:24px; line-height:1; cursor:pointer }
+.contact-form{ padding:14px 16px; display:flex; flex-direction:column; gap:12px; overflow:auto }
+.contact-form label{ display:flex; flex-direction:column; gap:6px; font-size:14px; opacity:.95 }
+.contact-form input,.contact-form textarea{
+  background:#0b0b0b; border:1px solid rgba(255,255,255,.18); color:#fff;
+  border-radius:10px; padding:10px 12px; font:inherit; resize:vertical;
+}
+.contact-send{
+  align-self:flex-start; background:#0b0b0b; color:#E0E0E0; border:1.5px solid #fff;
+  border-radius:999px; padding:10px 14px; font-weight:800; cursor:pointer;
+}
+.contact-send:hover{ opacity:.9 }
+.contact-note{ margin:4px 0 0; opacity:.8; font-size:13px }
+
+/* ===== Responsive ===== */
 @media (max-width: 980px){
-  .about-card{ max-width:88% }
+  .about-copy{ max-width:88% }
   .portfolio{ grid-template-columns:1fr; gap:14px; margin:4vh auto 3rem }
   .tile{ min-height:200px }
 }
-
-/* ===== Footer ===== */
-.footer{ text-align:center; opacity:.65; padding:2rem 16px }

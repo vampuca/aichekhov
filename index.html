@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Студия ИИ им. А.П. Чехова</title>
-  <meta name="description" content="AI студия им. А.П. Чехова — графические новеллы, AI-сериалы и экспериментальный контент. От идеи до готовой истории." />
+  <meta name="description" content="AI студия им. А.П. Чехова — графические новеллы, сериалы и экспериментальный контент. От идеи до готовой истории." />
   <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -12,18 +12,21 @@
 
   <!-- ===== Sticky Header ===== -->
   <header class="site-header">
-    <a class="brand" href="/" aria-label="На главную">
-      <img src="/assets/img/logo.png" alt="Логотип студии" />
+    <a class="brand" href="./" aria-label="На главную">
+      <img src="assets/img/logo.png" alt="Логотип студии" />
     </a>
+
     <nav class="main-nav" aria-label="Основная навигация">
-      <a href="/assets/series/">Сериалы</a>
-      <a href="/assets/novellas/">Новеллы</a>
-      <a href="/assets/content/">AI-контент</a>
+      <a href="#about" data-link="about">О нас</a>
+      <a href="#projects" data-link="projects">Проекты</a>
     </nav>
-    <a class="contact-btn" href="mailto:hello@aichekhov.ru">hello@aichekhov.ru</a>
+
+    <!-- Кнопка открывает форму -->
+    <button class="contact-btn" type="button" id="open-contact">Пишите нам</button>
+    <noscript><a class="contact-btn" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></noscript>
   </header>
 
-  <!-- ===== О НАС (видео на фоне) ===== -->
+  <!-- ===== О НАС (видео фон, без плашки) ===== -->
   <section class="about-hero" id="about" aria-label="О нас">
     <video class="about-bg" autoplay muted loop playsinline poster="assets/img/poster.jpg">
       <source src="assets/video/background.mp4" type="video/mp4" />
@@ -32,9 +35,9 @@
 
     <div class="about-inner">
       <h1 class="about-title">Новый язык<br/>сторителлинга</h1>
-      <p class="about-kicker">Первая в России творческая AI-студия, основанная профессионалами ТВ и кино.</p>
+      <p class="about-kicker subtitle">Первая в России творческая AI-студия, основанная профессионалами ТВ и кино.</p>
 
-      <div class="about-card">
+      <div class="about-copy">
         <p>
           Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда».
           Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс,
@@ -47,43 +50,168 @@
     </div>
   </section>
 
-  <!-- ===== Заголовок блока проектов (как у Morphic) ===== -->
+  <!-- ===== Заголовок блока проектов ===== -->
   <section class="section-intro" aria-label="Интро проектов">
-    <h2 class="section-title">AI студия им. А.П. Чехова.</h2>
+    <h2 class="section-title" id="projects">AI студия им. А.П. Чехова.</h2>
     <p class="section-subtitle">От идеи до готовой истории.</p>
   </section>
 
-  <!-- ===== ПРОЕКТЫ / ПОРТФОЛИО ===== -->
+  <!-- ===== ПРОЕКТЫ / ПЛИТКИ ===== -->
   <section class="portfolio" aria-label="Проекты студии">
-    <!-- AI-сериалы -->
-    <a class="tile tile-video" href="/assets/series/" aria-label="AI-сериалы">
+    <!-- Сериалы -->
+    <a class="tile tile-video" href="assets/series/" aria-label="Сериалы">
       <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
-        <source src="/assets/series/episode-1-preview.mp4" type="video/mp4" />
+        <source src="assets/series/episode-1-preview.mp4" type="video/mp4" />
       </video>
       <div class="tile-overlay"></div>
-      <div class="tile-title">AI-сериалы</div>
-      <div class="tile-badge">Серия 1 доступна</div>
+      <div class="tile-title">Сериалы</div>
+      <div class="tile-badge">Смотреть</div>
     </a>
 
-    <!-- Графические новеллы -->
-    <a class="tile" href="/assets/novellas/" aria-label="Графические новеллы">
+    <!-- Графические новеллы (при желании добавим превью позже) -->
+    <a class="tile tile-video maybe-preview" href="assets/novellas/" aria-label="Графические новеллы"
+       data-preview="assets/novellas/novel-1-preview.mp4">
       <div class="tile-overlay static"></div>
       <div class="tile-title">Графические новеллы</div>
       <div class="tile-badge">В разработке</div>
     </a>
 
-    <!-- AI-контент -->
-    <a class="tile" href="/assets/content/" aria-label="AI-контент">
+    <!-- AI-контент (при желании добавим превью позже) -->
+    <a class="tile tile-video maybe-preview" href="assets/content/" aria-label="AI-контент"
+       data-preview="assets/content/content-1-preview.mp4">
       <div class="tile-overlay static"></div>
       <div class="tile-title">AI-контент</div>
       <div class="tile-badge">В разработке</div>
     </a>
   </section>
 
+  <!-- ===== Нижний email с иконкой ===== -->
+  <section class="contact-inline" aria-label="Контакты">
+    <a class="mail-link" href="mailto:studio@aichekhov.ru">
+      <svg class="mail-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+        <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.6" />
+        <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.6" />
+      </svg>
+      <span class="mail-text">studio@aichekhov.ru</span>
+    </a>
+  </section>
+
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <p>© 2025 Студия искусственного интеллекта им. А.П. Чехова</p>
+    <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
   </footer>
 
+  <!-- ===== Contact Modal (форма) ===== -->
+  <div class="contact-modal" id="contact-modal" aria-hidden="true">
+    <div class="contact-backdrop" id="contact-backdrop"></div>
+
+    <section class="contact-panel" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+      <header class="contact-head">
+        <h3 id="contact-title">Напишите нам</h3>
+        <button class="contact-close" type="button" aria-label="Закрыть" id="close-contact">×</button>
+      </header>
+
+      <!-- Formspree: замените XXXXXXXX на свой ID формы -->
+      <form class="contact-form" action="https://formspree.io/f/XXXXXXXX" method="POST">
+        <label>Ваше имя
+          <input name="name" type="text" autocomplete="name" required />
+        </label>
+        <label>Эл. почта
+          <input name="email" type="email" autocomplete="email" required />
+        </label>
+        <label>Сообщение
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+        <input type="hidden" name="_subject" value="Сообщение с aichekhov.ru" />
+        <input type="hidden" name="_redirect" value="https://vampuca.github.io/aichekhov/?sent=1" />
+
+        <button class="contact-send" type="submit">Отправить</button>
+        <p class="contact-note">или на почту: <a href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    // Год в футере
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Плавный пуск видео на iOS при первом тапе
+    document.addEventListener('touchend', () => {
+      document.querySelectorAll('video').forEach(v => { if (v.paused) v.play().catch(()=>{}); });
+    }, { once: true });
+
+    // Модалка контактов
+    (function(){
+      const open = document.getElementById('open-contact');
+      const modal = document.getElementById('contact-modal');
+      const closeBtn = document.getElementById('close-contact');
+      const backdrop = document.getElementById('contact-backdrop');
+
+      function openModal(){
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow='hidden';
+        const first = modal.querySelector('input,textarea,button');
+        if(first) setTimeout(()=>first.focus(),10);
+      }
+      function closeModal(){
+        modal.setAttribute('aria-hidden','true');
+        document.body.style.overflow='';
+        if(open) open.focus();
+      }
+
+      open && open.addEventListener('click', openModal);
+      closeBtn && closeBtn.addEventListener('click', closeModal);
+      backdrop && backdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.getAttribute('aria-hidden')==='false') closeModal(); });
+
+      // тост после отправки
+      if (new URLSearchParams(location.search).get('sent')==='1') {
+        const toast = document.createElement('div');
+        toast.textContent = 'Спасибо! Сообщение отправлено.';
+        toast.style.cssText = 'position:fixed;left:50%;top:20px;transform:translateX(-50%);background:#0b0b0b;color:#fff;border:1px solid #fff;border-radius:999px;padding:10px 14px;z-index:120;';
+        document.body.appendChild(toast);
+        setTimeout(()=>toast.remove(), 3500);
+        history.replaceState({}, '', location.pathname);
+      }
+    })();
+
+    // Подсветка активного пункта меню (О нас / Проекты)
+    (function(){
+      const map = { about: document.querySelector('#about'), projects: document.querySelector('#projects') };
+      const links = document.querySelectorAll('.main-nav a[data-link]');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          const id = e.target.id;
+          const link = document.querySelector(`.main-nav a[data-link="${id}"]`);
+          if (!link) return;
+          if (e.isIntersecting) {
+            links.forEach(a=>a.classList.remove('active'));
+            link.classList.add('active');
+          }
+        });
+      },{ rootMargin: '-40% 0px -55% 0px', threshold: 0.01 });
+      Object.values(map).forEach(el=> el && io.observe(el));
+    })();
+
+    // Подключаем превью для «maybe-preview», если файл реально существует
+    (function(){
+      document.querySelectorAll('.maybe-preview').forEach(tile=>{
+        const src = tile.getAttribute('data-preview');
+        if (!src) return;
+        const v = document.createElement('video');
+        v.className = 'tile-bg';
+        v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
+        v.addEventListener('canplay', ()=> tile.prepend(v), { once:true });
+        v.addEventListener('error', ()=>{/* молча остаёмся на статике */}, { once:true });
+        const source = document.createElement('source');
+        source.src = src; source.type = 'video/mp4';
+        v.appendChild(source);
+        // Начинаем грузить, но добавляем в DOM только при canplay
+        v.load();
+      });
+    })();
+  </script>
 </body>
 </html>
