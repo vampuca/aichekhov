@@ -1,194 +1,198 @@
 <!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Студия искусственного интеллекта им. А.П. Чехова</title>
-    <meta name="description" content="Студия ИИ им. А.П. Чехова — графические новеллы, сериалы и экспериментальные прототипы. От идеи до готовой истории." />
-    <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- FIXED UI (как было) -->
-    <a class="brand" href="#top" aria-label="На начало">
-      <img src="assets/img/logo.png" alt="Логотип студии" />
-    </a>
-    <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">
-      Пишите нам
-    </button>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Студия искусственного интеллекта им. А.П. Чехова</title>
+  <meta name="description" content="AI студия им. А.П. Чехова — графические новеллы, сериалы и экспериментальный контент. От идеи до готовой истории." />
+  <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Фиксированные элементы -->
+  <a class="brand" href="#top" aria-label="На начало">
+    <img src="assets/img/logo.png" alt="Логотип студии" />
+  </a>
 
-    <!-- 1) HERO — заголовок ниже, видео ближе (как было раньше) -->
-    <section id="top" class="hero" role="banner">
-      <div class="hero-inner">
-        <h1>
-          Новый язык<br>сторителлинга
-        </h1>
-        <p class="subtitle">
-          Первая в России творческая AI-студия, основанная профессионалами ТВ и кино.
-        </p>
-      </div>
-    </section>
+  <nav class="top-nav" aria-label="Навигация по странице">
+    <a href="#about" data-link="about">О нас</a>
+    <a href="#projects" data-link="projects">Проекты</a>
+  </nav>
 
-    <!-- 2) ABOUT с видео: верхние углы скруглены; при скролле скругление исчезает -->
-    <section class="about-video" aria-labelledby="about-title">
-      <video class="bg-video" autoplay muted loop playsinline poster="assets/img/poster.jpg">
-        <source src="assets/video/background.mp4" type="video/mp4" />
+  <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">
+    Пишите нам
+  </button>
+
+  <!-- 1) HERO -->
+  <section id="top" class="hero" role="banner">
+    <div class="hero-inner">
+      <h1>Новый язык<br>сторителлинга</h1>
+      <p class="subtitle">Первая в России творческая AI-студия, основанная профессионалами ТВ и кино.</p>
+    </div>
+  </section>
+
+  <!-- 2) ABOUT + видео -->
+  <section class="about-video" id="about" aria-labelledby="about-title">
+    <video class="bg-video" autoplay muted loop playsinline poster="assets/img/poster.jpg">
+      <source src="assets/video/background.mp4" type="video/mp4" />
+    </video>
+    <div class="video-overlay" aria-hidden="true"></div>
+
+    <div class="about-content">
+      <h2 id="about-title" class="sr-only">Кто мы</h2>
+      <p>
+        Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда». Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс, освободившись от громоздкой административной цепочки традиционного производства.
+        <br><br>
+        Мы приглашаем вас сделать вместе с нами шаг в будущее, где точно не будет скучно. Апчхи.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3) Интро перед плашками -->
+  <section class="section-intro" id="projects" aria-label="Интро проектов">
+    <h2 class="section-title">AI студия им. А.П. Чехова.</h2>
+    <p class="section-subtitle">От идеи до готовой истории.</p>
+  </section>
+
+  <!-- 4) ПЛИТКИ -->
+  <section class="portfolio" aria-label="Проекты студии">
+    <!-- Сериалы -->
+    <a class="tile tile-video" href="assets/series/" aria-label="Сериалы">
+      <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
+        <source src="assets/series/episode-1-preview.mp4" type="video/mp4" />
       </video>
-      <div class="video-overlay" aria-hidden="true"></div>
+      <div class="tile-overlay"></div>
+      <div class="tile-title">Сериалы</div>
+      <div class="tile-badge">Смотреть</div>
+    </a>
 
-      <div class="about-content">
-        <h2 id="about-title" class="sr-only">Кто мы</h2>
-        <p>
-          Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда». Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс, освободившись от громоздкой административной цепочки традиционного производства.<br><br>
-          Мы приглашаем вас сделать вместе с нами шаг в будущее, где точно не будет скучно. Апчхи.
-        </p>
-      </div>
-    </section>
+    <!-- Графические новеллы (картинка-превью) -->
+    <a class="tile tile-visual" href="assets/novellas/" aria-label="Графические новеллы">
+      <img class="tile-bg-img" src="assets/novellas/novella-preview.jpg" alt="" />
+      <div class="tile-overlay"></div>
+      <div class="tile-title">Графические новеллы</div>
+      <div class="tile-badge">В разработке</div>
+    </a>
 
-    <!-- 3) Интро перед плашками -->
-    <section class="section-intro" aria-label="Интро проектов" id="projects">
-      <h2 class="section-title">AI студия им. А.П. Чехова.</h2>
-      <p class="section-subtitle">От идеи до готовой истории.</p>
-    </section>
+    <!-- AI-контент (видео-превью) -->
+    <a class="tile tile-video" href="assets/content/" aria-label="AI-контент">
+      <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
+        <source src="assets/content/content-preview.mp4" type="video/mp4" />
+      </video>
+      <div class="tile-overlay"></div>
+      <div class="tile-title">AI-контент</div>
+      <div class="tile-badge">В разработке</div>
+    </a>
+  </section>
 
-    <!-- 4) ПРОЕКТЫ / ПЛИТКИ (без полупрозрачной подложки у текста) -->
-    <section class="portfolio" aria-label="Проекты студии">
-      <!-- Сериалы -->
-      <a class="tile tile-video" href="assets/series/" aria-label="Сериалы">
-        <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
-          <source src="assets/series/episode-1-preview.mp4" type="video/mp4" />
-        </video>
-        <div class="tile-overlay"></div>
-        <div class="tile-title">Сериалы</div>
-        <div class="tile-badge">Смотреть</div>
+  <!-- Нижний email -->
+  <section class="contact-section" id="contact">
+    <div class="contact">
+      <a class="mail-link" href="mailto:studio@aichekhov.ru" aria-label="Написать на studio@aichekhov.ru">
+        <svg class="mail-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+          <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.6" />
+          <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.6" />
+        </svg>
+        <span class="mail-text">studio@aichekhov.ru</span>
       </a>
+    </div>
+  </section>
 
-      <!-- Графические новеллы -->
-      <a class="tile tile-video maybe-preview" href="assets/novellas/" aria-label="Графические новеллы"
-         data-preview="assets/novellas/novel-1-preview.mp4">
-        <div class="tile-overlay static"></div>
-        <div class="tile-title">Графические новеллы</div>
-        <div class="tile-badge">В разработке</div>
-      </a>
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
+  </footer>
 
-      <!-- AI-контент -->
-      <a class="tile tile-video maybe-preview" href="assets/content/" aria-label="AI-контент"
-         data-preview="assets/content/content-1-preview.mp4">
-        <div class="tile-overlay static"></div>
-        <div class="tile-title">AI-контент</div>
-        <div class="tile-badge">В разработке</div>
-      </a>
-    </section>
+  <!-- Drawer -->
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
+    <header class="drawer-head">
+      <h3 id="contactTitle">Связаться с нами</h3>
+      <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
+    </header>
+    <form class="contact-form" id="contactForm">
+      <label>Имя <input type="text" name="name" autocomplete="name" required></label>
+      <label>Email <input type="email" name="email" autocomplete="email" required></label>
+      <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
+      <button type="submit" class="contact-submit">Отправить</button>
+      <p class="contact-alt">Или напишите: <a href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
+    </form>
+  </aside>
 
-    <!-- Контакты внизу: иконка + крупный адрес -->
-    <section class="contact-section" id="contact">
-      <div class="contact">
-        <a class="mail-link" href="mailto:studio@aichekhov.ru" aria-label="Написать на studio@aichekhov.ru">
-          <svg class="mail-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-            <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.6" />
-            <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.6" />
-          </svg>
-          <span class="mail-text">studio@aichekhov.ru</span>
-        </a>
-      </div>
-    </section>
+  <script>
+    // Год
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    <footer class="site-footer">
-      <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
-    </footer>
+    // iOS автоплей
+    document.addEventListener("touchend", () => {
+      document.querySelectorAll("video").forEach(v => { if (v.paused) v.play().catch(()=>{}); });
+    }, { once: true });
 
-    <!-- Затемнение + выезжающая форма (mailto) -->
-    <div class="scrim" id="scrim" hidden></div>
-    <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
-      <header class="drawer-head">
-        <h3 id="contactTitle">Связаться с нами</h3>
-        <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
-      </header>
-      <form class="contact-form" id="contactForm">
-        <label>Имя <input type="text" name="name" autocomplete="name" required></label>
-        <label>Email <input type="email" name="email" autocomplete="email" required></label>
-        <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
-        <button type="submit" class="contact-submit">Отправить</button>
-        <p class="contact-alt">Или напишите: <a href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
-      </form>
-    </aside>
+    // Drawer open/close
+    (function(){
+      const openBtn = document.getElementById('contactOpen');
+      const drawer  = document.getElementById('contactDrawer');
+      const closeBtn= document.getElementById('contactClose');
+      const scrim   = document.getElementById('scrim');
 
-    <script>
-      // Год в футере
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-      // iOS автоплей подстраховка
-      document.addEventListener("touchend", () => {
-        document.querySelectorAll("video").forEach(v => { if (v.paused) v.play().catch(()=>{}); });
-      }, { once: true });
-
-      // Drawer open/close
-      (function(){
-        const openBtn = document.getElementById('contactOpen');
-        const drawer  = document.getElementById('contactDrawer');
-        const closeBtn= document.getElementById('contactClose');
-        const scrim   = document.getElementById('scrim');
-        const firstFocus = () => drawer.querySelector('input,textarea,button');
-
-        function openDrawer(){
-          drawer.hidden = false; scrim.hidden = false;
-          requestAnimationFrame(()=> {
-            drawer.classList.add('is-open'); scrim.classList.add('is-visible');
-            document.body.style.overflow = 'hidden';
-            const el = firstFocus(); el && el.focus();
-          });
-        }
-        function closeDrawer(){
-          drawer.classList.remove('is-open'); scrim.classList.remove('is-visible');
-          document.body.style.overflow = '';
-          setTimeout(()=>{ drawer.hidden = true; scrim.hidden = true; }, 200);
-          openBtn && openBtn.focus();
-        }
-
-        openBtn.addEventListener('click', openDrawer);
-        closeBtn.addEventListener('click', closeDrawer);
-        scrim.addEventListener('click', closeDrawer);
-        document.addEventListener('keydown', e => { if(e.key==='Escape' && !drawer.hidden) closeDrawer(); });
-
-        // Отправка через почтовый клиент (mailto)
-        document.getElementById('contactForm').addEventListener('submit', e=>{
-          e.preventDefault();
-          const data = new FormData(e.target);
-          const subject = encodeURIComponent('Сообщение со сайта');
-          const body = encodeURIComponent(`Имя: ${data.get('name')}\nEmail: ${data.get('email')}\n\n${data.get('message')}`);
-          window.location.href = `mailto:studio@aichekhov.ru?subject=${subject}&body=${body}`;
-          closeDrawer();
+      function openDrawer(){
+        drawer.hidden = false; scrim.hidden = false;
+        requestAnimationFrame(()=>{
+          drawer.classList.add('is-open'); scrim.classList.add('is-visible');
+          document.body.style.overflow = 'hidden';
+          const f = drawer.querySelector('input,textarea,button'); f && f.focus();
         });
-      })();
+      }
+      function closeDrawer(){
+        drawer.classList.remove('is-open'); scrim.classList.remove('is-visible');
+        document.body.style.overflow = '';
+        setTimeout(()=>{ drawer.hidden = true; scrim.hidden = true; }, 200);
+        openBtn && openBtn.focus();
+      }
+      openBtn.addEventListener('click', openDrawer);
+      closeBtn.addEventListener('click', closeDrawer);
+      scrim.addEventListener('click', closeDrawer);
+      document.addEventListener('keydown', e => { if(e.key==='Escape' && !drawer.hidden) closeDrawer(); });
 
-      // Снятие скругления у видео при скролле (верхние углы -> 0)
-      (function(){
-        const about = document.querySelector('.about-video');
-        function onScroll(){
-          const top = about.getBoundingClientRect().top;
-          if (top <= 60) about.classList.add('unrounded');
-          else about.classList.remove('unrounded');
-        }
-        window.addEventListener('scroll', onScroll, {passive:true});
-        onScroll();
-      })();
+      // mailto отправка
+      document.getElementById('contactForm').addEventListener('submit', e=>{
+        e.preventDefault();
+        const d = new FormData(e.target);
+        const subject = encodeURIComponent('Сообщение со сайта');
+        const body = encodeURIComponent(`Имя: ${d.get('name')}\nEmail: ${d.get('email')}\n\n${d.get('message')}`);
+        location.href = `mailto:studio@aichekhov.ru?subject=${subject}&body=${body}`;
+        closeDrawer();
+      });
+    })();
 
-      // Ленивая подстановка превью для maybe-preview, если файл существует
-      (function(){
-        document.querySelectorAll('.maybe-preview').forEach(tile=>{
-          const src = tile.getAttribute('data-preview');
-          if (!src) return;
-          const v = document.createElement('video');
-          v.className = 'tile-bg';
-          v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
-          v.addEventListener('canplay', ()=> tile.prepend(v), { once:true });
-          v.addEventListener('error', ()=>{}, { once:true });
-          const source = document.createElement('source');
-          source.src = src; source.type = 'video/mp4';
-          v.appendChild(source);
-          v.load();
+    // Active state для меню
+    (function(){
+      const sections = { about: document.querySelector('#about'), projects: document.querySelector('#projects') };
+      const links = document.querySelectorAll('.top-nav a[data-link]');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          const id = e.target.id;
+          const link = document.querySelector(`.top-nav a[data-link="${id}"]`);
+          if (!link) return;
+          if (e.isIntersecting) {
+            links.forEach(a=>a.classList.remove('active'));
+            link.classList.add('active');
+          }
         });
-      })();
-    </script>
-  </body>
+      },{ rootMargin: '-45% 0px -50% 0px', threshold: 0.01 });
+      Object.values(sections).forEach(el=> el && io.observe(el));
+    })();
+
+    // Снятие скругления у about-видео при скролле
+    (function(){
+      const about = document.querySelector('.about-video');
+      const onScroll = ()=>{
+        const top = about.getBoundingClientRect().top;
+        if (top <= 60) about.classList.add('unrounded');
+        else about.classList.remove('unrounded');
+      };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+    })();
+  </script>
+</body>
 </html>
