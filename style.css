@@ -39,11 +39,11 @@ body{
 /* ===== Секции ===== */
 section{width:100%;}
 
-/* 1) HERO — ниже лого + видно видео ближе */
+/* 1) HERO — заголовок ещё ниже, видео ближе */
 .hero{
-  min-height:84vh;                                /* короче — видео ближе к заголовку */
+  min-height:82vh;                                /* короче: видео ближе к заголовку */
   display:flex; align-items:flex-start; justify-content:center;
-  padding-top:clamp(120px, 18vh, 200px);          /* опустили заголовок ещё ниже */
+  padding-top:clamp(140px, 20vh, 220px);          /* опустили на “2 абзаца” */
   padding-bottom:clamp(16px, 5vh, 64px);
   background:
     radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,.12), rgba(0,0,0,0) 60%),
@@ -56,30 +56,30 @@ section{width:100%;}
 }
 .subtitle{ margin:0; font-size:clamp(16px,2.2vw,22px); opacity:.9; }
 
-/* 2) ABOUT with VIDEO — скругление у видео, затемнение светлое */
+/* 2) ABOUT with VIDEO — скругляем верхние углы; при скролле убираем */
 .about-video{
   position:relative;
-  margin:0 3vw;                 /* чтобы скругление было видно у краёв */
+  margin:0 3vw;                 /* чтобы было видно скругление по краям */
   min-height:100vh;
-  --video-radius: 28px;         /* начальное «красивое» скругление */
+  --video-radius: 28px;         /* красивый стартовый радиус */
 }
 .bg-video{
   position:absolute; inset:0; width:100%; height:100%;
   object-fit:cover; background:#000;
-  border-radius: var(--video-radius);          /* скругляем ИМЕННО видео */
+  border-radius: var(--video-radius) var(--video-radius) 0 0; /* только верхние углы */
   transition: border-radius .2s ease;
 }
 .video-overlay{
   position:absolute; inset:0;
-  border-radius: var(--video-radius);          /* повтор формы у оверлея */
+  border-radius: var(--video-radius) var(--video-radius) 0 0; /* повтор формы */
   background:
-    radial-gradient(1000px 420px at 50% 0%, rgba(0,0,0,0), rgba(0,0,0,.38) 70%),
-    linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.38) 100%);
+    radial-gradient(1000px 420px at 50% 0%, rgba(0,0,0,0), rgba(0,0,0,.36) 70%),
+    linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.36) 100%); /* посветлее */
   transition: border-radius .2s ease;
 }
 .about-video.unrounded .bg-video,
 .about-video.unrounded .video-overlay{
-  border-radius: 0;                              /* при скролле скругление исчезает */
+  border-radius: 0;                              /* скругление исчезает */
 }
 
 .about-content{
@@ -93,7 +93,7 @@ section{width:100%;}
   padding:16px 18px; border-radius:12px;
 }
 
-/* Контакты внизу — только иконка */
+/* Контакты внизу — иконка + адрес */
 .contact-section{
   width:100%;
   display:flex; flex-direction:column; align-items:center; text-align:center;
@@ -105,11 +105,12 @@ section{width:100%;}
   backdrop-filter:saturate(120%) blur(2px);
   padding:.75rem .9rem; border-radius:12px;
 }
-.mail-icon{
-  display:inline-flex; align-items:center; justify-content:center;
+.mail-link{
+  display:inline-flex; align-items:center; gap:10px;
   color:#fff; text-decoration:none;
 }
-.mail-icon svg{ display:block }
+.mail-icon{ display:block }
+.mail-text{ font-size:1.05rem; line-height:1 }
 
 /* Footer — поднят чуть выше */
 .site-footer{

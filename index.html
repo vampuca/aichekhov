@@ -17,7 +17,7 @@
       Пишите нам
     </button>
 
-    <!-- 1) HERO (ниже лого; виден «кусочек» видео ближе к заголовку) -->
+    <!-- 1) HERO — опущенный заголовок, виден «кусочек» видео -->
     <section id="top" class="hero" role="banner">
       <div class="hero-inner">
         <h1>
@@ -29,7 +29,7 @@
       </div>
     </section>
 
-    <!-- 2) ABOUT с видео: скругление у видео, исчезает при скролле -->
+    <!-- 2) ABOUT с видео: верхние углы скруглены, при скролле скругление исчезает -->
     <section class="about-video" aria-labelledby="about-title">
       <video class="bg-video" autoplay muted loop playsinline poster="assets/img/poster.jpg">
         <source src="assets/video/background.mp4" type="video/mp4" />
@@ -47,15 +47,15 @@
       </div>
     </section>
 
-    <!-- Контакты внизу: только иконка почты -->
+    <!-- Контакты внизу: иконка + адрес -->
     <section class="contact-section" id="contact">
       <div class="contact">
-        <a class="mail-icon" href="mailto:hello@aichekhov.ru" aria-label="Написать на hello@aichekhov.ru">
-          <!-- Простая иконка конверта (SVG) -->
-          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+        <a class="mail-link" href="mailto:hello@aichekhov.ru" aria-label="Написать на hello@aichekhov.ru">
+          <svg class="mail-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
             <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.6" />
             <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.6" />
           </svg>
+          <span class="mail-text">hello@aichekhov.ru</span>
         </a>
       </div>
     </section>
@@ -81,7 +81,7 @@
     </aside>
 
     <script>
-      // год в футере
+      // Год в футере
       document.getElementById("year").textContent = new Date().getFullYear();
 
       // iOS автоплей подстраховка
@@ -127,7 +127,7 @@
         });
       })();
 
-      // Снятие скругления у видео при скролле
+      // Снятие скругления у видео при скролле (верхние углы -> 0)
       (function(){
         const about = document.querySelector('.about-video');
         function onScroll(){
