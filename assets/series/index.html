@@ -1,84 +1,66 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AI-сериалы — Студия ИИ им. А.П. Чехова</title>
-  <link rel="stylesheet" href="/style.css?v=5" />
-  <style>
-    /* Локальные стили для сетки серий (не трогаем global style.css) */
-    .series-wrap{max-width:1200px;margin:0 auto;padding:110px 16px 40px}
-    .series-head{margin:0 0 16px;text-align:center;font-size:clamp(22px,3.2vw,28px);font-weight:700}
-    .series-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-    @media (max-width: 900px){.series-grid{grid-template-columns:1fr}}
-
-    .series-card{position:relative;border-radius:16px;overflow:hidden;background:#111;min-height:260px}
-    .series-card .card-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(105%)}
-    .series-card .card-overlay{position:absolute;inset:0;background:
-      linear-gradient(180deg, rgba(0,0,0,0.00) 50%, rgba(0,0,0,0.55) 100%),
-      radial-gradient(100% 60% at 50% 10%, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.35) 100%);
-      pointer-events:none}
-    .series-card .badge{position:absolute;top:12px;left:12px;background:#0b0b0b;color:var(--text);
-      border:1px solid #fff;border-radius:999px;padding:6px 10px;font-size:12px;line-height:1}
-    .series-card .title{position:absolute;left:12px;right:12px;bottom:12px;background:rgba(0,0,0,.45);
-      backdrop-filter:blur(3px);padding:10px 12px;border-radius:10px;font-weight:700}
-    .series-card a{position:absolute;inset:0;display:block}
-
-    /* Лёгкий эффект при наведении */
-    @media (hover:hover){
-      .series-card .card-video{transition:transform .35s ease}
-      .series-card:hover .card-video{transform:scale(1.02)}
-    }
-
-    /* Фиксированные элементы шапки — те же, что на главной */
-    .brand{position:fixed;top:20px;left:20px;z-index:20;display:inline-block}
-    .brand img{display:block;width:120px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
-    .contact-fixed{position:fixed;top:36px;right:20px;z-index:20;display:inline-block;padding:10px 16px;
-      background:#0b0b0b;color:var(--text);border:1.5px solid #fff;border-radius:999px;font-size:14px;font-weight:700}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Сериалы</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .video-block {
+            margin-bottom: 40px;
+        }
+        video {
+            max-width: 100%;
+            border: 2px solid #444;
+            border-radius: 8px;
+        }
+        .coming-soon {
+            position: relative;
+            display: inline-block;
+        }
+        .coming-soon::after {
+            content: "В производстве";
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            padding: 5px 10px;
+            font-size: 16px;
+            color: #fff;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-  <!-- Шапка (как на главной) -->
-  <a class="brand" href="/" aria-label="На главную">
-    <img src="/assets/img/logo.png" alt="Логотип студии" />
-  </a>
-  <a class="contact-fixed" href="mailto:hello@aichekhov.ru">Пишите нам</a>
+    <h1>AI Сериалы</h1>
 
-  <main class="series-wrap">
-    <h1 class="series-head">AI-сериалы</h1>
-
-    <section class="series-grid" aria-label="Список серий">
-      <!-- Серия 1 — смотреть -->
-      <article class="series-card dyn">
-        <video class="card-video" autoplay muted loop playsinline preload="metadata"
-               poster="/assets/series/episode-1-poster.jpg">
-          <source src="/series/episode-1-preview.mp4" type="video/mp4" />
+    <div class="video-block">
+        <h2>Серия 1 — «Пока смерть не разлучит нас»</h2>
+        <video controls>
+            <source src="episode-1-preview.mp4" type="video/mp4">
+            Ваш браузер не поддерживает воспроизведение видео.
         </video>
-        <div class="card-overlay"></div>
-        <div class="badge">Смотреть</div>
-        <div class="title">Пока смерть не разлучит нас — Серия 1</div>
-        <a href="/series/episode-1.html" aria-label="Открыть серию 1"></a>
-      </article>
+    </div>
 
-      <!-- Серия 2 — в производстве -->
-      <article class="series-card dyn">
-        <video class="card-video" autoplay muted loop playsinline preload="metadata"
-               poster="/assets/series/episode-2-poster.jpg">
-          <source src="/series/episode-2-preview.mp4" type="video/mp4" />
-        </video>
-        <div class="card-overlay"></div>
-        <div class="badge">В производстве</div>
-        <div class="title">Пока смерть не разлучит нас — Серия 2</div>
-        <a href="/series/episode-2.html" aria-label="Открыть серию 2"></a>
-      </article>
-    </section>
-  </main>
-
-  <script>
-    // iOS/Android: гарантируем автоплей превью при первом взаимодействии
-    document.addEventListener('touchend', () => {
-      document.querySelectorAll('video').forEach(v => { if (v.paused) v.play().catch(()=>{}); });
-    }, { once: true });
-  </script>
+    <div class="video-block">
+        <h2>Серия 2</h2>
+        <div class="coming-soon">
+            <video muted>
+                <source src="episode-2-preview.mp4" type="video/mp4">
+                Ваш браузер не поддерживает воспроизведение видео.
+            </video>
+        </div>
+    </div>
 </body>
 </html>
