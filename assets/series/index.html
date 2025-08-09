@@ -4,69 +4,43 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Сериалы — Студия ИИ им. А.П. Чехова</title>
-
-  <!-- общий стиль сайта -->
   <link rel="stylesheet" href="/style.css" />
 
   <style>
-    /* ===== Специфика страницы серий ===== */
-    body{ background:#000; }
-
-    /* Хиро-блок сериала */
+    /* HERO (общий для страницы сериалов) */
     .series-hero{
-      position:relative;
-      min-height:50vh;
-      display:grid;
-      place-items:center;
-      padding:120px 16px 48px;
-      overflow:hidden;
-      isolation:isolate;
-    }
-    .series-hero::before{
-      content:""; position:absolute; inset:0;
-      background:url("/assets/series/background-till-death.jpg") center/cover no-repeat;
-      z-index:-2; filter:saturate(105%);
-    }
-    .series-hero::after{
-      content:""; position:absolute; inset:0;
+      min-height:50vh; display:grid; place-items:center;
+      padding:120px 16px 56px; position:relative; isolation:isolate;
       background:
-        radial-gradient(1200px 600px at 50% -10%, rgba(0,0,0,.25), rgba(0,0,0,.75) 70%),
-        linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.85) 100%);
-      z-index:-1;
+        radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,.08), rgba(0,0,0,0) 60%),
+        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.18) 100%);
     }
-    .series-hero-inner{ text-align:center; max-width:1100px; }
-    .series-title{ margin:0 0 .35rem; font-size:clamp(36px,6vw,68px); line-height:1.03; font-weight:200; }
-    .series-sub{ margin:0; font-size:clamp(14px,2.2vw,18px); font-weight:800; color:var(--subtitle); }
+    .series-hero-inner{ text-align:center; max-width:1100px }
+    .series-title{ margin:0 0 .35rem; font-size:clamp(36px,6vw,68px); line-height:1.03; font-weight:200 }
+    .series-sub{ margin:0; font-size:clamp(14px,2.2vw,18px); font-weight:800; color:var(--subtitle) }
 
-    /* Секция с плашками на общем бэкграунде */
-    .episodes-section{
-      position:relative; isolation:isolate;
-      padding:32px 0 48px;
-    }
+    /* Секция одного сериала на затемнённом фоне-картинке */
+    .episodes-section{ position:relative; isolation:isolate; padding:28px 0 56px }
     .episodes-section::before{
       content:""; position:absolute; inset:0; z-index:-2;
-      background:url("/assets/series/background-till-death.jpg") center/cover no-repeat;
-      filter:saturate(105%);
+      background:url("/assets/series/background-till-death.jpg") center/cover no-repeat; filter:saturate(105%);
     }
     .episodes-section::after{
-      content:""; position:absolute; inset:0; z-index:-1;
-      background:rgba(0,0,0,.65);
+      content:""; position:absolute; inset:0; z-index:-1; background:rgba(0,0,0,.66);
     }
+    .episodes-wrap{ max-width:1200px; margin:0 auto; padding:0 16px }
+    .episodes-head{ margin:0 0 16px; font-weight:800; font-size:clamp(22px,3.2vw,28px); color:#e0e0e0 }
 
-    .episodes-wrap{ max-width:1200px; margin:0 auto; padding:0 16px; }
-    .episodes-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-    @media (max-width: 1000px){ .episodes-grid{ grid-template-columns:repeat(2,1fr); } }
-    @media (max-width: 640px){ .episodes-grid{ grid-template-columns:1fr; } }
+    .episodes-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px }
+    @media (max-width:1000px){ .episodes-grid{ grid-template-columns:repeat(2,1fr) } }
+    @media (max-width:640px){ .episodes-grid{ grid-template-columns:1fr } }
 
     .ep-card{
       position:relative; overflow:hidden; border-radius:16px;
-      background:#111; min-height:230px;
-      border:1px solid rgba(255,255,255,.08);
+      background:#111; min-height:230px; border:1px solid rgba(255,255,255,.08);
       color:#fff; text-decoration:none; display:block;
     }
-    .ep-bg-video, .ep-bg-img{
-      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(105%); display:block;
-    }
+    .ep-bg-video, .ep-bg-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(105%); display:block }
     .ep-overlay{
       position:absolute; inset:0; pointer-events:none;
       background:
@@ -75,8 +49,7 @@
     }
     .ep-badge{
       position:absolute; top:12px; left:12px;
-      background:#0b0b0b; border:1px solid #fff; border-radius:999px;
-      padding:6px 10px; font-size:12px; line-height:1;
+      background:#0b0b0b; border:1px solid #fff; border-radius:999px; padding:6px 10px; font-size:12px; line-height:1;
     }
     .ep-title{
       position:absolute; left:12px; right:12px; bottom:12px;
@@ -84,8 +57,7 @@
       padding:10px 12px; border-radius:10px; font-weight:800; font-size:15px;
     }
     .ep-num{
-      position:absolute; right:10px; top:8px;
-      font-weight:900; font-size:42px; line-height:1;
+      position:absolute; right:10px; top:8px; font-weight:900; font-size:42px; line-height:1;
       color:rgba(255,255,255,.75); text-shadow:0 2px 10px rgba(0,0,0,.6);
     }
     @media (hover:hover){
@@ -94,75 +66,64 @@
       .ep-card:hover{ border-color:rgba(255,255,255,.18) }
     }
 
-    /* На этой странице подсветку активного пункта меню НЕ показываем,
-       чтобы «О нас» не горел всегда */
-    .top-nav a.active{ color:var(--nav); background:transparent; }
+    /* чтобы «О нас» не подсвечивался постоянно */
+    .top-nav a.active{ color:var(--nav); background:transparent }
   </style>
 </head>
 <body>
-
-  <!-- фиксированные элементы как на главной -->
+  <!-- верх, как на главной -->
   <a class="brand" href="/" aria-label="На главную">
     <img src="/assets/img/logo.png" alt="Логотип студии" />
   </a>
-
   <nav class="top-nav" aria-label="Навигация">
     <a href="/#about">О нас</a>
     <a href="/#projects">Проекты</a>
   </nav>
+  <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">
-    Пишите нам
-  </button>
-
-  <!-- Хиро сериала -->
+  <!-- HERO -->
   <header class="series-hero">
     <div class="series-hero-inner">
-      <h1 class="series-title">Пока смерть не разлучит нас</h1>
-      <p class="series-sub">Сериал</p>
+      <h1 class="series-title">Сериалы</h1>
+      <p class="series-sub">Сезон 2025</p>
     </div>
   </header>
 
-  <!-- Секция плашек с общим фоном -->
+  <!-- СЕКЦИЯ: Пока смерть не разлучит нас -->
   <section class="episodes-section">
-    <div class="episodes-wrap" aria-label="Список серий">
-      <div class="episodes-grid">
+    <div class="episodes-wrap">
+      <h2 class="episodes-head">Пока смерть не разлучит нас</h2>
 
-        <!-- Серия 1 -->
-        <a class="ep-card" href="/assets/series/episode-1.html" aria-label="Смотреть: Серия 1">
+      <div class="episodes-grid">
+        <!-- 1 серия — смотреть -->
+        <a class="ep-card" href="/assets/series/episode-1.html" aria-label="Смотреть: 1 серия">
           <video class="ep-bg-video" autoplay muted loop playsinline preload="metadata">
             <source src="/assets/series/episode-1-preview.mp4" type="video/mp4" />
           </video>
           <div class="ep-overlay"></div>
           <div class="ep-badge">Смотреть</div>
-          <div class="ep-title">Серия 1</div>
+          <div class="ep-title">1 серия</div>
           <div class="ep-num">1</div>
         </a>
 
-        <!-- Серия 2 -->
-        <a class="ep-card" href="/assets/series/episode-2.html" aria-label="Серия 2 (в производстве)">
+        <!-- 2 серия — в разработке -->
+        <a class="ep-card" href="/assets/series/episode-2.html" aria-label="2 серия (в разработке)">
           <video class="ep-bg-video" autoplay muted loop playsinline preload="metadata">
             <source src="/assets/series/episode-2-preview.mp4" type="video/mp4" />
           </video>
           <div class="ep-overlay"></div>
-          <div class="ep-badge">В производстве</div>
-          <div class="ep-title">Серия 2</div>
+          <div class="ep-badge">В разработке</div>
+          <div class="ep-title">2 серия</div>
           <div class="ep-num">2</div>
         </a>
 
-        <!-- Серия 3 (заглушка) -->
-        <a class="ep-card" href="/assets/series/episode-3.html" aria-label="Серия 3 (скоро)">
-          <div class="ep-overlay"></div>
-          <div class="ep-badge">Скоро</div>
-          <div class="ep-title">Серия 3</div>
-          <div class="ep-num">3</div>
-        </a>
-
+        <!-- 3 плашка — пустая -->
+        <div class="ep-card" aria-hidden="true"></div>
       </div>
     </div>
   </section>
 
-  <!-- Низ -->
+  <!-- низ, как на главной -->
   <section class="contact-section" id="contact">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru" aria-label="Написать на studio@aichekhov.ru">
@@ -179,7 +140,7 @@
     <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
   </footer>
 
-  <!-- Drawer (тот же, что на главной) -->
+  <!-- drawer как на главной -->
   <div class="scrim" id="scrim" hidden></div>
   <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
     <header class="drawer-head">
@@ -198,10 +159,12 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    // автоплей превью (подстраховка iOS)
     document.addEventListener('touchend', () => {
       document.querySelectorAll('video').forEach(v => { if (v.paused) v.play().catch(()=>{}); });
     }, { once:true });
 
+    // drawer
     (function(){
       const openBtn=document.getElementById('contactOpen');
       const drawer=document.getElementById('contactDrawer');
