@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Студия искусственного интеллекта им. А.П. Чехова</title>
+  <title>Студия ИИ им. А.П. Чехова</title>
   <meta name="description" content="AI студия им. А.П. Чехова — графические новеллы, сериалы и экспериментальный контент. От идеи до готовой истории." />
   <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Фиксированные элементы -->
+  <!-- ВЕРХ -->
   <a class="brand" href="#top" aria-label="На начало">
     <img src="assets/img/logo.png" alt="Логотип студии" />
   </a>
@@ -23,7 +23,7 @@
     Пишите нам
   </button>
 
-  <!-- 1) HERO -->
+  <!-- HERO -->
   <section id="top" class="hero" role="banner">
     <div class="hero-inner">
       <h1>Новый язык<br>сторителлинга</h1>
@@ -31,7 +31,7 @@
     </div>
   </section>
 
-  <!-- 2) ABOUT + видео -->
+  <!-- О НАС + ВИДЕО -->
   <section class="about-video" id="about" aria-labelledby="about-title">
     <video class="bg-video" autoplay muted loop playsinline poster="assets/img/poster.jpg">
       <source src="assets/video/background.mp4" type="video/mp4" />
@@ -48,13 +48,13 @@
     </div>
   </section>
 
-  <!-- 3) Интро перед плашками -->
+  <!-- ИНТРО ПРОЕКТОВ -->
   <section class="section-intro" id="projects" aria-label="Интро проектов">
     <h2 class="section-title">AI студия им. А.П. Чехова.</h2>
     <p class="section-subtitle">От идеи до готовой истории.</p>
   </section>
 
-  <!-- 4) ПЛИТКИ -->
+  <!-- ПЛИТКИ -->
   <section class="portfolio" aria-label="Проекты студии">
     <!-- Сериалы -->
     <a class="tile tile-video" href="assets/series/" aria-label="Сериалы">
@@ -66,7 +66,7 @@
       <div class="tile-badge">Смотреть</div>
     </a>
 
-    <!-- Графические новеллы (картинка-превью) -->
+    <!-- Графические новеллы (КАРТИНКА-ПРЕВЬЮ) -->
     <a class="tile tile-visual" href="assets/novellas/" aria-label="Графические новеллы">
       <img class="tile-bg-img" src="assets/novellas/novella-preview.jpg" alt="" />
       <div class="tile-overlay"></div>
@@ -74,7 +74,7 @@
       <div class="tile-badge">В разработке</div>
     </a>
 
-    <!-- AI-контент (видео-превью) -->
+    <!-- AI-контент (ВИДЕО-ПРЕВЬЮ) -->
     <a class="tile tile-video" href="assets/content/" aria-label="AI-контент">
       <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
         <source src="assets/content/content-preview.mp4" type="video/mp4" />
@@ -85,7 +85,7 @@
     </a>
   </section>
 
-  <!-- Нижний email -->
+  <!-- НИЗ -->
   <section class="contact-section" id="contact">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru" aria-label="Написать на studio@aichekhov.ru">
@@ -102,7 +102,7 @@
     <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
   </footer>
 
-  <!-- Drawer -->
+  <!-- DRAWER -->
   <div class="scrim" id="scrim" hidden></div>
   <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
     <header class="drawer-head">
@@ -122,10 +122,10 @@
     // Год
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // iOS автоплей
-    document.addEventListener("touchend", () => {
-      document.querySelectorAll("video").forEach(v => { if (v.paused) v.play().catch(()=>{}); });
-    }, { once: true });
+    // Автоплей превью после первого взаимодействия (подстраховка iOS/браузеров)
+    function kickVideos(){ document.querySelectorAll('video').forEach(v=>{ if(v.paused) v.play().catch(()=>{}); }); }
+    document.addEventListener('touchend', kickVideos, { once:true });
+    document.addEventListener('click', kickVideos, { once:true });
 
     // Drawer open/close
     (function(){
@@ -135,63 +135,43 @@
       const scrim   = document.getElementById('scrim');
 
       function openDrawer(){
-        drawer.hidden = false; scrim.hidden = false;
+        drawer.hidden=false; scrim.hidden=false;
         requestAnimationFrame(()=>{
           drawer.classList.add('is-open'); scrim.classList.add('is-visible');
-          document.body.style.overflow = 'hidden';
-          const f = drawer.querySelector('input,textarea,button'); f && f.focus();
+          document.body.style.overflow='hidden';
+          const f=drawer.querySelector('input,textarea,button'); f&&f.focus();
         });
       }
       function closeDrawer(){
         drawer.classList.remove('is-open'); scrim.classList.remove('is-visible');
-        document.body.style.overflow = '';
-        setTimeout(()=>{ drawer.hidden = true; scrim.hidden = true; }, 200);
+        document.body.style.overflow='';
+        setTimeout(()=>{ drawer.hidden=true; scrim.hidden=true; }, 200);
         openBtn && openBtn.focus();
       }
       openBtn.addEventListener('click', openDrawer);
       closeBtn.addEventListener('click', closeDrawer);
       scrim.addEventListener('click', closeDrawer);
-      document.addEventListener('keydown', e => { if(e.key==='Escape' && !drawer.hidden) closeDrawer(); });
 
-      // mailto отправка
       document.getElementById('contactForm').addEventListener('submit', e=>{
         e.preventDefault();
-        const d = new FormData(e.target);
-        const subject = encodeURIComponent('Сообщение со сайта');
-        const body = encodeURIComponent(`Имя: ${d.get('name')}\nEmail: ${d.get('email')}\n\n${d.get('message')}`);
-        location.href = `mailto:studio@aichekhov.ru?subject=${subject}&body=${body}`;
+        const d=new FormData(e.target);
+        const subject=encodeURIComponent('Сообщение со сайта');
+        const body=encodeURIComponent(`Имя: ${d.get('name')}\nEmail: ${d.get('email')}\n\n${d.get('message')}`);
+        location.href=`mailto:studio@aichekhov.ru?subject=${subject}&body=${body}`;
         closeDrawer();
       });
     })();
 
-    // Active state для меню
+    // Актив в меню — только по клику (без залипания)
     (function(){
-      const sections = { about: document.querySelector('#about'), projects: document.querySelector('#projects') };
-      const links = document.querySelectorAll('.top-nav a[data-link]');
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          const id = e.target.id;
-          const link = document.querySelector(`.top-nav a[data-link="${id}"]`);
-          if (!link) return;
-          if (e.isIntersecting) {
-            links.forEach(a=>a.classList.remove('active'));
-            link.classList.add('active');
-          }
+      const links=[...document.querySelectorAll('.top-nav a')];
+      links.forEach(a=>a.classList.remove('active'));
+      links.forEach(a=>{
+        a.addEventListener('click', ()=>{
+          links.forEach(x=>x.classList.remove('active'));
+          a.classList.add('active');
         });
-      },{ rootMargin: '-45% 0px -50% 0px', threshold: 0.01 });
-      Object.values(sections).forEach(el=> el && io.observe(el));
-    })();
-
-    // Снятие скругления у about-видео при скролле
-    (function(){
-      const about = document.querySelector('.about-video');
-      const onScroll = ()=>{
-        const top = about.getBoundingClientRect().top;
-        if (top <= 60) about.classList.add('unrounded');
-        else about.classList.remove('unrounded');
-      };
-      window.addEventListener('scroll', onScroll, {passive:true});
-      onScroll();
+      });
     })();
   </script>
 </body>
