@@ -1,4 +1,4 @@
-/* ===== Локальный Hanken (если лежит в assets/fonts) ===== */
+/* Локальный Hanken */
 @font-face{
   font-family:"Hanken Grotesk";
   src:url("assets/fonts/HankenGrotesk-VariableFont_wght.ttf") format("truetype");
@@ -7,10 +7,10 @@
 
 :root{
   --text: rgba(255,255,255,.92);
-  --nav: #5a5a5a;        /* спокойные кнопки */
-  --nav-active: #e0e0e0; /* светлее при hover/focus */
+  --nav: #5a5a5a;
+  --nav-active: #e0e0e0;
   --subtitle: #6a6a6a;   /* светлее и контрастнее */
-  --about-offset: -150px;/* поднять блок «О нас» ещё выше ~1 см */
+  --about-offset: -190px; /* ещё выше (~+40px к прошлому) */
 }
 
 *{box-sizing:border-box}
@@ -22,7 +22,7 @@ body{
   font-weight:100;
 }
 
-/* ===== Верх ===== */
+/* Верх */
 .brand{ position:fixed; top:20px; left:20px; z-index:30 }
 .brand img{ width:120px; height:auto; display:block; filter:drop-shadow(0 2px 8px rgba(0,0,0,.5)) }
 
@@ -33,15 +33,16 @@ body{
 .top-nav a{
   color:var(--nav); text-decoration:none; font-weight:800; font-size:14px;
   padding:8px 10px; border-radius:10px;
-  background:rgba(255,255,255,.04); /* почти прозрачные */
+  background:rgba(255,255,255,.04);
   transition:color .15s ease, background .15s ease;
 }
 .top-nav a:hover, .top-nav a:focus{
   color:var(--nav-active);
   background:rgba(255,255,255,.10);
 }
+/* На всякий случай обнуляем .active, если его где-то оставили */
+.top-nav a.active{ color:var(--nav); background:rgba(255,255,255,.04) }
 
-/* кнопка контактов */
 .contact-fixed{
   position:fixed; top:28px; right:20px; z-index:30;
   background:rgba(255,255,255,.04); color:var(--nav);
@@ -53,7 +54,7 @@ body{
   color:var(--nav-active); background:rgba(255,255,255,.10); border-color:#fff;
 }
 
-/* ===== HERO ===== */
+/* HERO */
 .hero{
   min-height:80vh; display:flex; align-items:flex-start; justify-content:center;
   padding-top:clamp(156px, 21vh, 236px);
@@ -64,9 +65,9 @@ body{
 }
 .hero-inner{ text-align:center; padding:0 24px; max-width:1000px }
 .hero h1{ margin:0 0 16px; font-size:clamp(44px, 9vw, 92px); line-height:1.04; font-weight:200 }
-.subtitle{ margin:0; font-size:clamp(16px,2.2vw,22px); color:var(--subtitle); font-weight:700 }
+.subtitle{ margin:0; font-size:clamp(16px,2.2vw,22px); color:var(--subtitle); font-weight:800 }
 
-/* ===== ABOUT + video ===== */
+/* ABOUT + video */
 .about-video{ position:relative; margin:0 3vw; min-height:100vh; --video-radius:28px }
 .bg-video{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000;
@@ -82,11 +83,10 @@ body{
 .about-video.unrounded .bg-video,
 .about-video.unrounded .video-overlay{ border-radius:0 }
 
-/* Карточка «О нас» — подняли выше */
 .about-content{
   min-height:100vh; display:grid; align-content:start; justify-items:center;
   padding: clamp(12vh, 18vh, 22vh) 24px 24px; text-align:center;
-  margin-top: var(--about-offset);
+  margin-top: var(--about-offset); /* ПОДНЯЛИ ВЫШЕ */
 }
 .about-content p{
   max-width:760px; margin:0; font-size:clamp(18px,2vw,22px); line-height:1.6;
@@ -95,12 +95,12 @@ body{
   padding:38px 22px 18px; border-radius:12px; border:1px solid rgba(255,255,255,.08);
 }
 
-/* ===== Интро перед плитками ===== */
+/* Интро */
 .section-intro{ max-width:1100px; margin:6vh auto 0; padding:0 16px; text-align:center }
 .section-title{ font-weight:800; font-size:clamp(26px,4.2vw,40px); margin:0 0 .25rem; color:#e0e0e0 }
-.section-subtitle{ font-size:clamp(16px,2.2vw,20px); color:var(--subtitle); font-weight:700 }
+.section-subtitle{ font-size:clamp(16px,2.2vw,20px); color:var(--subtitle); font-weight:800 }
 
-/* ===== Плитки ===== */
+/* Плитки */
 .portfolio{
   width:100%; max-width:1200px; margin:4.5vh auto 3.5rem;
   display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:0 16px;
@@ -138,7 +138,7 @@ body{
   .tile:hover{ border-color:rgba(255,255,255,.18) }
 }
 
-/* ===== Низ ===== */
+/* Контакты и футер */
 .contact-section{ display:flex; flex-direction:column; align-items:center; text-align:center; margin-top:auto }
 .contact{
   max-width:900px; background:rgba(0,0,0,.35); backdrop-filter:saturate(120%) blur(2px);
@@ -148,7 +148,7 @@ body{
 .mail-text{ font-size:1.2rem; line-height:1 }
 .site-footer{ display:grid; place-items:center; min-height:18vh; padding:20px; text-align:center; color:rgba(255,255,255,.8) }
 
-/* ===== Drawer ===== */
+/* Drawer */
 .scrim{ position:fixed; inset:0; background:rgba(0,0,0,.35); opacity:0; transition:opacity .2s ease; z-index:40 }
 .scrim.is-visible{ opacity:1 }
 .drawer{
@@ -170,7 +170,7 @@ body{
 }
 .contact-submit{ padding:12px 16px; border:0; border-radius:999px; cursor:pointer; background:#2563EB; color:var(--text); font-weight:700 }
 
-/* ===== Мобилка ===== */
+/* Мобилка */
 @media (max-width: 900px){
   .brand img{ width:100px }
   .top-nav{ transform:none; left:auto; right:120px }
