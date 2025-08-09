@@ -6,7 +6,7 @@
     <title>Студия искусственного интеллекта им. А.П. Чехова</title>
     <meta name="description" content="Студия ИИ им. А.П. Чехова — графические новеллы, видео, исследовательские прототипы." />
     <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4" />
-    <link rel="stylesheet" href="style.css?v=4" />
+    <link rel="stylesheet" href="style.css?v=5" />
   </head>
   <body>
     <!-- FIXED UI -->
@@ -17,7 +17,7 @@
       Пишите нам
     </button>
 
-    <!-- 1) HERO — опущенный заголовок, видно «кусочек» видео ближе -->
+    <!-- 1) HERO — заголовок ниже, видео ближе -->
     <section id="top" class="hero" role="banner">
       <div class="hero-inner">
         <h1>
@@ -29,7 +29,7 @@
       </div>
     </section>
 
-    <!-- 2) ABOUT с видео: правый край скруглён; при скролле скругление исчезает -->
+    <!-- 2) ABOUT с видео: верхние углы скруглены; при скролле скругление исчезает -->
     <section class="about-video" aria-labelledby="about-title">
       <video class="bg-video" autoplay muted loop playsinline poster="assets/img/poster.jpg">
         <source src="assets/video/background.mp4" type="video/mp4" />
@@ -39,16 +39,13 @@
       <div class="about-content">
         <h2 id="about-title" class="sr-only">Кто мы</h2>
         <p>
-          Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда».<br><br>
-          Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс, освободившись
-          от громоздкой административной цепочки традиционного производства. Мы приглашаем вас сделать вместе с нами шаг
-          в будущее, где точно не будет скучно.<br><br>
-          Апчхи.
+          Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда». Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс, освободившись от громоздкой административной цепочки традиционного производства.<br><br>
+          Мы приглашаем вас сделать вместе с нами шаг в будущее, где точно не будет скучно. Апчхи.
         </p>
       </div>
     </section>
 
-    <!-- Контакты внизу: иконка + адрес -->
+    <!-- Контакты внизу: иконка + крупный адрес -->
     <section class="contact-section" id="contact">
       <div class="contact">
         <a class="mail-link" href="mailto:hello@aichekhov.ru" aria-label="Написать на hello@aichekhov.ru">
@@ -128,7 +125,7 @@
         });
       })();
 
-      // Снятие скругления у видео при скролле (правый край -> 0)
+      // Снятие скругления у видео при скролле (верхние углы -> 0)
       (function(){
         const about = document.querySelector('.about-video');
         function onScroll(){
