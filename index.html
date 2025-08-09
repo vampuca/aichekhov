@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ру">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Студия ИИ им. А.П. Чехова</title>
   <meta name="description" content="AI студия им. А.П. Чехова — графические новеллы, сериалы и экспериментальный контент. От идеи до готовой истории." />
   <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4" />
-  <link rel="stylesheet" href="style.css?v=9" />
+  <link rel="stylesheet" href="style.css?v=10" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -21,7 +21,7 @@
     <a href="#projects">Проекты</a>
   </nav>
 
-  <!-- Плашка контактов: как раньше — чёрная с белым кантиком и светло-серым текстом -->
+  <!-- Контакты (чёрная плашка с белым кантом и серым текстом) -->
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">
     Пишите нам
   </button>
@@ -34,7 +34,7 @@
     </div>
   </section>
 
-  <!-- О НАС + ВИДЕО (заголовок «О нас» убран) -->
+  <!-- О НАС + ВИДЕО (без видимого заголовка) -->
   <section class="about-video" id="about" aria-label="О нас">
     <video class="bg-video" autoplay muted loop playsinline poster="assets/img/poster.jpg">
       <source src="assets/video/background.mp4" type="video/mp4" />
@@ -52,7 +52,7 @@
 
   <!-- Интро проектов -->
   <section class="section-intro" id="projects" aria-label="Интро проектов">
-    <h2 class="section-title">AI студия им. А.П. Чехова.</h2>
+    <h2 class="section-title">AI студия им. А.П. Чехова</h2>
     <p class="section-subtitle">От идеи до готовой истории.</p>
   </section>
 
@@ -68,9 +68,9 @@
       <div class="tile-badge">Смотреть</div>
     </a>
 
-    <!-- Новеллы -->
+    <!-- Графические новеллы -->
     <a class="tile tile-visual" href="assets/novellas/" aria-label="Графические новеллы">
-      <img class="tile-bg-img" src="assets/novellas/novella-preview.jpg?v=9" alt="" />
+      <img class="tile-bg-img" src="assets/novellas/novella-preview.jpg?v=10" alt="" />
       <div class="tile-overlay"></div>
       <div class="tile-title">Графические новеллы</div>
       <div class="tile-badge">В разработке</div>
@@ -164,11 +164,21 @@
       });
     })();
 
-    // На всякий — убираем .active у меню, чтобы не «залипало»
+    // Не допускаем "залипания" активного состояния
     document.querySelectorAll('.top-nav a.active').forEach(a=>a.classList.remove('active'));
 
+    // Блюр нав-кнопок усиливается при скролле
+    (function(){
+      const toggle = () => {
+        if (window.scrollY > 10) document.body.classList.add('is-scrolled');
+        else document.body.classList.remove('is-scrolled');
+      };
+      window.addEventListener('scroll', toggle, {passive:true});
+      toggle();
+    })();
+
     // Скругления у about-видео убираем при скролле
-    (()=> {
+    (function(){
       const about = document.querySelector('.about-video');
       const onScroll = ()=>{
         const top = about.getBoundingClientRect().top;
