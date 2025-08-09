@@ -4,97 +4,91 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Пока смерть не разлучит нас — Серия 1</title>
-  <link rel="stylesheet" href="/style.css" />
-  <style>
-    body{ background:#000; }
-    .episode-wrap{ max-width:1100px; margin:120px auto 40px; padding:0 16px; }
-    .ep-head{ margin:0 0 18px; }
-    .ep-title{ margin:0; font-size:clamp(26px,4.6vw,44px); font-weight:200; }
-    .ep-sub{ margin:.25rem 0 0; color:var(--subtitle); font-weight:800; }
-    .player{
-      position:relative; width:100%; aspect-ratio:16/9; border-radius:16px; overflow:hidden;
-      border:1px solid rgba(255,255,255,.08); background:#111;
-    }
-    .player video{ width:100%; height:100%; object-fit:cover; display:block; }
-    .ep-desc{ margin:16px 0 0; color:rgba(255,255,255,.9); line-height:1.6; }
-  </style>
+  <meta name="description" content="Пока смерть не разлучит нас — Серия 1. Триллер-сериал AI-студии им. А.П. Чехова." />
+  <link rel="stylesheet" href="../../style.css?v=16" />
 </head>
-<body>
-  <a class="brand" href="/" aria-label="На главную">
-    <img src="/assets/img/logo.png" alt="Логотип студии" />
+<body id="top">
+
+  <!-- Верх — как на главной/«Сериалы» -->
+  <a class="brand" href="../../#top" aria-label="На начало">
+    <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
-  <nav class="top-nav">
-    <a href="/#about">О нас</a>
-    <a href="/#projects">Проекты</a>
+  <nav class="top-nav" aria-label="Навигация">
+    <a href="../series/">← Сериалы</a>
+    <a href="../../#projects">Проекты</a>
   </nav>
-  <button class="contact-fixed" id="contactOpen">Пишите нам</button>
+  <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <main class="episode-wrap">
-    <header class="ep-head">
-      <h1 class="ep-title">Пока смерть не разлучит нас</h1>
-      <p class="ep-sub">Серия 1</p>
-    </header>
+  <!-- Hero компактный -->
+  <header class="hero hero--series" style="min-height:48vh;padding-top:18vh;">
+    <div class="hero-inner">
+      <h1>Пока смерть не разлучит нас</h1>
+      <p class="subtitle">Серия 1</p>
+    </div>
+  </header>
 
-    <div class="player" aria-label="Видеоплеер серии 1">
-      <video controls playsinline poster="/assets/series/background-till-death.jpg">
-        <source src="/assets/series/episode-1-preview.mp4" type="video/mp4" />
-      </video>
+  <!-- Плеер -->
+  <main class="player-wrap">
+    <div class="player-box">
+      <!-- Google Drive embed (работает, если файл доступен для просмотра «по ссылке») -->
+      <iframe
+        class="player-frame"
+        src="https://drive.google.com/file/d/1ASoP_DHPkeUl1GGi00XfTfTfvqjc9dU9/preview"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+        title="Пока смерть не разлучит нас — Серия 1"></iframe>
     </div>
 
-    <p class="ep-desc">
-      Краткое описание серии. Здесь можно добавить синопсис, ключевые сцены и примечания к выпуску.
+    <p class="player-fallback">
+      Если плеер не загрузился, <a href="https://drive.google.com/file/d/1ASoP_DHPkeUl1GGi00XfTfTfvqjc9dU9/view" target="_blank" rel="noopener">откройте серию на Google Drive</a>.
     </p>
   </main>
 
+  <!-- Контакт + футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
         <svg class="mail-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-          <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.6" />
-          <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.6" />
+          <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.6"/>
         </svg>
         <span class="mail-text">studio@aichekhov.ru</span>
       </a>
     </div>
   </section>
-  <footer class="site-footer"><p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p></footer>
 
-  <!-- drawer копия -->
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
+  </footer>
+
+  <!-- Drawer -->
   <div class="scrim" id="scrim" hidden></div>
-  <aside class="drawer" id="contactDrawer" hidden role="dialog" aria-modal="true">
+  <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" hidden>
     <header class="drawer-head">
-      <h3 id="contactTitle">Связаться с нами</h3>
+      <h3>Связаться с нами</h3>
       <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
     </header>
-    <form class="contact-form" id="contactForm">
+    <form class="contact-form">
       <label>Имя <input type="text" name="name" required></label>
       <label>Email <input type="email" name="email" required></label>
       <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
       <button type="submit" class="contact-submit">Отправить</button>
-      <p class="contact-alt">Или напишите: <a href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
+      <p class="contact-alt">Или напишите: <a class="contact-plain" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
     </form>
   </aside>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-    (function(){
-      const open=document.getElementById('contactOpen');
-      const drawer=document.getElementById('contactDrawer');
-      const closeB=document.getElementById('contactClose');
-      const scrim=document.getElementById('scrim');
-      function openD(){ drawer.hidden=false; scrim.hidden=false;
-        requestAnimationFrame(()=>{ drawer.classList.add('is-open'); scrim.classList.add('is-visible'); document.body.style.overflow='hidden'; });
-      }
-      function closeD(){ drawer.classList.remove('is-open'); scrim.classList.remove('is-visible'); document.body.style.overflow='';
-        setTimeout(()=>{ drawer.hidden=true; scrim.hidden=true; },200);
-      }
-      open.addEventListener('click',openD); closeB.addEventListener('click',closeD); scrim.addEventListener('click',closeD);
-      document.getElementById('contactForm').addEventListener('submit', e=>{
-        e.preventDefault();
-        const d=new FormData(e.target);
-        location.href=`mailto:studio@aichekhov.ru?subject=${encodeURIComponent('Серия 1')}&body=${encodeURIComponent(`Имя: ${d.get('name')}\nEmail: ${d.get('email')}\n\n${d.get('message')}`)}`;
-        closeD();
-      });
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (() => {
+      const open = document.getElementById('contactOpen');
+      const close = document.getElementById('contactClose');
+      const dr = document.getElementById('contactDrawer');
+      const scr = document.getElementById('scrim');
+      function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
+      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
+      open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
+      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
     })();
   </script>
 </body>
