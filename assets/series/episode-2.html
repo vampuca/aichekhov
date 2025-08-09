@@ -2,37 +2,103 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Серия 2 — в производстве</title>
-  <link rel="stylesheet" href="/style.css?v=6" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Пока смерть не разлучит нас — Серия 2</title>
+  <link rel="stylesheet" href="/style.css" />
   <style>
-    .page{max-width:900px;margin:0 auto;padding:110px 16px 40px;text-align:center}
-    .title{font-size:clamp(22px,3.2vw,28px);font-weight:800;margin:0 0 14px}
-    .teaser{position:relative;border-radius:16px;overflow:hidden;height:360px;max-width:900px;margin:0 auto 16px;border:1px solid rgba(255,255,255,.08);background:#111}
-    .teaser video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(105%)}
-    .teaser .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.00) 55%, rgba(0,0,0,0.55) 100%)}
-    .badge{display:inline-block;margin-top:6px;border:1px solid #fff;border-radius:999px;padding:8px 14px;background:#0b0b0b}
-    .brand{position:fixed;top:20px;left:20px;z-index:20}
-    .brand img{display:block;width:120px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
-    .contact-fixed{position:fixed;top:30px;right:20px;z-index:20;padding:10px 16px;background:#0b0b0b;color:#fff;border:1.5px solid #fff;border-radius:999px;font-size:14px;font-weight:700;text-decoration:none}
+    body{ background:#000; }
+    .episode-wrap{ max-width:1100px; margin:120px auto 40px; padding:0 16px; }
+    .ep-head{ margin:0 0 18px; }
+    .ep-title{ margin:0; font-size:clamp(26px,4.6vw,44px); font-weight:200; }
+    .ep-sub{ margin:.25rem 0 0; color:var(--subtitle); font-weight:800; }
+    .placeholder{
+      display:grid; place-items:center; width:100%; aspect-ratio:16/9;
+      border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,.08);
+      background:url("/assets/series/background-till-death.jpg") center/cover no-repeat;
+      position:relative;
+    }
+    .ph-label{
+      position:absolute; bottom:12px; right:12px;
+      background:#0b0b0b; border:1px solid #fff; border-radius:999px; padding:6px 10px; font-size:12px;
+    }
+    .ep-desc{ margin:16px 0 0; color:rgba(255,255,255,.9); line-height:1.6; }
   </style>
 </head>
 <body>
-  <a class="brand" href="/"><img src="/assets/img/logo.png" alt="Логотип" /></a>
-  <a class="contact-fixed" href="mailto:hello@aichekhov.ru">hello@aichekhov.ru</a>
+  <a class="brand" href="/" aria-label="На главную">
+    <img src="/assets/img/logo.png" alt="Логотип студии" />
+  </a>
+  <nav class="top-nav">
+    <a href="/#about">О нас</a>
+    <a href="/#projects">Проекты</a>
+  </nav>
+  <button class="contact-fixed" id="contactOpen">Пишите нам</button>
 
-  <main class="page">
-    <h1 class="title">Пока смерть не разлучит нас — Серия 2</h1>
-    <div class="teaser">
-      <video autoplay muted loop playsinline preload="metadata">
-        <source src="/assets/series/episode-2-preview.mp4" type="video/mp4" />
-      </video>
-      <div class="overlay"></div>
+  <main class="episode-wrap">
+    <header class="ep-head">
+      <h1 class="ep-title">Пока смерть не разлучит нас</h1>
+      <p class="ep-sub">Серия 2</p>
+    </header>
+
+    <div class="placeholder" aria-label="Серия в производстве">
+      <span class="ph-label">В производстве</span>
     </div>
-    <div class="badge">В производстве</div>
 
-    <p style="margin-top:18px;opacity:.85">Следите за обновлениями — здесь появится премьера второй серии.</p>
-    <p style="margin-top:10px"><a href="/assets/series/">← ко всем сериям</a></p>
+    <p class="ep-desc">
+      Здесь появится эпизод 2. Пока мы готовим релиз.
+    </p>
   </main>
+
+  <section class="contact-section">
+    <div class="contact">
+      <a class="mail-link" href="mailto:studio@aichekhov.ru">
+        <svg class="mail-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+          <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.6" />
+          <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.6" />
+        </svg>
+        <span class="mail-text">studio@aichekhov.ru</span>
+      </a>
+    </div>
+  </section>
+  <footer class="site-footer"><p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p></footer>
+
+  <!-- drawer -->
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="drawer" id="contactDrawer" hidden role="dialog" aria-modal="true">
+    <header class="drawer-head">
+      <h3 id="contactTitle">Связаться с нами</h3>
+      <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
+    </header>
+    <form class="contact-form" id="contactForm">
+      <label>Имя <input type="text" name="name" required></label>
+      <label>Email <input type="email" name="email" required></label>
+      <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
+      <button type="submit" class="contact-submit">Отправить</button>
+      <p class="contact-alt">Или напишите: <a href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
+    </form>
+  </aside>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    (function(){
+      const open=document.getElementById('contactOpen');
+      const drawer=document.getElementById('contactDrawer');
+      const closeB=document.getElementById('contactClose');
+      const scrim=document.getElementById('scrim');
+      function openD(){ drawer.hidden=false; scrim.hidden=false;
+        requestAnimationFrame(()=>{ drawer.classList.add('is-open'); scrim.classList.add('is-visible'); document.body.style.overflow='hidden'; });
+      }
+      function closeD(){ drawer.classList.remove('is-open'); scrim.classList.remove('is-visible'); document.body.style.overflow='';
+        setTimeout(()=>{ drawer.hidden=true; scrim.hidden=true; },200);
+      }
+      open.addEventListener('click',openD); closeB.addEventListener('click',closeD); scrim.addEventListener('click',closeD);
+      document.getElementById('contactForm').addEventListener('submit', e=>{
+        e.preventDefault();
+        const d=new FormData(e.target);
+        location.href=`mailto:studio@aichekhov.ru?subject=${encodeURIComponent('Серия 2')}&body=${encodeURIComponent(`Имя: ${d.get('name')}\nEmail: ${d.get('email')}\n\n${d.get('message')}`)}`;
+        closeD();
+      });
+    })();
+  </script>
 </body>
 </html>
