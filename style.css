@@ -95,6 +95,7 @@ body.is-scrolled .top-nav a{
 
 /* Контент «о нас» */
 .about-content{
+    margin-top: 5px;
   min-height:100vh; display:grid; align-content:start; justify-items:center;
   padding: clamp(12vh, 18vh, 22vh) 24px 24px; text-align:center;
 }
@@ -184,7 +185,8 @@ body.is-scrolled .top-nav a{
   .brand img{ width:100px }
   .top-nav{ transform:none; left:auto; right:120px }
   .hero h1{ font-size:clamp(32px,10vw,64px) }
-  .about-content{ padding:14vh 16px 20px }
+  .about-content{
+    margin-top: 5px; padding:14vh 16px 20px }
   .about-content p{ max-width:92% }
   .portfolio{ grid-template-columns:1fr }
 }
