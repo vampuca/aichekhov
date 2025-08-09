@@ -7,20 +7,19 @@
   <meta name="description" content="AI студия им. А.П. Чехова — графические новеллы, сериалы и экспериментальный контент. От идеи до готовой истории." />
   <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4" />
   <link rel="stylesheet" href="style.css" />
-  <!-- Локальный Hanken подключаем через @font-face в CSS; здесь — фолбэк на CDN при отсутствии локального файла -->
+  <!-- CDN-фолбэк шрифта на случай отсутствия локального файла -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-
-  <!-- ВЕРХ (фиксированный) -->
+  <!-- ВЕРХ -->
   <a class="brand" href="#top" aria-label="На начало">
     <img src="assets/img/logo.png" alt="Логотип студии" />
   </a>
 
   <nav class="top-nav" aria-label="Навигация по странице">
-    <a href="#about" data-link="about">О нас</a>
-    <a href="#projects" data-link="projects">Проекты</a>
+    <a href="#about">О нас</a>
+    <a href="#projects">Проекты</a>
   </nav>
 
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">
@@ -45,9 +44,7 @@
     <div class="about-content">
       <h2 id="about-title" class="sr-only">Кто мы</h2>
       <p>
-        Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда».
-        Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс,
-        освободившись от громоздкой административной цепочки традиционного производства.
+        Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда». Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс, освободившись от громоздкой административной цепочки традиционного производства.
         <br><br>
         Мы приглашаем вас сделать вместе с нами шаг в будущее, где точно не будет скучно. Апчхи.
       </p>
@@ -72,9 +69,9 @@
       <div class="tile-badge">Смотреть</div>
     </a>
 
-    <!-- Графические новеллы (новая картинка без рамок) -->
+    <!-- Графические новеллы (новая картинка, без рамок) -->
     <a class="tile tile-visual" href="assets/novellas/" aria-label="Графические новеллы">
-      <img class="tile-bg-img" src="assets/novellas/novella-preview.jpg" alt="" />
+      <img class="tile-bg-img" src="assets/novellas/novella-preview.jpg?v=1" alt="" />
       <div class="tile-overlay"></div>
       <div class="tile-title">Графические новеллы</div>
       <div class="tile-badge">В разработке</div>
@@ -128,7 +125,7 @@
     // Год
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Автоплей подстраховка (iOS/браузеры)
+    // Автоплей подстраховка
     function kickVideos(){ document.querySelectorAll('video').forEach(v=>{ if(v.paused) v.play().catch(()=>{}); }); }
     document.addEventListener('touchend', kickVideos, { once:true });
     document.addEventListener('click',    kickVideos, { once:true });
@@ -168,19 +165,10 @@
       });
     })();
 
-    // Актив в меню — только по клику
-    (function(){
-      const links=[...document.querySelectorAll('.top-nav a')];
-      links.forEach(a=>a.classList.remove('active'));
-      links.forEach(a=>{
-        a.addEventListener('click', ()=>{
-          links.forEach(x=>x.classList.remove('active'));
-          a.classList.add('active');
-        });
-      });
-    })();
+    // На всякий случай снимаем старые .active, чтобы ничего не «горело»
+    document.querySelectorAll('.top-nav a.active').forEach(a=>a.classList.remove('active'));
 
-    // Снятие скругления у about-видео при скролле
+    // Скругление у about-видео снимается при скролле
     (function(){
       const about = document.querySelector('.about-video');
       const onScroll = ()=>{

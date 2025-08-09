@@ -1,4 +1,4 @@
-/* ===== Локальный Hanken (если положен в assets/fonts) ===== */
+/* ===== Локальный Hanken (если лежит в assets/fonts) ===== */
 @font-face{
   font-family:"Hanken Grotesk";
   src:url("assets/fonts/HankenGrotesk-VariableFont_wght.ttf") format("truetype");
@@ -7,10 +7,10 @@
 
 :root{
   --text: rgba(255,255,255,.92);
-  --nav: #5a5a5a;        /* тёмно-серый */
-  --nav-active: #e0e0e0; /* светлее при ховере/активе */
-  --subtitle: #444;      /* подзаголовки темнее, как просила */
-  --about-offset: -110px;/* поднять блок "О нас" — верх рамки чуть выше линии лба */
+  --nav: #5a5a5a;        /* спокойные кнопки */
+  --nav-active: #e0e0e0; /* светлее при hover/focus */
+  --subtitle: #6a6a6a;   /* светлее и контрастнее */
+  --about-offset: -150px;/* поднять блок «О нас» ещё выше ~1 см */
 }
 
 *{box-sizing:border-box}
@@ -28,25 +28,24 @@ body{
 
 .top-nav{
   position:fixed; top:28px; left:50%; transform:translateX(-50%); z-index:30;
-  display:flex; gap:18px;
-  /* убрали массивную «плашку» под меню */
-  background:transparent; border-radius:12px;
+  display:flex; gap:18px; background:transparent;
 }
 .top-nav a{
   color:var(--nav); text-decoration:none; font-weight:800; font-size:14px;
   padding:8px 10px; border-radius:10px;
-  /* кнопки почти прозрачные */
-  background:rgba(255,255,255,.04);
+  background:rgba(255,255,255,.04); /* почти прозрачные */
   transition:color .15s ease, background .15s ease;
 }
-.top-nav a:hover, .top-nav a:focus, .top-nav a.active{
+.top-nav a:hover, .top-nav a:focus{
   color:var(--nav-active);
   background:rgba(255,255,255,.10);
 }
 
+/* кнопка контактов */
 .contact-fixed{
   position:fixed; top:28px; right:20px; z-index:30;
-  background:rgba(255,255,255,.04); color:var(--nav); border:1.5px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.04); color:var(--nav);
+  border:1.5px solid rgba(255,255,255,.35);
   border-radius:999px; padding:10px 14px; font-size:13px; font-weight:800; cursor:pointer;
   transition:color .15s ease, background .15s ease, border-color .15s ease;
 }
@@ -83,11 +82,11 @@ body{
 .about-video.unrounded .bg-video,
 .about-video.unrounded .video-overlay{ border-radius:0 }
 
-/* Карточка «О нас» — сдвиг вверх до линии лба */
+/* Карточка «О нас» — подняли выше */
 .about-content{
   min-height:100vh; display:grid; align-content:start; justify-items:center;
   padding: clamp(12vh, 18vh, 22vh) 24px 24px; text-align:center;
-  margin-top: var(--about-offset); /* ключевой сдвиг */
+  margin-top: var(--about-offset);
 }
 .about-content p{
   max-width:760px; margin:0; font-size:clamp(18px,2vw,22px); line-height:1.6;
@@ -111,8 +110,10 @@ body{
   min-height:220px; background:#111; color:#fff; text-decoration:none;
   border:1px solid rgba(255,255,255,.08);
 }
-.tile-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(105%) }
-.tile-bg-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }
+.tile-video .tile-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(105%) }
+.tile-visual .tile-bg-img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
+}
 .tile-overlay{
   position:absolute; inset:0;
   background:
@@ -122,16 +123,17 @@ body{
 }
 .tile-title{
   position:absolute; left:14px; right:14px; bottom:42px;
-  font-weight:800; font-size:clamp(16px,2.2vw,22px); color:#ededed;
+  font-weight:600; /* тоньше */
+  font-size:clamp(16px,2.2vw,22px); color:#ededed;
   text-shadow:0 1px 6px rgba(0,0,0,.55);
 }
 .tile-badge{
   position:absolute; left:14px; bottom:10px;
   border:1px solid #fff; border-radius:999px; padding:6px 10px;
-  font-size:12px; background:rgba(0,0,0,.6); color:#e0e0e0;
+  font-size:12px; background:#0b0b0b; color:#e0e0e0; font-weight:500; /* тоньше */
 }
 @media (hover:hover){
-  .tile-bg{ transition:transform .35s ease }
+  .tile-video .tile-bg{ transition:transform .35s ease }
   .tile:hover .tile-bg{ transform:scale(1.02) }
   .tile:hover{ border-color:rgba(255,255,255,.18) }
 }
