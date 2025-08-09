@@ -5,29 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Студия ИИ им. А.П. Чехова</title>
   <meta name="description" content="AI студия им. А.П. Чехова — графические новеллы, сериалы и экспериментальный контент. От идеи до готовой истории." />
-
-  <link rel="stylesheet" href="style.css?v=8" />
+  <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4" />
+  <link rel="stylesheet" href="style.css?v=9" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Логотип -->
+  <!-- ВЕРХ -->
   <a class="brand" href="#top" aria-label="На начало">
-    <img src="assets/img/logo.png" alt="Логотип студии">
+    <img src="assets/img/logo.png" alt="Логотип студии" />
   </a>
 
-  <!-- Верхнее меню -->
   <nav class="top-nav" aria-label="Навигация по странице">
     <a href="#about">О нас</a>
     <a href="#projects">Проекты</a>
   </nav>
 
-  <!-- Кнопка контактов (всегда светлая) -->
+  <!-- Плашка контактов: как раньше — чёрная с белым кантиком и светло-серым текстом -->
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">
     Пишите нам
   </button>
 
-  <!-- HERO -->
+  <!-- HERO (как было) -->
   <section id="top" class="hero" role="banner">
     <div class="hero-inner">
       <h1>Новый язык<br>сторителлинга</h1>
@@ -35,15 +34,14 @@
     </div>
   </section>
 
-  <!-- О НАС + ВИДЕО -->
-  <section class="about-video" id="about" aria-labelledby="about-title">
+  <!-- О НАС + ВИДЕО (заголовок «О нас» убран) -->
+  <section class="about-video" id="about" aria-label="О нас">
     <video class="bg-video" autoplay muted loop playsinline poster="assets/img/poster.jpg">
       <source src="assets/video/background.mp4" type="video/mp4" />
     </video>
     <div class="video-overlay" aria-hidden="true"></div>
 
     <div class="about-content">
-      <h2 id="about-title" class="sr-only">О нас</h2>
       <p>
         Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда». Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс, освободившись от громоздкой административной цепочки традиционного производства.
         <br><br>
@@ -72,7 +70,7 @@
 
     <!-- Новеллы -->
     <a class="tile tile-visual" href="assets/novellas/" aria-label="Графические новеллы">
-      <img class="tile-bg-img" src="assets/novellas/novella-preview.jpg?v=8" alt="">
+      <img class="tile-bg-img" src="assets/novellas/novella-preview.jpg?v=9" alt="" />
       <div class="tile-overlay"></div>
       <div class="tile-title">Графические новеллы</div>
       <div class="tile-badge">В разработке</div>
@@ -123,10 +121,10 @@
   </aside>
 
   <script>
-    // текущий год
+    // год
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // страховка автоплея
+    // автоплей страховка
     function kick(){ document.querySelectorAll('video').forEach(v=>{ if(v.paused) v.play().catch(()=>{}); }); }
     document.addEventListener('touchend', kick, {once:true});
     document.addEventListener('click', kick, {once:true});
@@ -166,10 +164,10 @@
       });
     })();
 
-    // На всякий случай убираем .active у меню, чтобы не «залипало»
+    // На всякий — убираем .active у меню, чтобы не «залипало»
     document.querySelectorAll('.top-nav a.active').forEach(a=>a.classList.remove('active'));
 
-    // Снятие скруглений у about-видео при скролле
+    // Скругления у about-видео убираем при скролле
     (()=> {
       const about = document.querySelector('.about-video');
       const onScroll = ()=>{

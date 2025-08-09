@@ -1,4 +1,4 @@
-/* Локальный Hanken */
+/* Hanken локально */
 @font-face{
   font-family:"Hanken Grotesk";
   src:url("assets/fonts/HankenGrotesk-VariableFont_wght.ttf") format("truetype");
@@ -9,9 +9,12 @@
   --text: rgba(255,255,255,.92);
   --nav: #5b5b5b;
   --nav-active: #e8e8e8;
-  --subtitle: #7a7a7a;     /* подзаголовки чуть светлее */
-  --about-section: -150px; /* секцию опустили относительно предыдущей (-190 → -150) */
-  --about-card-lift: -60px;/* а сам текстовый блок внутри подняли */
+  --subtitle: #7a7a7a;
+
+  /* Смещения «О нас» по просьбе:
+     секцию опускаем на ~2 см (≈ 76px), блок текста внутри — на ~0.5 см (≈ 19px) */
+  --about-section-shift: 76px;
+  --about-card-shift: 19px;
 }
 
 *{box-sizing:border-box}
@@ -34,26 +37,25 @@ body{
 .top-nav a{
   color:var(--nav); text-decoration:none; font-weight:800; font-size:14px;
   padding:8px 10px; border-radius:10px;
-  background:rgba(255,255,255,.04);
+  background:rgba(255,255,255,.04); /* почти прозрачные */
   transition:color .15s ease, background .15s ease;
 }
 .top-nav a:hover, .top-nav a:focus{
   color:var(--nav-active);
   background:rgba(255,255,255,.10);
 }
-/* чтобы не залипало даже если где-то прилетит .active */
-.top-nav a.active{ color:var(--nav); background:rgba(255,255,255,.04) }
+.top-nav a.active{ color:var(--nav); background:rgba(255,255,255,.04) } /* на всякий случай */
 
-/* Контакт — всегда светлая */
+/* Контакт — вернуть «как было»: чёрная плашка, белый кант, светло-серый текст, без hover-эффектов */
 .contact-fixed{
   position:fixed; top:28px; right:20px; z-index:30;
-  background:#ffffff; color:#000;
+  background:#0b0b0b; color:#bfbfbf;
   border:1.5px solid #ffffff;
   border-radius:999px; padding:10px 14px; font-size:13px; font-weight:800; cursor:pointer;
-  box-shadow:0 2px 18px rgba(255,255,255,.12);
+  box-shadow:0 2px 14px rgba(0,0,0,.35);
 }
 
-/* HERO */
+/* HERO — «как было» */
 .hero{
   min-height:80vh; display:flex; align-items:flex-start; justify-content:center;
   padding-top:clamp(156px, 21vh, 236px);
@@ -64,29 +66,33 @@ body{
 }
 .hero-inner{ text-align:center; padding:0 24px; max-width:1000px }
 .hero h1{ margin:0 0 16px; font-size:clamp(44px, 9vw, 92px); line-height:1.04; font-weight:200 }
-.subtitle{ margin:0; font-size:clamp(16px,2.2vw,22px); color:var(--subtitle); font-weight:800 }
+.subtitle{ margin:0; font-size:clamp(16px,2.2vw,22px); color:var(--subtitle); font-weight:700 }
 
-/* ABOUT + video */
-.about-video{ position:relative; margin:0 3vw; min-height:100vh; --video-radius:28px }
+/* О НАС + видео */
+.about-video{
+  position:relative; margin:0 3vw; min-height:100vh; --video-radius:28px;
+  /* опускаем всю секцию на 2 см */
+  margin-top: var(--about-section-shift);
+}
 .bg-video{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000;
-  border-radius:var(--video-radius) var(--video-radius) 0 0; transition:border-radius .2s ease
+  border-radius:var(--video-radius) var(--video-radius) 0 0; transition:border-radius .2s ease;
 }
 .video-overlay{
   position:absolute; inset:0; border-radius:var(--video-radius) var(--video-radius) 0 0;
   background:
     radial-gradient(1000px 420px at 50% 0%, rgba(0,0,0,0), rgba(0,0,0,.32) 70%),
     linear-gradient(180deg, rgba(0,0,0,.08) 0%, rgba(0,0,0,.32) 100%);
-  transition:border-radius .2s ease
+  transition:border-radius .2s ease;
 }
 .about-video.unrounded .bg-video,
 .about-video.unrounded .video-overlay{ border-radius:0 }
 
+/* Сам текстовый блок — опускаем ещё на 0.5 см относительно секции */
 .about-content{
   min-height:100vh; display:grid; align-content:start; justify-items:center;
   padding: clamp(12vh, 18vh, 22vh) 24px 24px; text-align:center;
-  margin-top: var(--about-section);           /* секцию опустили */
-  transform: translateY(var(--about-card-lift)); /* сам блок текста подняли */
+  transform: translateY(var(--about-card-shift));
 }
 .about-content p{
   max-width:760px; margin:0; font-size:clamp(18px,2vw,22px); line-height:1.6;
@@ -95,7 +101,7 @@ body{
   padding:38px 22px 18px; border-radius:12px; border:1px solid rgba(255,255,255,.08);
 }
 
-/* Интро */
+/* Интро проектов */
 .section-intro{ max-width:1100px; margin:6vh auto 0; padding:0 16px; text-align:center }
 .section-title{ font-weight:800; font-size:clamp(26px,4.2vw,40px); margin:0 0 .25rem; color:#e3e3e3 }
 .section-subtitle{ font-size:clamp(16px,2.2vw,20px); color:var(--subtitle); font-weight:700 }
@@ -121,16 +127,16 @@ body{
     radial-gradient(100% 60% at 50% 10%, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.35) 100%);
   pointer-events:none;
 }
+/* тоньше подписи на плитках */
 .tile-title{
   position:absolute; left:14px; right:14px; bottom:42px;
-  font-weight:600; /* тоньше */
-  font-size:clamp(16px,2.2vw,22px); color:#ededed;
+  font-weight:600; font-size:clamp(16px,2.2vw,22px); color:#ededed;
   text-shadow:0 1px 6px rgba(0,0,0,.55);
 }
 .tile-badge{
   position:absolute; left:14px; bottom:10px;
   border:1px solid #fff; border-radius:999px; padding:6px 10px;
-  font-size:12px; background:#0b0b0b; color:#e0e0e0; font-weight:500; /* тоньше */
+  font-size:12px; background:#0b0b0b; color:#e0e0e0; font-weight:500;
 }
 @media (hover:hover){
   .tile-video .tile-bg{ transition:transform .35s ease }
@@ -138,7 +144,7 @@ body{
   .tile:hover{ border-color:rgba(255,255,255,.18) }
 }
 
-/* Контакты и футер */
+/* Низ */
 .contact-section{ display:flex; flex-direction:column; align-items:center; text-align:center; margin-top:auto }
 .contact{
   max-width:900px; background:rgba(0,0,0,.35); backdrop-filter:saturate(120%) blur(2px);
