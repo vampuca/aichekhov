@@ -7,10 +7,11 @@
 
 :root{
   --text: rgba(255,255,255,.92);
-  --nav: #5a5a5a;
-  --nav-active: #e0e0e0;
-  --subtitle: #6a6a6a;   /* светлее и контрастнее */
-  --about-offset: -190px; /* ещё выше (~+40px к прошлому) */
+  --nav: #5b5b5b;
+  --nav-active: #e8e8e8;
+  --subtitle: #7a7a7a;     /* подзаголовки чуть светлее */
+  --about-section: -150px; /* секцию опустили относительно предыдущей (-190 → -150) */
+  --about-card-lift: -60px;/* а сам текстовый блок внутри подняли */
 }
 
 *{box-sizing:border-box}
@@ -40,18 +41,16 @@ body{
   color:var(--nav-active);
   background:rgba(255,255,255,.10);
 }
-/* На всякий случай обнуляем .active, если его где-то оставили */
+/* чтобы не залипало даже если где-то прилетит .active */
 .top-nav a.active{ color:var(--nav); background:rgba(255,255,255,.04) }
 
+/* Контакт — всегда светлая */
 .contact-fixed{
   position:fixed; top:28px; right:20px; z-index:30;
-  background:rgba(255,255,255,.04); color:var(--nav);
-  border:1.5px solid rgba(255,255,255,.35);
+  background:#ffffff; color:#000;
+  border:1.5px solid #ffffff;
   border-radius:999px; padding:10px 14px; font-size:13px; font-weight:800; cursor:pointer;
-  transition:color .15s ease, background .15s ease, border-color .15s ease;
-}
-.contact-fixed:hover, .contact-fixed:focus{
-  color:var(--nav-active); background:rgba(255,255,255,.10); border-color:#fff;
+  box-shadow:0 2px 18px rgba(255,255,255,.12);
 }
 
 /* HERO */
@@ -76,8 +75,8 @@ body{
 .video-overlay{
   position:absolute; inset:0; border-radius:var(--video-radius) var(--video-radius) 0 0;
   background:
-    radial-gradient(1000px 420px at 50% 0%, rgba(0,0,0,0), rgba(0,0,0,.34) 70%),
-    linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.34) 100%);
+    radial-gradient(1000px 420px at 50% 0%, rgba(0,0,0,0), rgba(0,0,0,.32) 70%),
+    linear-gradient(180deg, rgba(0,0,0,.08) 0%, rgba(0,0,0,.32) 100%);
   transition:border-radius .2s ease
 }
 .about-video.unrounded .bg-video,
@@ -86,7 +85,8 @@ body{
 .about-content{
   min-height:100vh; display:grid; align-content:start; justify-items:center;
   padding: clamp(12vh, 18vh, 22vh) 24px 24px; text-align:center;
-  margin-top: var(--about-offset); /* ПОДНЯЛИ ВЫШЕ */
+  margin-top: var(--about-section);           /* секцию опустили */
+  transform: translateY(var(--about-card-lift)); /* сам блок текста подняли */
 }
 .about-content p{
   max-width:760px; margin:0; font-size:clamp(18px,2vw,22px); line-height:1.6;
@@ -97,8 +97,8 @@ body{
 
 /* Интро */
 .section-intro{ max-width:1100px; margin:6vh auto 0; padding:0 16px; text-align:center }
-.section-title{ font-weight:800; font-size:clamp(26px,4.2vw,40px); margin:0 0 .25rem; color:#e0e0e0 }
-.section-subtitle{ font-size:clamp(16px,2.2vw,20px); color:var(--subtitle); font-weight:800 }
+.section-title{ font-weight:800; font-size:clamp(26px,4.2vw,40px); margin:0 0 .25rem; color:#e3e3e3 }
+.section-subtitle{ font-size:clamp(16px,2.2vw,20px); color:var(--subtitle); font-weight:700 }
 
 /* Плитки */
 .portfolio{
@@ -146,6 +146,8 @@ body{
 }
 .mail-link{ display:inline-flex; align-items:center; gap:12px; color:var(--text); text-decoration:none }
 .mail-text{ font-size:1.2rem; line-height:1 }
+.contact-plain{ color:var(--text); text-decoration:underline; text-underline-offset:3px }
+
 .site-footer{ display:grid; place-items:center; min-height:18vh; padding:20px; text-align:center; color:rgba(255,255,255,.8) }
 
 /* Drawer */

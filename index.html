@@ -6,10 +6,7 @@
   <title>Студия ИИ им. А.П. Чехова</title>
   <meta name="description" content="AI студия им. А.П. Чехова — графические новеллы, сериалы и экспериментальный контент. От идеи до готовой истории." />
 
-  <!-- Бьём кэш -->
-  <link rel="stylesheet" href="style.css?v=7" />
-
-  <!-- Фолбэк шрифта (если локальный ttf не загрузится) -->
+  <link rel="stylesheet" href="style.css?v=8" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -25,7 +22,7 @@
     <a href="#projects">Проекты</a>
   </nav>
 
-  <!-- Кнопка контактов -->
+  <!-- Кнопка контактов (всегда светлая) -->
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">
     Пишите нам
   </button>
@@ -75,8 +72,7 @@
 
     <!-- Новеллы -->
     <a class="tile tile-visual" href="assets/novellas/" aria-label="Графические новеллы">
-      <!-- важно: img, а не background, чтобы точно увидеть 404, и cache-buster -->
-      <img class="tile-bg-img" src="assets/novellas/novella-preview.jpg?v=7" alt="">
+      <img class="tile-bg-img" src="assets/novellas/novella-preview.jpg?v=8" alt="">
       <div class="tile-overlay"></div>
       <div class="tile-title">Графические новеллы</div>
       <div class="tile-badge">В разработке</div>
@@ -122,15 +118,15 @@
       <label>Email <input type="email" name="email" autocomplete="email" required></label>
       <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
       <button type="submit" class="contact-submit">Отправить</button>
-      <p class="contact-alt">Или напишите: <a href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
+      <p class="contact-alt">Или напишите: <a class="contact-plain" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
     </form>
   </aside>
 
   <script>
-    // Год
+    // текущий год
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Страховка автоплея
+    // страховка автоплея
     function kick(){ document.querySelectorAll('video').forEach(v=>{ if(v.paused) v.play().catch(()=>{}); }); }
     document.addEventListener('touchend', kick, {once:true});
     document.addEventListener('click', kick, {once:true});
@@ -170,10 +166,10 @@
       });
     })();
 
-    // Убираем любые .active, чтобы «не залипало»
+    // На всякий случай убираем .active у меню, чтобы не «залипало»
     document.querySelectorAll('.top-nav a.active').forEach(a=>a.classList.remove('active'));
 
-    // Снимаем скругления у about-видео при скролле
+    // Снятие скруглений у about-видео при скролле
     (()=> {
       const about = document.querySelector('.about-video');
       const onScroll = ()=>{
