@@ -95,7 +95,7 @@ body.is-scrolled .top-nav a{
 
 /* Контент «о нас» */
 .about-content{
-    margin-top: 5px;
+    margin-top: 10px;
   min-height:100vh; display:grid; align-content:start; justify-items:center;
   padding: clamp(12vh, 18vh, 22vh) 24px 24px; text-align:center;
 }
