@@ -11,8 +11,8 @@
   --nav-active: #e8e8e8;
   --subtitle: #7a7a7a;
 
-  /* Поднимаем секцию "о нас" примерно на пару см */
-  --about-section-shift: -75px;
+  --about-section-shift: -75px;            /* как было */
+  --about-text-offset: 37px;               /* НАСТРОЙКА: сдвиг текста вниз (~0.5–0.6 см) */
 }
 
 *{box-sizing:border-box}
@@ -35,24 +35,17 @@ body{
 .top-nav a{
   color:var(--nav); text-decoration:none; font-weight:800; font-size:14px;
   padding:8px 10px; border-radius:10px;
-  /* лёгкая стеклянная подложка с блюром */
   background:rgba(8,8,8,.18);
   backdrop-filter: blur(8px) saturate(120%);
   -webkit-backdrop-filter: blur(8px) saturate(120%);
   border:1px solid rgba(255,255,255,.12);
   transition:color .15s ease, background .15s ease, border-color .15s ease;
 }
-.top-nav a:hover, .top-nav a:focus{
-  color:var(--nav-active);
-}
-body.is-scrolled .top-nav a{
-  background:rgba(8,8,8,.30);
-  border-color:rgba(255,255,255,.20);
-}
-/* На всякий случай обнуляем .active */
-.top-nav a.active{ color:var(--nav); }
+.top-nav a:hover, .top-nav a:focus{ color:var(--nav-active) }
+body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,255,255,.20) }
+.top-nav a.active{ color:var(--nav) }
 
-/* Контакт — чёрная плашка с белым кантом и серым текстом */
+/* Контакт */
 .contact-fixed{
   position:fixed; top:28px; right:20px; z-index:30;
   background:#0b0b0b; color:#bfbfbf;
@@ -77,7 +70,7 @@ body.is-scrolled .top-nav a{
 /* О НАС + видео */
 .about-video{
   position:relative; margin:0 3vw; min-height:100vh; --video-radius:28px;
-  margin-top: var(--about-section-shift); /* ключевое смещение секции */
+  margin-top: var(--about-section-shift);
 }
 .bg-video{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000;
@@ -93,14 +86,20 @@ body.is-scrolled .top-nav a{
 .about-video.unrounded .bg-video,
 .about-video.unrounded .video-overlay{ border-radius:0 }
 
-/* Контент «о нас» */
+/* Контент «о нас» — ВАЖНО: только это меняем (сдвиг текста вниз) */
 .about-content{
   min-height:100vh; display:grid; align-content:start; justify-items:center;
-  /* +20px к верхнему отступу, чтобы текст ушёл ниже и видео было видно без текста */
-  padding: calc(clamp(12vh, 18vh, 22vh) + 20px) 24px 24px;
+  padding: clamp(12vh, 18vh, 22vh) 24px 24px; /* вернул без +20px */
   text-align:center;
 }
-
+.about-content p{
+  margin-top: var(--about-text-offset);   /* СМЕЩЕНИЕ ТЕКСТА ВНИЗ */
+  max-width:760px;
+  font-size:clamp(18px,2vw,22px); line-height:1.6;
+  text-align:justify; text-justify:inter-word;
+  background:rgba(0,0,0,.35); backdrop-filter:saturate(120%) blur(2px);
+  padding:38px 22px 18px; border-radius:12px; border:1px solid rgba(255,255,255,.08);
+}
 
 /* Интро проектов */
 .section-intro{ max-width:1100px; margin:6vh auto 0; padding:0 16px; text-align:center }
@@ -181,10 +180,14 @@ body.is-scrolled .top-nav a{
   .brand img{ width:100px }
   .top-nav{ transform:none; left:auto; right:120px }
   .hero h1{ font-size:clamp(32px,10vw,64px) }
+
   .about-content{
-    margin-top: 5px;
-    padding: calc(14vh + 20px) 16px 20px;
-  }  
-  .about-content p{ max-width:92% }
+    padding: 14vh 16px 20px;               /* вернул без +20px */
+  }
+  .about-content p{
+    margin-top: 21px;                       /* помягче на мобильных */
+    max-width:92%;
+  }
+
   .portfolio{ grid-template-columns:1fr }
 }
