@@ -1,22 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Episode 2</title>
-    <link rel="stylesheet" href="../style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Серия 2 — в производстве</title>
+  <link rel="stylesheet" href="/style.css?v=6" />
+  <style>
+    .page{max-width:900px;margin:0 auto;padding:110px 16px 40px;text-align:center}
+    .title{font-size:clamp(22px,3.2vw,28px);font-weight:800;margin:0 0 14px}
+    .teaser{position:relative;border-radius:16px;overflow:hidden;height:360px;max-width:900px;margin:0 auto 16px;border:1px solid rgba(255,255,255,.08);background:#111}
+    .teaser video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(105%)}
+    .teaser .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.00) 55%, rgba(0,0,0,0.55) 100%)}
+    .badge{display:inline-block;margin-top:6px;border:1px solid #fff;border-radius:999px;padding:8px 14px;background:#0b0b0b}
+    .brand{position:fixed;top:20px;left:20px;z-index:20}
+    .brand img{display:block;width:120px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
+    .contact-fixed{position:fixed;top:30px;right:20px;z-index:20;padding:10px 16px;background:#0b0b0b;color:#fff;border:1.5px solid #fff;border-radius:999px;font-size:14px;font-weight:700;text-decoration:none}
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Episode 2</h1>
-    </header>
+  <a class="brand" href="/"><img src="/assets/img/logo.png" alt="Логотип" /></a>
+  <a class="contact-fixed" href="mailto:hello@aichekhov.ru">hello@aichekhov.ru</a>
 
-    <main>
-        <p>В производстве…</p>
-    </main>
+  <main class="page">
+    <h1 class="title">Пока смерть не разлучит нас — Серия 2</h1>
+    <div class="teaser">
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="/assets/series/episode-2-preview.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div>
+    </div>
+    <div class="badge">В производстве</div>
 
-    <footer>
-        <p><a href="../../index.html">Back to Home</a></p>
-    </footer>
+    <p style="margin-top:18px;opacity:.85">Следите за обновлениями — здесь появится премьера второй серии.</p>
+    <p style="margin-top:10px"><a href="/assets/series/">← ко всем сериям</a></p>
+  </main>
 </body>
 </html>

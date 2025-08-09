@@ -1,25 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Episode 1</title>
-    <link rel="stylesheet" href="../style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Серия 1 — Пока смерть не разлучит нас</title>
+  <link rel="stylesheet" href="/style.css?v=6" />
+  <style>
+    .page{max-width:1100px;margin:0 auto;padding:110px 16px 40px}
+    .title{font-size:clamp(22px,3.2vw,28px);font-weight:800;margin:0 0 14px}
+    .meta{opacity:.75;margin-bottom:18px}
+    .player{position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#000}
+    .player video{width:100%;display:block}
+    .back{display:inline-block;margin-top:18px;opacity:.8}
+    .brand{position:fixed;top:20px;left:20px;z-index:20}
+    .brand img{display:block;width:120px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
+    .contact-fixed{position:fixed;top:30px;right:20px;z-index:20;padding:10px 16px;background:#0b0b0b;color:#fff;border:1.5px solid #fff;border-radius:999px;font-size:14px;font-weight:700;text-decoration:none}
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Episode 1: Pilot</h1>
-    </header>
+  <a class="brand" href="/"><img src="/assets/img/logo.png" alt="Логотип" /></a>
+  <a class="contact-fixed" href="mailto:hello@aichekhov.ru">hello@aichekhov.ru</a>
 
-    <main>
-        <video controls width="100%" poster="../images/episode1-poster.jpg">
-            <source src="../videos/episode1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </main>
+  <main class="page">
+    <h1 class="title">Пока смерть не разлучит нас — Серия 1</h1>
+    <div class="meta">Пилотный эпизод • 2025</div>
 
-    <footer>
-        <p><a href="../../index.html">Back to Home</a></p>
-    </footer>
+    <div class="player">
+      <video controls playsinline preload="metadata" poster="">
+        <!-- сейчас используем превьюшку; заменишь на YouTube/полный mp4, когда будет -->
+        <source src="/assets/series/episode-1-preview.mp4" type="video/mp4" />
+        Ваш браузер не поддерживает воспроизведение видео.
+      </video>
+    </div>
+
+    <p class="back"><a href="/assets/series/">← ко всем сериям</a></p>
+  </main>
 </body>
 </html>
