@@ -1,32 +1,27 @@
 <!doctype html>
-<html lang="ру">
+<html lang="ru">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Студия ИИ им. А.П. Чехова</title>
   <meta name="description" content="AI студия им. А.П. Чехова — графические новеллы, сериалы и экспериментальный контент. От идеи до готовой истории." />
   <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4" />
-  <link rel="stylesheet" href="style.css?v=11" />
+  <link rel="stylesheet" href="style.css?v=17" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- ВЕРХ -->
   <a class="brand" href="#top" aria-label="На начало">
     <img src="assets/img/logo.png" alt="Логотип студии" />
   </a>
-
   <nav class="top-nav" aria-label="Навигация по странице">
     <a href="#about">О нас</a>
     <a href="#projects">Проекты</a>
   </nav>
+  <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- Контакты (чёрная плашка с белым кантом и серым текстом) -->
-  <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">
-    Пишите нам
-  </button>
-
-  <!-- HERO (как было) -->
+  <!-- HERO -->
   <section id="top" class="hero" role="banner">
     <div class="hero-inner">
       <h1>Новый язык<br>сторителлинга</h1>
@@ -58,6 +53,7 @@
 
   <!-- Плитки проектов -->
   <section class="portfolio" aria-label="Проекты студии">
+    <!-- Сериалы -->
     <a class="tile tile-video" href="assets/series/" aria-label="Сериалы">
       <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
         <source src="assets/series/episode-1-preview.mp4" type="video/mp4" />
@@ -67,6 +63,7 @@
       <div class="tile-badge">Смотреть</div>
     </a>
 
+    <!-- Графические новеллы -->
     <a class="tile tile-visual" href="assets/novellas/" aria-label="Графические новеллы">
       <img class="tile-bg-img" src="assets/novellas/novella-preview.jpg?v=11" alt="" />
       <div class="tile-overlay"></div>
@@ -74,6 +71,7 @@
       <div class="tile-badge">В разработке</div>
     </a>
 
+    <!-- AI-контент -->
     <a class="tile tile-video" href="assets/content/" aria-label="AI-контент">
       <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
         <source src="assets/content/content-preview.mp4" type="video/mp4" />
@@ -103,7 +101,7 @@
 
   <!-- Drawer -->
   <div class="scrim" id="scrim" hidden></div>
-  <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
+  <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" hidden>
     <header class="drawer-head">
       <h3 id="contactTitle">Связаться с нами</h3>
       <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
@@ -120,33 +118,33 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // запустить превью после первого взаимодействия (iOS)
     function kick(){ document.querySelectorAll('video').forEach(v=>{ if(v.paused) v.play().catch(()=>{}); }); }
     document.addEventListener('touchend', kick, {once:true});
     document.addEventListener('click', kick, {once:true});
 
+    // drawer
     (()=> {
       const openBtn = document.getElementById('contactOpen');
       const drawer  = document.getElementById('contactDrawer');
       const closeBtn= document.getElementById('contactClose');
       const scrim   = document.getElementById('scrim');
-      function open(){ drawer.hidden=false; scrim.hidden=false; requestAnimationFrame(()=>{drawer.classList.add('is-open'); scrim.classList.add('is-visible'); document.body.style.overflow='hidden'; const f=drawer.querySelector('input,textarea,button'); f&&f.focus();}); }
+      function open(){ drawer.hidden=false; scrim.hidden=false; requestAnimationFrame(()=>{drawer.classList.add('is-open'); scrim.classList.add('is-visible'); document.body.style.overflow='hidden';}); }
       function close(){ drawer.classList.remove('is-open'); scrim.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ drawer.hidden=true; scrim.hidden=true; }, 200); }
       openBtn.addEventListener('click', open); closeBtn.addEventListener('click', close); scrim.addEventListener('click', close);
-      document.getElementById('contactForm').addEventListener('submit', e=>{ e.preventDefault(); const d=new FormData(e.target); const subject=encodeURIComponent('Сообщение со сайта'); const body=encodeURIComponent(`Имя: ${d.get('name')}\nEmail: ${d.get('email')}\n\n${d.get('message')}`); location.href=`mailto:studio@aichekhov.ru?subject=${subject}&body=${body}`; close(); });
+
+      document.getElementById('contactForm').addEventListener('submit', e=>{
+        e.preventDefault();
+        const d=new FormData(e.target);
+        const subject=encodeURIComponent('Сообщение со сайта');
+        const body=encodeURIComponent(`Имя: ${d.get('name')}\nEmail: ${d.get('email')}\n\n${d.get('message')}`);
+        location.href=`mailto:studio@aichekhov.ru?subject=${subject}&body=${body}`;
+        close();
+      });
     })();
 
+    // убрать залипание активных ссылок
     document.querySelectorAll('.top-nav a.active').forEach(a=>a.classList.remove('active'));
-
-    (function(){
-      const toggle = () => { if (window.scrollY > 10) document.body.classList.add('is-scrolled'); else document.body.classList.remove('is-scrolled'); };
-      window.addEventListener('scroll', toggle, {passive:true}); toggle();
-    })();
-
-    (function(){
-      const about = document.querySelector('.about-video');
-      const onScroll = ()=>{ const top = about.getBoundingClientRect().top; if (top <= 60) about.classList.add('unrounded'); else about.classList.remove('unrounded'); };
-      window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
-    })();
   </script>
 </body>
 </html>

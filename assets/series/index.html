@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Сериалы — Студия ИИ им. А.П. Чехова</title>
   <meta name="description" content="Сериалы AI-студии им. А.П. Чехова. Сезон 2025." />
-  <link rel="stylesheet" href="../../style.css?v=15" />
-  <!-- подгрузим превью заранее, чтобы плашки ожили мгновенно -->
+  <link rel="stylesheet" href="../../style.css?v=17" />
   <link rel="preload" as="video" href="./episode-1-preview.mp4" type="video/mp4" />
   <link rel="preload" as="video" href="./episode-2-preview.mp4" type="video/mp4" />
 </head>
 <body id="top">
-  <!-- Верх: логотип + меню + контакт, как на главной -->
+  <!-- верх как на главной -->
   <a class="brand" href="../../#top" aria-label="На начало">
-    <img src="../../assets/img/logo.png" alt="Логотип студии">
+    <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
   <nav class="top-nav" aria-label="Навигация">
     <a href="../../#about">О нас</a>
@@ -21,7 +20,7 @@
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- HERO -->
+  <!-- hero -->
   <header class="hero hero--series">
     <div class="hero-inner">
       <h1>Сериалы</h1>
@@ -29,13 +28,13 @@
     </div>
   </header>
 
-  <!-- Секция «Пока смерть не разлучит» (фон + 3 плашки) -->
-  <section class="series-block series-block--tight">
+  <!-- секция сериала с затемнённым фоном и 3 плашками -->
+  <section class="series-block">
     <div class="series-frame" style="--bg:url('./background-till-death.jpg')">
       <div class="container">
         <header class="series-head">
-          <h2 class="section-title">Пока смерть не разлучит</h2>
-          <p class="section-subtitle">Триллер-сериал.</p>
+          <h2 class="section-title">Пока смерть не разлучит нас</h2>
+          <p class="section-subtitle">Триллер-сериал. Новые эпизоды по мере готовности.</p>
         </header>
 
         <div class="series-grid">
@@ -52,7 +51,7 @@
           </a>
 
           <!-- Серия 2 -->
-          <div class="tile tile-video" aria-label="Серия 2 — в разработке">
+          <a class="tile tile-video" href="./episode-2.html" aria-label="Серия 2 — в разработке">
             <div class="tile-visual">
               <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
                 <source src="./episode-2-preview.mp4" type="video/mp4">
@@ -61,7 +60,7 @@
             </div>
             <div class="tile-title">Серия 2</div>
             <div class="tile-badge">В разработке</div>
-          </div>
+          </a>
 
           <!-- Серия 3 -->
           <div class="tile tile-empty" aria-label="Серия 3 — скоро">
@@ -74,7 +73,7 @@
     </div>
   </section>
 
-  <!-- Контакт + футер -->
+  <!-- контакты + футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -108,23 +107,20 @@
   </aside>
 
   <script>
-    // год
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // автозапуск превью на iOS
-    const kick = () => document.querySelectorAll('video').forEach(v => v.play().catch(()=>{}));
+    const kick=()=>document.querySelectorAll('video').forEach(v=>{ if(v.paused) v.play().catch(()=>{}); });
     addEventListener('touchend', kick, { once:true }); addEventListener('click', kick, { once:true });
 
-    // Drawer
     (() => {
       const open = document.getElementById('contactOpen');
       const close = document.getElementById('contactClose');
       const dr = document.getElementById('contactDrawer');
       const scr = document.getElementById('scrim');
       function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
-      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
+      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; },200);}
       open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
-      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
+      addEventListener('keydown', e=>{ if(e.key==='Escape' && !dr.hidden) hide(); });
     })();
   </script>
 </body>

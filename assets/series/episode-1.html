@@ -5,21 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Пока смерть не разлучит нас — Серия 1</title>
   <meta name="description" content="Пока смерть не разлучит нас — Серия 1. Триллер-сериал AI-студии им. А.П. Чехова." />
-  <link rel="stylesheet" href="../../style.css?v=16" />
+  <link rel="stylesheet" href="../../style.css?v=17" />
+
+  <!-- Plyr (оставляем на будущее для YouTube) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3/dist/plyr.css" />
+  <script src="https://cdn.jsdelivr.net/npm/plyr@3/dist/plyr.polyfilled.min.js"></script>
 </head>
 <body id="top">
-
-  <!-- Верх — как на главной/«Сериалы» -->
-  <a class="brand" href="../../#top" aria-label="На начало">
+  <a class="brand" href="../" aria-label="К списку сериалов">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
   <nav class="top-nav" aria-label="Навигация">
-    <a href="../series/">← Сериалы</a>
+    <a href="../">← Сериалы</a>
     <a href="../../#projects">Проекты</a>
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- Hero компактный -->
   <header class="hero hero--series" style="min-height:48vh;padding-top:18vh;">
     <div class="hero-inner">
       <h1>Пока смерть не разлучит нас</h1>
@@ -27,25 +28,14 @@
     </div>
   </header>
 
-  <!-- Плеер -->
+  <!-- Универсальный плеер -->
   <main class="player-wrap">
-    <div class="player-box">
-      <!-- Google Drive embed (работает, если файл доступен для просмотра «по ссылке») -->
-      <iframe
-        class="player-frame"
-        src="https://drive.google.com/file/d/1ASoP_DHPkeUl1GGi00XfTfTfvqjc9dU9/preview"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen
-        loading="lazy"
-        title="Пока смерть не разлучит нас — Серия 1"></iframe>
-    </div>
-
+    <div id="player-root"></div>
     <p class="player-fallback">
-      Если плеер не загрузился, <a href="https://drive.google.com/file/d/1ASoP_DHPkeUl1GGi00XfTfTfvqjc9dU9/view" target="_blank" rel="noopener">откройте серию на Google Drive</a>.
+      Если плеер не загрузился, <a id="fallback-link" href="#" target="_blank" rel="noopener">откройте по прямой ссылке</a>.
     </p>
   </main>
 
-  <!-- Контакт + футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -80,6 +70,37 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // === ИСТОЧНИК ВИДЕО ===
+    // Сейчас: Google Drive (новая ссылка)
+    const SOURCE = { type: 'gdrive', gdriveId: '1V6xdTYGRsSgESxYGB4ED95pFI0YGgTYm', poster: '' };
+    // Потом на YouTube:
+    // const SOURCE = { type: 'youtube', url: 'https://www.youtube.com/watch?v=YOUR_ID', poster: '' };
+
+    const root = document.getElementById('player-root');
+    const fallback = document.getElementById('fallback-link');
+
+    function mountGDrive(id){
+      const src = `https://drive.google.com/file/d/${id}/preview`;
+      root.innerHTML = `
+        <div class="player-box">
+          <iframe class="player-frame"
+            src="${src}" allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen loading="lazy" title="Серия 1 — плеер"></iframe>
+        </div>`;
+      fallback.href = `https://drive.google.com/file/d/${id}/view`;
+    }
+    function mountYouTube(url, poster){
+      root.innerHTML = `<video id="plyr" playsinline controls ${poster ? `poster="${poster}"` : ''}></video>`;
+      const plyr = new Plyr('#plyr', { ratio: '16:9', youtube: { rel:0, modestbranding:1 } });
+      plyr.source = { type: 'video', sources: [{ src: url, provider: 'youtube' }], poster };
+      try { fallback.href = url; } catch {}
+    }
+
+    if (SOURCE.type === 'gdrive') mountGDrive(SOURCE.gdriveId);
+    else if (SOURCE.type === 'youtube') mountYouTube(SOURCE.url, SOURCE.poster);
+
+    // Drawer
     (() => {
       const open = document.getElementById('contactOpen');
       const close = document.getElementById('contactClose');
