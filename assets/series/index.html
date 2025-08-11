@@ -10,6 +10,7 @@
   <link rel="preload" as="video" href="./episode-2-preview.mp4" type="video/mp4" />
 </head>
 <body id="top">
+
   <!-- верх как на главной -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
@@ -20,7 +21,7 @@
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- hero -->
+  <!-- HERO -->
   <header class="hero hero--series">
     <div class="hero-inner">
       <h1>Сериалы</h1>
@@ -28,12 +29,12 @@
     </div>
   </header>
 
-  <!-- секция сериала с затемнённым фоном и 3 плашками -->
-  <section class="series-block">
+  <!-- Блок сезона: фон + три плашки -->
+  <section class="series-block series-block--lift">
     <div class="series-frame" style="--bg:url('./background-till-death.jpg')">
       <div class="container">
         <header class="series-head">
-          <h2 class="section-title">Пока смерть не разлучит нас</h2>
+          <h2 class="section-title">Пока смерть не разлучит</h2>
           <p class="section-subtitle">Триллер-сериал. Новые эпизоды по мере готовности.</p>
         </header>
 
@@ -42,7 +43,7 @@
           <a class="tile tile-video" href="./episode-1.html" aria-label="Серия 1 — смотреть">
             <div class="tile-visual">
               <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
-                <source src="./episode-1-preview.mp4" type="video/mp4">
+                <source src="./episode-1-preview.mp4" type="video/mp4" />
               </video>
               <div class="tile-overlay"></div>
             </div>
@@ -51,16 +52,16 @@
           </a>
 
           <!-- Серия 2 -->
-          <a class="tile tile-video" href="./episode-2.html" aria-label="Серия 2 — в разработке">
+          <div class="tile tile-video" aria-label="Серия 2 — в разработке">
             <div class="tile-visual">
               <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
-                <source src="./episode-2-preview.mp4" type="video/mp4">
+                <source src="./episode-2-preview.mp4" type="video/mp4" />
               </video>
               <div class="tile-overlay"></div>
             </div>
             <div class="tile-title">Серия 2</div>
             <div class="tile-badge">В разработке</div>
-          </a>
+          </div>
 
           <!-- Серия 3 -->
           <div class="tile tile-empty" aria-label="Серия 3 — скоро">
@@ -73,7 +74,7 @@
     </div>
   </section>
 
-  <!-- контакты + футер -->
+  <!-- Контакты + футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -109,18 +110,16 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const kick=()=>document.querySelectorAll('video').forEach(v=>{ if(v.paused) v.play().catch(()=>{}); });
-    addEventListener('touchend', kick, { once:true }); addEventListener('click', kick, { once:true });
+    const kick=()=>document.querySelectorAll('video').forEach(v=>v.play().catch(()=>{}));
+    addEventListener('touchend',kick,{once:true}); addEventListener('click',kick,{once:true});
 
-    (() => {
-      const open = document.getElementById('contactOpen');
-      const close = document.getElementById('contactClose');
-      const dr = document.getElementById('contactDrawer');
-      const scr = document.getElementById('scrim');
-      function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
-      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; },200);}
-      open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
-      addEventListener('keydown', e=>{ if(e.key==='Escape' && !dr.hidden) hide(); });
+    (()=>{ // drawer
+      const open=document.getElementById('contactOpen'), close=document.getElementById('contactClose');
+      const dr=document.getElementById('contactDrawer'), scr=document.getElementById('scrim');
+      function show(){dr.hidden=false;scr.hidden=false;requestAnimationFrame(()=>{dr.classList.add('is-open');scr.classList.add('is-visible');document.body.style.overflow='hidden';});}
+      function hide(){dr.classList.remove('is-open');scr.classList.remove('is-visible');document.body.style.overflow='';setTimeout(()=>{dr.hidden=true;scr.hidden=true;},200);}
+      open.addEventListener('click',show); close.addEventListener('click',hide); scr.addEventListener('click',hide);
+      addEventListener('keydown',e=>{if(e.key==='Escape'&&!dr.hidden)hide();});
     })();
   </script>
 </body>
