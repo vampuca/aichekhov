@@ -5,42 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Пока смерть не разлучит — Серия 1</title>
   <meta name="description" content="Пока смерть не разлучит — Серия 1. Триллер-сериал AI-студии им. А.П. Чехова." />
-  <link rel="stylesheet" href="../../style.css?v=20" />
+  <link rel="stylesheet" href="../../style.css?v=16" />
 </head>
 <body id="top">
+
+  <!-- Верх — как на главной/«Сериалы» -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
   <nav class="top-nav" aria-label="Навигация">
-    <a href="../">← Сериалы</a>
+    <a href="../series/">← Сериалы</a>
     <a href="../../#projects">Проекты</a>
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
+  <!-- Hero компактный -->
   <header class="hero hero--series" style="min-height:48vh;padding-top:18vh;">
     <div class="hero-inner">
-      <h1>Пока смерть не разлучит</h1>
+      <h1>Пока смерть не разлучит </h1>
       <p class="subtitle">Серия 1</p>
     </div>
   </header>
 
+  <!-- Плеер -->
   <main class="player-wrap">
     <div class="player-box">
+      <!-- Google Drive embed (работает, если файл доступен для просмотра «по ссылке») -->
       <iframe
-        class="player-frame"
-        src="https://drive.google.com/file/d/1V6xdTYGRsSgESxYGB4ED95pFI0YGgTYm/preview"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen
-        loading="lazy"
-        title="Пока смерть не разлучит — Серия 1"></iframe>
-    </div>
+  class="player-frame"
+  src="https://drive.google.com/file/d/1V6xdTYGRsSgESxYGB4ED95pFI0YGgTYm/preview"
+  allow="autoplay; fullscreen; picture-in-picture"
+  allowfullscreen
+  loading="lazy"
+  title="Пока смерть не разлучит — Серия 1"></iframe>
 
-    <p class="player-fallback">
-      Если плеер не загрузился,
-      <a href="https://drive.google.com/file/d/1V6xdTYGRsSgESxYGB4ED95pFI0YGgTYm/view" target="_blank" rel="noopener">откройте серию на Google Drive</a>.
-    </p>
+<p class="player-fallback">
+  Если плеер не загрузился, <a href="https://drive.google.com/file/d/1V6xdTYGRsSgESxYGB4ED95pFI0YGgTYm/view" target="_blank" rel="noopener">откройте серию на Google Drive</a>.
+</p>
+
   </main>
 
+  <!-- Контакт + футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -57,6 +62,7 @@
     <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
   </footer>
 
+  <!-- Drawer -->
   <div class="scrim" id="scrim" hidden></div>
   <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" hidden>
     <header class="drawer-head">
@@ -74,11 +80,15 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    (()=>{const o=document.getElementById('contactOpen'),c=document.getElementById('contactClose'),d=document.getElementById('contactDrawer'),s=document.getElementById('scrim');
-      function show(){d.hidden=false;s.hidden=false;requestAnimationFrame(()=>{d.classList.add('is-open');s.classList.add('is-visible');document.body.style.overflow='hidden';});}
-      function hide(){d.classList.remove('is-open');s.classList.remove('is-visible');document.body.style.overflow='';setTimeout(()=>{d.hidden=true;s.hidden=true;},200);}
-      o.addEventListener('click',show); c.addEventListener('click',hide); s.addEventListener('click',hide);
-      addEventListener('keydown',e=>{if(e.key==='Escape'&&!d.hidden)hide();});
+    (() => {
+      const open = document.getElementById('contactOpen');
+      const close = document.getElementById('contactClose');
+      const dr = document.getElementById('contactDrawer');
+      const scr = document.getElementById('scrim');
+      function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
+      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
+      open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
+      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
     })();
   </script>
 </body>
