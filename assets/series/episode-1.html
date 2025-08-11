@@ -6,12 +6,39 @@
   <title>Пока смерть не разлучит — Серия 1</title>
   <meta name="description" content="Пока смерть не разлучит — Серия 1. Триллер-сериал AI-студии им. А.П. Чехова." />
 
-  <!-- общий стиль -->
-  <link rel="stylesheet" href="../../style.css?v=35" />
-
-  <!-- Google Fonts: как на главной -->
+  <!-- Шрифт и общий стиль как на главной -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css?v=68" />
+
+  <style>
+    /* Плеер сразу под фикс-шапкой */
+    .player-wrap.no-hero{
+      max-width: min(1100px, 92vw);
+      margin: 96px auto 48px;
+      padding: 0 8px;
+    }
+    @media (min-width: 901px){
+      .player-wrap.no-hero{ margin-top: 72px; }
+    }
+
+    /* Бокс плеера и само видео */
+    .player-box{
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .player-frame{
+      display: block;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: 0;
+      background: #000;
+    }
+  </style>
 </head>
 <body id="top">
   <!-- Верх -->
@@ -24,16 +51,8 @@
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- Компактный hero (как было) -->
-  <header class="hero hero--series" style="min-height:48vh;padding-top:18vh;">
-    <div class="hero-inner">
-      <h1>Пока смерть не разлучит</h1>
-      <p class="subtitle">Серия 1</p>
-    </div>
-  </header>
-
-  <!-- Плеер по центру -->
-  <main class="player-wrap">
+  <!-- Плеер (без hero) -->
+  <main class="player-wrap no-hero">
     <div class="player-box">
       <iframe
         class="player-frame"
@@ -43,9 +62,6 @@
         loading="lazy"
         title="Пока смерть не разлучит — Серия 1"></iframe>
     </div>
-    <p class="player-fallback">
-      Если плеер не загрузился, <a href="https://drive.google.com/file/d/1V6xdTYGRsSgESxYGB4ED95pFI0YGgTYm/view" target="_blank" rel="noopener">открыть на Google Drive</a>.
-    </p>
   </main>
 
   <!-- Контакты + футер -->
@@ -89,7 +105,7 @@
       const dr = document.getElementById('contactDrawer');
       const scr = document.getElementById('scrim');
       function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
-      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; },200);}
+      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
       open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
       addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
     })();

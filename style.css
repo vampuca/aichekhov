@@ -185,6 +185,9 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 }
 
 /* ===========================================================
+   /* …весь ваш текущий файл… */
+
+/* ===========================================================
    СТРАНИЦА «СЕРИАЛЫ» (без подложки)
    =========================================================== */
 
@@ -194,9 +197,9 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   padding-bottom:clamp(6px,2vh,32px);
 }
 
-/* ↑ подтягиваем секцию ближе к заголовку (~3 см) */
-.series-page .series-block{ margin-top:-72px; }          /* было -44px */
-@media (max-width:980px){ .series-page .series-block{ margin-top:-52px; } }
+/* ↑ подтягиваем секцию ещё ближе к заголовку (~2 см дополнительно) */
+.series-page .series-block{ margin-top:-120px; }   /* было ~ -72px */
+@media (max-width:980px){ .series-page .series-block{ margin-top:-84px; } }
 
 /* прозрачный контейнер */
 .series-page .series-frame{
@@ -210,16 +213,16 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 }
 .series-page .series-inner{ position:relative; padding: 0 24px 0; }
 
-/* заголовок сериала — ЕЩЁ тоньше; подзаголовок — серый как на главной */
+/* заголовок сериала — ЕЩЁ тоньше; подзаголовок — общий серый */
 .series-page .series-head .section-title{
-  font-weight:500;                 /* было 600 */
+  font-weight:400;                 /* было 500 */
   color:#ececec;
   font-size:clamp(28px,4.6vw,52px);
   margin:6px 0 8px;
 }
 .series-page .series-head .section-subtitle{
   font-weight:600;
-  color:var(--subtitle);           /* единый серый */
+  color:var(--subtitle);           /* серый как на главной */
 }
 
 /* сетка карточек */
@@ -231,10 +234,36 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 @media (max-width:980px){ .series-page .series-grid{ grid-template-columns:1fr; } }
 .series-page .series-grid .tile{ min-height:240px; }
 
-/* ===== Плеер (страница серии) ===== */
+/* ===== Плеер и заголовок серии ===== */
+
+/* геро-заголовок на странице серии должен «держаться» правого края плеера */
+.player-hero{
+  min-height:auto;
+  padding-top:16vh;
+  padding-bottom:0;
+  display:flex; justify-content:center;
+}
+.player-hero .hero-inner{
+  max-width:min(1100px,92vw);   /* как у .player-wrap */
+  width:100%;
+  padding:0 8px;
+  text-align:right;             /* выравнивание по правому краю плеера */
+}
+.player-hero h1{
+  font-weight:400;              /* тонкий, как просили */
+  font-size:clamp(22px,3.6vw,36px);
+  margin:0 0 6px;
+}
+.player-hero .subtitle{
+  font-size:clamp(14px,2.2vw,18px);
+  color:var(--subtitle);
+  margin:0;
+}
+
+/* плеер по центру, как раньше */
 .player-wrap{
   max-width:min(1100px,92vw);
-  margin:-6vh auto 48px;
+  margin:-2vh auto 48px;        /* чуть ближе к заголовку */
   padding:0 8px;
 }
 .player-box{
@@ -248,4 +277,45 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   border:0; background:#000;
 }
 .player-fallback{ text-align:center; opacity:.8; margin:14px 0 0; }
-@media (max-width:900px){ .player-wrap{ margin:-4vh auto 40px; } }
+@media (max-width:900px){ .player-wrap{ margin:-1vh auto 40px; } }
+/* === Patch 2025-08-11: правка «Сериалы» + уменьшение заголовка плеера === */
+
+/* Поднять секцию с плашками примерно на 2.5 см (~96px) */
+.series-page .series-block{ margin-top:-100px; }
+@media (max-width:980px){
+  .series-page .series-block{ margin-top:-72px; }
+}
+
+/* Компактный заголовок на странице серии + выравнивание по правому краю */
+.player-hero{
+  min-height:auto;
+  padding-top:16vh;
+  padding-bottom:0;
+  display:flex; justify-content:center;
+}
+.player-hero .hero-inner{
+  max-width:min(1100px,92vw);
+  width:100%;
+  padding:0 8px;
+  text-align:right;
+}
+.player-hero h1{
+  font-weight:400;
+  font-size:clamp(22px,3.6vw,36px);
+  margin:0 0 6px;
+}
+.player-hero .subtitle{
+  font-size:clamp(14px,2.2vw,18px);
+  color:var(--subtitle);
+  margin:0;
+}
+/* === Patch: поднять секцию с плашками ещё выше и убрать заголовок над плеером === */
+
+/* Секции с плашками ближе к HERO (~дополнительно до ~2.5см+) */
+.series-page .series-block{ margin-top:-140px; }  /* было -100px */
+@media (max-width:980px){
+  .series-page .series-block{ margin-top:-96px; }
+}
+
+/* Когда на странице серии нет заголовка (no-hero) — дайте отступ под фикс. шапку */
+.player-wrap.no-hero{ margin:16vh auto 48px; }

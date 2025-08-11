@@ -1,25 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ру">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Series Index</title>
-    <link rel="stylesheet" href="../style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI-контент — Студия ИИ им. А.П. Чехова</title>
+  <meta name="description" content="Раздел «AI-контент» в разработке." />
+  <!-- Шрифты и общий стиль — как на главной -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css?v=62" />
+  <style>
+    .soon-art{
+      max-width:min(1100px,92vw);
+      margin: -2vh auto 6vh;
+      padding: 0 8px;
+    }
+    .soon-art .frame{
+      border-radius:18px; overflow:hidden; background:#0b0b0b;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    .soon-art img{ display:block; width:100%; height:auto; }
+  </style>
 </head>
-<body>
-    <header>
-        <h1>Series Episodes</h1>
+<body id="top">
+  <!-- Верх -->
+  <a class="brand" href="../../#top" aria-label="На начало">
+    <img src="../../assets/img/logo.png" alt="Логотип студии" />
+  </a>
+  <nav class="top-nav" aria-label="Навигация">
+    <a href="../../#about">О нас</a>
+    <a href="../../#projects">Проекты</a>
+  </nav>
+  <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
+
+  <!-- Hero: только «Скоро» -->
+  <header class="hero hero--series" style="min-height:64vh;">
+    <div class="hero-inner">
+      <h1>Скоро</h1>
+    </div>
+  </header>
+
+  <!-- Картинка следующей секцией -->
+  <section class="soon-art" aria-label="Иллюстрация">
+    <div class="frame">
+      <img src="../shared/hero-soon.webp" alt="Промо-иллюстрация AI" loading="lazy" decoding="async" />
+    </div>
+  </section>
+
+  <!-- Контакты и футер -->
+  <section class="contact-section">
+    <div class="contact">
+      <a class="mail-link" href="mailto:studio@aichekhov.ru">
+        <svg class="mail-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+          <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <span class="mail-text">studio@aichekhov.ru</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
+  </footer>
+
+  <!-- Drawer -->
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" hidden>
+    <header class="drawer-head">
+      <h3>Связаться с нами</h3>
+      <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
     </header>
+    <form class="contact-form" id="contactForm">
+      <label>Имя <input type="text" name="name" autocomplete="name" required></label>
+      <label>Email <input type="email" name="email" autocomplete="email" required></label>
+      <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
+      <button type="submit" class="contact-submit">Отправить</button>
+      <p class="contact-alt">Или напишите: <a class="contact-plain" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
+    </form>
+  </aside>
 
-    <main>
-        <ul>
-            <li><a href="../series/episode-1.html">Episode 1: Pilot</a></li>
-            <li><a href="../series/episode-2.html">Episode 2</a></li>
-        </ul>
-    </main>
-
-    <footer>
-        <p><a href="../../index.html">Back to Home</a></p>
-    </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (()=>{const o=document.getElementById('contactOpen'),c=document.getElementById('contactClose'),
+      d=document.getElementById('contactDrawer'),s=document.getElementById('scrim');
+      function show(){d.hidden=false;s.hidden=false;requestAnimationFrame(()=>{d.classList.add('is-open');s.classList.add('is-visible');document.body.style.overflow='hidden';});}
+      function hide(){d.classList.remove('is-open');s.classList.remove('is-visible');document.body.style.overflow='';setTimeout(()=>{d.hidden=true;s.hidden=true;},200);}
+      o.addEventListener('click',show); c.addEventListener('click',hide); s.addEventListener('click',hide);
+      addEventListener('keydown',e=>{if(e.key==='Escape'&&!d.hidden)hide();});
+      document.getElementById('contactForm').addEventListener('submit', e=>{
+        e.preventDefault();
+        const dta=new FormData(e.target);
+        location.href=`mailto:studio@aichekhov.ru?subject=${encodeURIComponent('Сообщение со сайта')}&body=${encodeURIComponent(`Имя: ${dta.get('name')}\nEmail: ${dta.get('email')}\n\n${dta.get('message')}`)}`;
+        hide();
+      });
+    })();
+  </script>
 </body>
 </html>
