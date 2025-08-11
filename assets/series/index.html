@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Сериалы — Студия ИИ им. А.П. Чехова</title>
   <meta name="description" content="Сериалы AI-студии им. А.П. Чехова. Сезон 2025." />
-  <link rel="stylesheet" href="../../style.css?v=17" />
+  <link rel="stylesheet" href="../../style.css?v=20" />
   <link rel="preload" as="video" href="./episode-1-preview.mp4" type="video/mp4" />
   <link rel="preload" as="video" href="./episode-2-preview.mp4" type="video/mp4" />
 </head>
 <body id="top">
-
-  <!-- верх как на главной -->
+  <!-- верх -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
@@ -21,7 +20,7 @@
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- HERO -->
+  <!-- hero -->
   <header class="hero hero--series">
     <div class="hero-inner">
       <h1>Сериалы</h1>
@@ -29,7 +28,7 @@
     </div>
   </header>
 
-  <!-- Блок сезона: фон + три плашки -->
+  <!-- блок сезона: фон + три плашки (поднято ближе к hero) -->
   <section class="series-block series-block--lift">
     <div class="series-frame" style="--bg:url('./background-till-death.jpg')">
       <div class="container">
@@ -52,7 +51,7 @@
           </a>
 
           <!-- Серия 2 -->
-          <div class="tile tile-video" aria-label="Серия 2 — в разработке">
+          <div class="tile tile-video" aria-label="Серия 2 — в разработке" tabindex="0">
             <div class="tile-visual">
               <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
                 <source src="./episode-2-preview.mp4" type="video/mp4" />
@@ -64,7 +63,7 @@
           </div>
 
           <!-- Серия 3 -->
-          <div class="tile tile-empty" aria-label="Серия 3 — скоро">
+          <div class="tile tile-empty" aria-label="Серия 3 — скоро" tabindex="0">
             <div class="tile-visual"><div class="tile-overlay"></div></div>
             <div class="tile-title">Серия 3</div>
             <div class="tile-badge">Скоро</div>
@@ -74,7 +73,7 @@
     </div>
   </section>
 
-  <!-- Контакты + футер -->
+  <!-- контакты + футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -109,17 +108,14 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
     const kick=()=>document.querySelectorAll('video').forEach(v=>v.play().catch(()=>{}));
     addEventListener('touchend',kick,{once:true}); addEventListener('click',kick,{once:true});
 
-    (()=>{ // drawer
-      const open=document.getElementById('contactOpen'), close=document.getElementById('contactClose');
-      const dr=document.getElementById('contactDrawer'), scr=document.getElementById('scrim');
-      function show(){dr.hidden=false;scr.hidden=false;requestAnimationFrame(()=>{dr.classList.add('is-open');scr.classList.add('is-visible');document.body.style.overflow='hidden';});}
-      function hide(){dr.classList.remove('is-open');scr.classList.remove('is-visible');document.body.style.overflow='';setTimeout(()=>{dr.hidden=true;scr.hidden=true;},200);}
-      open.addEventListener('click',show); close.addEventListener('click',hide); scr.addEventListener('click',hide);
-      addEventListener('keydown',e=>{if(e.key==='Escape'&&!dr.hidden)hide();});
+    (()=>{const o=document.getElementById('contactOpen'),c=document.getElementById('contactClose'),d=document.getElementById('contactDrawer'),s=document.getElementById('scrim');
+      function show(){d.hidden=false;s.hidden=false;requestAnimationFrame(()=>{d.classList.add('is-open');s.classList.add('is-visible');document.body.style.overflow='hidden';});}
+      function hide(){d.classList.remove('is-open');s.classList.remove('is-visible');document.body.style.overflow='';setTimeout(()=>{d.hidden=true;s.hidden=true;},200);}
+      o.addEventListener('click',show); c.addEventListener('click',hide); s.addEventListener('click',hide);
+      addEventListener('keydown',e=>{if(e.key==='Escape'&&!d.hidden)hide();});
     })();
   </script>
 </body>
