@@ -5,9 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Пока смерть не разлучит — Серия 1</title>
   <meta name="description" content="Пока смерть не разлучит — Серия 1. Триллер-сериал AI-студии им. А.П. Чехова." />
-  <link rel="stylesheet" href="../../style.css?v=22" />
+
+  <!-- общий стиль -->
+  <link rel="stylesheet" href="../../style.css?v=35" />
+
+  <!-- Google Fonts: как на главной -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body id="top">
+  <!-- Верх -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
@@ -17,7 +24,7 @@
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- компактный hero в стиле главной -->
+  <!-- Компактный hero (как было) -->
   <header class="hero hero--series" style="min-height:48vh;padding-top:18vh;">
     <div class="hero-inner">
       <h1>Пока смерть не разлучит</h1>
@@ -36,9 +43,8 @@
         loading="lazy"
         title="Пока смерть не разлучит — Серия 1"></iframe>
     </div>
-
     <p class="player-fallback">
-      Если плеер не загрузился, <a href="https://drive.google.com/file/d/1V6xdTYGRsSgESxYGB4ED95pFI0YGgTYm/view" target="_blank" rel="noopener">откройте серию на Google Drive</a>.
+      Если плеер не загрузился, <a href="https://drive.google.com/file/d/1V6xdTYGRsSgESxYGB4ED95pFI0YGgTYm/view" target="_blank" rel="noopener">открыть на Google Drive</a>.
     </p>
   </main>
 
@@ -83,9 +89,9 @@
       const dr = document.getElementById('contactDrawer');
       const scr = document.getElementById('scrim');
       function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
-      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
+      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; },200);}
       open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
-      addEventListener('keydown', e => { if (e.key==='Escape' && !dr.hidden) hide(); });
+      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
     })();
   </script>
 </body>

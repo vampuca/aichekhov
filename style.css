@@ -1,4 +1,4 @@
-/* ====== Hanken (локально) ====== */
+/* ===== Hanken (локально) ===== */
 @font-face{
   font-family:"Hanken Grotesk";
   src:url("assets/fonts/HankenGrotesk-VariableFont_wght.ttf") format("truetype");
@@ -27,9 +27,10 @@ body{
 /* ===== Верх ===== */
 .brand{ position:fixed; top:20px; left:20px; z-index:30 }
 .brand img{ width:120px; height:auto; display:block; filter:drop-shadow(0 2px 8px rgba(0,0,0,.5)) }
+
 .top-nav{
   position:fixed; top:28px; left:50%; transform:translateX(-50%); z-index:30;
-  display:flex; gap:18px;
+  display:flex; gap:18px; background:transparent;
 }
 .top-nav a{
   color:var(--nav); text-decoration:none; font-weight:800; font-size:14px;
@@ -40,14 +41,16 @@ body{
   border:1px solid rgba(255,255,255,.12);
   transition:color .15s ease, background .15s ease, border-color .15s ease;
 }
-.top-nav a:hover,.top-nav a:focus{ color:var(--nav-active) }
+.top-nav a:hover, .top-nav a:focus{ color:var(--nav-active) }
 body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,255,255,.20) }
 .top-nav a.active{ color:var(--nav) }
 
+/* Контактная кнопка */
 .contact-fixed{
   position:fixed; top:28px; right:20px; z-index:30;
   background:#0b0b0b; color:#bfbfbf;
-  border:1.5px solid #fff; border-radius:999px; padding:10px 14px; font-size:13px; font-weight:800; cursor:pointer;
+  border:1.5px solid #ffffff;
+  border-radius:999px; padding:10px 14px; font-size:13px; font-weight:800; cursor:pointer;
   box-shadow:0 2px 14px rgba(0,0,0,.35);
 }
 
@@ -64,7 +67,7 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 .hero h1{ margin:0 0 16px; font-size:clamp(44px, 9vw, 92px); line-height:1.04; font-weight:200 }
 .subtitle{ margin:0; font-size:clamp(16px,2.2vw,22px); color:var(--subtitle); font-weight:700 }
 
-/* ===== О нас + видео (главная) ===== */
+/* ===== О нас + видео ===== */
 .about-video{
   position:relative; margin:0 3vw; min-height:100vh; --video-radius:28px;
   margin-top: var(--about-section-shift);
@@ -97,7 +100,7 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   padding:38px 22px 18px; border-radius:12px; border:1px solid rgba(255,255,255,.08);
 }
 
-/* ===== Интро проектов + плитки (главная) ===== */
+/* ===== Интро и плитки (главная) ===== */
 .section-intro{ max-width:1100px; margin:6vh auto 0; padding:0 16px; text-align:center }
 .section-title{ font-weight:800; font-size:clamp(26px,4.2vw,40px); margin:0 0 .25rem; color:#e3e3e3 }
 .section-subtitle{ font-size:clamp(16px,2.2vw,20px); color:var(--subtitle); font-weight:700 }
@@ -145,9 +148,10 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 .mail-link{ display:inline-flex; align-items:center; gap:12px; color:var(--text); text-decoration:none }
 .mail-text{ font-size:1.2rem; line-height:1 }
 .contact-plain{ color:var(--text); text-decoration:underline; text-underline-offset:3px }
+
 .site-footer{ display:grid; place-items:center; min-height:18vh; padding:20px; text-align:center; color:rgba(255,255,255,.8) }
 
-/* ===== Drawer ===== */
+/* Drawer */
 .scrim{ position:fixed; inset:0; background:rgba(0,0,0,.35); opacity:0; transition:opacity .2s ease; z-index:40 }
 .scrim.is-visible{ opacity:1 }
 .drawer{
@@ -168,62 +172,69 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 }
 .contact-submit{ padding:12px 16px; border:0; border-radius:999px; cursor:pointer; background:#2563EB; color:var(--text); font-weight:700 }
 
-/* ===== Мобилка (общие) ===== */
+/* ====== Мобилка ====== */
 @media (max-width: 900px){
   .brand img{ width:100px }
   .top-nav{ transform:none; left:auto; right:120px }
   .hero h1{ font-size:clamp(32px,10vw,64px) }
+
   .about-content{ padding: 14vh 16px 20px; }
-  .about-content p{ margin-top:21px; max-width:92%; }
+  .about-content p{ margin-top: 21px; max-width:92%; }
+
   .portfolio{ grid-template-columns:1fr }
 }
 
-/* =========================================================
-   СТРАНИЦА «СЕРИАЛЫ» (фон под плашками как на главной)
-   ========================================================= */
+/* ===========================================================
+   СТРАНИЦА «СЕРИАЛЫ» (без подложки)
+   =========================================================== */
+
 .hero--series{
   min-height:64vh;
   padding-top:clamp(140px,18vh,210px);
   padding-bottom:clamp(6px,2vh,32px);
 }
 
-.series-block{ padding:0 0 60px; }
-.series-block--lift .series-frame{ margin-top:-52px; }
-@media (max-width:980px){ .series-block--lift .series-frame{ margin-top:-36px; } }
+/* ↑ подтягиваем секцию ближе к заголовку (~3 см) */
+.series-page .series-block{ margin-top:-72px; }          /* было -44px */
+@media (max-width:980px){ .series-page .series-block{ margin-top:-52px; } }
 
-.series-frame{
-  position:relative; margin:0 auto; width:min(1280px,94vw);
-  border-radius:24px; overflow:hidden;
-  /* фон задаётся через CSS-переменную --bg из HTML */
-  background: var(--bg) center/cover no-repeat #000;
+/* прозрачный контейнер */
+.series-page .series-frame{
+  position:relative;
+  width:min(1280px,94vw);
+  margin:0 auto;
+  border-radius:24px;
+  background:transparent;
+  box-shadow:none;
+  border:0;
 }
-.series-glass{
-  position:absolute; inset:0; pointer-events:none;
-  background:
-    radial-gradient(1100px 460px at 50% 0%, rgba(0,0,0,.00) 0%, rgba(0,0,0,.32) 70%),
-    linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.50) 100%);
-}
-.series-inner{ position:relative; padding:28px 24px 36px; }
-.series-head .section-title{ font-weight:800; color:#ececec; }
-.series-head .section-subtitle{ font-weight:600; color:#d1d1d1; }
+.series-page .series-inner{ position:relative; padding: 0 24px 0; }
 
-.series-grid{
-  margin-top:18px; display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+/* заголовок сериала — ЕЩЁ тоньше; подзаголовок — серый как на главной */
+.series-page .series-head .section-title{
+  font-weight:500;                 /* было 600 */
+  color:#ececec;
+  font-size:clamp(28px,4.6vw,52px);
+  margin:6px 0 8px;
 }
-@media (max-width:980px){ .series-grid{ grid-template-columns:1fr; } }
-
-.series-grid .tile-title{ font-weight:700; color:#ededed; }
-.series-grid .tile-badge{
-  font-weight:600; background:rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.9);
+.series-page .series-head .section-subtitle{
+  font-weight:600;
+  color:var(--subtitle);           /* единый серый */
 }
 
-/* =========================================================
-   ПЛЕЕР (страница эпизода)
-   ========================================================= */
+/* сетка карточек */
+.series-page .series-grid{
+  max-width:1200px;
+  margin:18px auto 0;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+}
+@media (max-width:980px){ .series-page .series-grid{ grid-template-columns:1fr; } }
+.series-page .series-grid .tile{ min-height:240px; }
+
+/* ===== Плеер (страница серии) ===== */
 .player-wrap{
   max-width:min(1100px,92vw);
-  margin:-6vh auto 48px;          /* подтянули ближе к hero */
+  margin:-6vh auto 48px;
   padding:0 8px;
 }
 .player-box{
@@ -236,21 +247,5 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   aspect-ratio:16/9;
   border:0; background:#000;
 }
-.player-fallback{ text-align:center; opacity:.8; margin:12px 0 0; }
-.player-fallback a{ text-decoration:underline; }
-
-.coming-box{
-  border-radius:18px;
-  background: radial-gradient(70% 120% at 50% 0%, rgba(255,255,255,.05), rgba(255,255,255,.01));
-  border:1px solid rgba(255,255,255,.08);
-  padding:28px; text-align:center;
-}
-.btn-ghost{
-  display:inline-block; margin-top:12px;
-  border:1px solid rgba(255,255,255,.35);
-  border-radius:999px; padding:10px 14px; font-weight:600;
-}
-
-@media (max-width:900px){
-  .player-wrap{ margin:-4vh auto 40px; }
-}
+.player-fallback{ text-align:center; opacity:.8; margin:14px 0 0; }
+@media (max-width:900px){ .player-wrap{ margin:-4vh auto 40px; } }

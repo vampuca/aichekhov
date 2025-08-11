@@ -4,14 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Сериалы — Студия ИИ им. А.П. Чехова</title>
-  <meta name="description" content="Сериалы AI-студии им. А.П. Чехова. Сезон 2025." />
-  <link rel="stylesheet" href="../../style.css?v=22" />
-  <!-- превью, чтобы карточки оживали мгновенно -->
+  <meta name="description" content="Сезон 2025. Сериалы AI-студии им. А.П. Чехова." />
+
+  <!-- тот же шрифт, что и на главной -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- общий стиль -->
+  <link rel="stylesheet" href="../../style.css?v=46" />
+
+  <!-- превью для мгновенной анимации карточек -->
   <link rel="preload" as="video" href="./episode-1-preview.mp4" type="video/mp4" />
   <link rel="preload" as="video" href="./episode-2-preview.mp4" type="video/mp4" />
 </head>
-<body id="top">
-  <!-- верх, как на главной -->
+<body class="series-page" id="top">
+  <!-- верх как на главной -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
@@ -29,15 +36,13 @@
     </div>
   </header>
 
-  <!-- Сезон: фон-картинка под плашками (картинка лежит рядом, ./background-till-death.jpg) -->
-  <section class="series-block series-block--lift">
-    <div class="series-frame" style="--bg:url('./background-till-death.jpg')">
-      <div class="series-glass" aria-hidden="true"></div>
-
+  <!-- Секция сезона (без подложки) -->
+  <section class="series-block">
+    <div class="series-frame">
       <div class="series-inner">
         <header class="series-head">
           <h2 class="section-title">Пока смерть не разлучит</h2>
-          <p class="section-subtitle">Триллер-сериал.</p>
+          <p class="section-subtitle">Триллер-сериал. Новые эпизоды по мере готовности.</p>
         </header>
 
         <div class="series-grid">
@@ -62,7 +67,7 @@
           </div>
 
           <!-- Серия 3 -->
-          <div class="tile tile-empty" aria-label="Серия 3 — скоро">
+          <div class="tile tile-visual" aria-label="Серия 3 — скоро">
             <div class="tile-overlay"></div>
             <div class="tile-title">Серия 3</div>
             <div class="tile-badge">Скоро</div>
@@ -107,13 +112,10 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // iOS: «пнуть» превью, если автостарт заблокирован
     const kick = () => document.querySelectorAll('.tile video').forEach(v => v.play().catch(()=>{}));
     addEventListener('touchend', kick, { once:true });
     addEventListener('click',     kick, { once:true });
 
-    // Drawer
     (() => {
       const open = document.getElementById('contactOpen');
       const close = document.getElementById('contactClose');
