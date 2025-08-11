@@ -370,3 +370,25 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   opacity:.75;
   margin:12px 0 0;
 }
+/* === Patch 2025-08-11: Series page fine-tuning (non-breaking) === */
+
+/* 1) Поднять секцию с плашками (≈3 см) */
+.series-block.series-block--lift .series-frame { margin-top: -52px; }
+
+/* 2) Фон под плашками с мягким затемнением (если в HTML задано --bg) */
+.series-frame{
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,.50), rgba(0,0,0,.55)),
+    var(--bg) center/cover no-repeat, #000;
+}
+
+/* 3) Унифицировать веса шрифта (мягче) */
+.series-head .section-title{ font-weight: 800; }
+.series-head .section-subtitle{ font-weight: 600; color:#d1d1d1; }
+.series-grid .tile-title{ font-weight: 700; }
+.series-grid .tile-badge{ font-weight: 600; }
+
+/* 4) Мобильная «версия подъёма» — чуть деликатнее */
+@media (max-width: 980px){
+  .series-block.series-block--lift .series-frame{ margin-top: -36px; }
+}
