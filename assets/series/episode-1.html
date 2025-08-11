@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Пока смерть не разлучит — Серия 1</title>
   <meta name="description" content="Пока смерть не разлучит — Серия 1. Триллер-сериал AI-студии им. А.П. Чехова." />
-  <link rel="stylesheet" href="../../style.css?v=16" />
+  <link rel="stylesheet" href="../../style.css?v=22" />
 </head>
 <body id="top">
-
-  <!-- Верх — как на главной/«Сериалы» -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
@@ -19,7 +17,7 @@
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- Hero компактный -->
+  <!-- компактный hero в стиле главной -->
   <header class="hero hero--series" style="min-height:48vh;padding-top:18vh;">
     <div class="hero-inner">
       <h1>Пока смерть не разлучит</h1>
@@ -27,10 +25,9 @@
     </div>
   </header>
 
-  <!-- Плеер -->
+  <!-- Плеер по центру -->
   <main class="player-wrap">
     <div class="player-box">
-      <!-- Google Drive embed (работает, если файл доступен для просмотра «по ссылке») -->
       <iframe
         class="player-frame"
         src="https://drive.google.com/file/d/1V6xdTYGRsSgESxYGB4ED95pFI0YGgTYm/preview"
@@ -45,7 +42,7 @@
     </p>
   </main>
 
-  <!-- Контакт + футер -->
+  <!-- Контакты + футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -88,7 +85,7 @@
       function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
       function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
       open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
-      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
+      addEventListener('keydown', e => { if (e.key==='Escape' && !dr.hidden) hide(); });
     })();
   </script>
 </body>

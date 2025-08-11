@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Пока смерть не разлучит — Серия 2</title>
   <meta name="description" content="Серия 2 — в разработке. Триллер-сериал AI-студии им. А.П. Чехова." />
-  <link rel="stylesheet" href="../../style.css?v=16" />
+  <link rel="stylesheet" href="../../style.css?v=22" />
 </head>
 <body id="top">
   <a class="brand" href="../../#top" aria-label="На начало">
@@ -19,7 +19,7 @@
 
   <header class="hero hero--series" style="min-height:48vh;padding-top:18vh;">
     <div class="hero-inner">
-      <h1>Пока смерть не разлучит </h1>
+      <h1>Пока смерть не разлучит</h1>
       <p class="subtitle">Серия 2 — в разработке</p>
     </div>
   </header>
@@ -72,7 +72,7 @@
       function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
       function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
       open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
-      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
+      addEventListener('keydown', e => { if (e.key==='Escape' && !dr.hidden) hide(); });
     })();
   </script>
 </body>
