@@ -1,30 +1,26 @@
 <!doctype html>
-<html lang="ру">
+<html lang="ru">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI-контент — Студия ИИ им. А.П. Чехова</title>
-  <meta name="description" content="Раздел «AI-контент» в разработке." />
-  <!-- Шрифты и общий стиль — как на главной -->
+  <title>AI-контент — Скоро</title>
+  <meta name="description" content="AI-контент — скоро." />
+  <link rel="stylesheet" href="../../style.css?v=soon1" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../style.css?v=62" />
+
   <style>
-    .soon-art{
-      max-width:min(1100px,92vw);
-      margin: -2vh auto 6vh;
-      padding: 0 8px;
+    .hero--soon{ min-height:48vh; padding-top:clamp(120px,16vh,200px); padding-bottom:clamp(8px,2vh,24px); }
+    .soon-art{ display:grid; place-items:center; width:min(1180px,94vw); margin:0 auto; }
+    .soon-figure{ width:100%; border-radius:18px; overflow:hidden; transform:translateY(-7vh); }
+    .soon-figure img{ display:block; width:100%; height:auto; }
+    @media (max-width: 900px){
+      .hero--soon{ min-height:42vh; padding-top:clamp(104px,15vh,180px); }
+      .soon-figure{ transform:translateY(-6vh); }
     }
-    .soon-art .frame{
-      border-radius:18px; overflow:hidden; background:#0b0b0b;
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 10px 30px rgba(0,0,0,.35);
-    }
-    .soon-art img{ display:block; width:100%; height:auto; }
   </style>
 </head>
 <body id="top">
-  <!-- Верх -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
@@ -34,21 +30,18 @@
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- Hero: только «Скоро» -->
-  <header class="hero hero--series" style="min-height:64vh;">
+  <header class="hero hero--soon">
     <div class="hero-inner">
       <h1>Скоро</h1>
     </div>
   </header>
 
-  <!-- Картинка следующей секцией -->
   <section class="soon-art" aria-label="Иллюстрация">
-    <div class="frame">
-      <img src="../shared/hero-soon.webp" alt="Промо-иллюстрация AI" loading="lazy" decoding="async" />
-    </div>
+    <figure class="soon-figure">
+      <img src="../shared/hero-soon.webp" alt="AI — заглушка раздела" />
+    </figure>
   </section>
 
-  <!-- Контакты и футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -65,16 +58,15 @@
     <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
   </footer>
 
-  <!-- Drawer -->
   <div class="scrim" id="scrim" hidden></div>
   <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" hidden>
     <header class="drawer-head">
       <h3>Связаться с нами</h3>
       <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
     </header>
-    <form class="contact-form" id="contactForm">
-      <label>Имя <input type="text" name="name" autocomplete="name" required></label>
-      <label>Email <input type="email" name="email" autocomplete="email" required></label>
+    <form class="contact-form">
+      <label>Имя <input type="text" name="name" required></label>
+      <label>Email <input type="email" name="email" required></label>
       <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
       <button type="submit" class="contact-submit">Отправить</button>
       <p class="contact-alt">Или напишите: <a class="contact-plain" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
@@ -83,18 +75,12 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    (()=>{const o=document.getElementById('contactOpen'),c=document.getElementById('contactClose'),
+    (()=>{ const o=document.getElementById('contactOpen'),c=document.getElementById('contactClose'),
       d=document.getElementById('contactDrawer'),s=document.getElementById('scrim');
       function show(){d.hidden=false;s.hidden=false;requestAnimationFrame(()=>{d.classList.add('is-open');s.classList.add('is-visible');document.body.style.overflow='hidden';});}
       function hide(){d.classList.remove('is-open');s.classList.remove('is-visible');document.body.style.overflow='';setTimeout(()=>{d.hidden=true;s.hidden=true;},200);}
       o.addEventListener('click',show); c.addEventListener('click',hide); s.addEventListener('click',hide);
       addEventListener('keydown',e=>{if(e.key==='Escape'&&!d.hidden)hide();});
-      document.getElementById('contactForm').addEventListener('submit', e=>{
-        e.preventDefault();
-        const dta=new FormData(e.target);
-        location.href=`mailto:studio@aichekhov.ru?subject=${encodeURIComponent('Сообщение со сайта')}&body=${encodeURIComponent(`Имя: ${dta.get('name')}\nEmail: ${dta.get('email')}\n\n${dta.get('message')}`)}`;
-        hide();
-      });
     })();
   </script>
 </body>
