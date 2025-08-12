@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- общий стиль (обновил версию, чтобы не кэшировалось) -->
+  <!-- общий стиль -->
   <link rel="stylesheet" href="../../style.css?v=49" />
 
   <!-- превью для мгновенной анимации карточек -->
@@ -36,9 +36,10 @@
     </div>
   </header>
 
-  <!-- Секция сезона -->
-  <section class="series-block">
-    <div class="series-frame">
+  <!-- Секция сезона (поднята и с фоном) -->
+  <section class="series-block series-block--lift">
+    <div class="series-frame" style="--bg:url('../../assets/series/background-till-death.jpg')">
+      <div class="series-glass"></div>
       <div class="series-inner">
         <header class="series-head">
           <h2 class="section-title">Пока смерть не разлучит</h2>
@@ -57,14 +58,14 @@
           </a>
 
           <!-- Серия 2 -->
-          <div class="tile tile-video" aria-label="Серия 2 — в разработке">
+          <a class="tile tile-video" href="./episode-2.html" aria-label="Серия 2 — в разработке">
             <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
               <source src="./episode-2-preview.mp4" type="video/mp4" />
             </video>
             <div class="tile-overlay"></div>
             <div class="tile-title">Серия 2</div>
             <div class="tile-badge">В разработке</div>
-          </div>
+          </a>
 
           <!-- Серия 3 -->
           <div class="tile tile-visual" aria-label="Серия 3 — скоро">
@@ -77,7 +78,7 @@
     </div>
   </section>
 
-  <!-- контакты + футер -->
+  <!-- Контакты + футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -112,10 +113,13 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // автозапуск превью на iOS
     const kick = () => document.querySelectorAll('.tile video').forEach(v => v.play().catch(()=>{}));
     addEventListener('touchend', kick, { once:true });
     addEventListener('click',     kick, { once:true });
 
+    // Drawer
     (() => {
       const open = document.getElementById('contactOpen');
       const close = document.getElementById('contactClose');

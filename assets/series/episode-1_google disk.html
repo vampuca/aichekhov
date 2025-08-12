@@ -5,11 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Пока смерть не разлучит — Серия 1</title>
   <meta name="description" content="Пока смерть не разлучит — Серия 1. Триллер-сериал AI-студии им. А.П. Чехова." />
-  <link rel="stylesheet" href="../../style.css?v=48" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css?v=69" />
+  <style>
+    .player-wrap.no-hero{ max-width:min(1100px,92vw); margin:96px auto 48px; padding:0 8px }
+    @media (min-width:901px){ .player-wrap.no-hero{ margin-top:72px } }
+    .player-box{ position:relative; border-radius:18px; overflow:hidden; background:#000; border:1px solid rgba(255,255,255,.08); box-shadow:0 10px 30px rgba(0,0,0,.35) }
+    .player-frame{ display:block; width:100%; aspect-ratio:16/9; border:0; background:#000 }
+  </style>
 </head>
 <body id="top">
-
-  <!-- Верх -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
@@ -19,25 +25,20 @@
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- Пустой hero (как договаривались) -->
-  <header class="hero hero--series" style="min-height:12vh; padding-top:14vh;"></header>
-
-  <!-- Плеер -->
-  <main class="player-wrap">
+  <main class="player-wrap no-hero">
     <div class="player-box">
       <iframe
         class="player-frame"
-        src="https://rutube.ru/play/embed/bae541141a301d7855fc3129e3d3d76d?p=xEmVAO2625aYDUy33BzLQA"
-        title="Пока смерть не разлучит — Серия 1"
+        src="https://drive.google.com/file/d/1V6xdTYGRsSgESxYGB4ED95pFI0YGgTYm/preview"
         allow="autoplay; fullscreen; picture-in-picture"
         allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen
         loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin">
-      </iframe>
+        title="Пока смерть не разлучит — Серия 1"></iframe>
     </div>
   </main>
 
-  <!-- Контакты + футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -54,7 +55,6 @@
     <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
   </footer>
 
-  <!-- Drawer -->
   <div class="scrim" id="scrim" hidden></div>
   <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" hidden>
     <header class="drawer-head">
@@ -72,15 +72,12 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    (() => {
-      const open = document.getElementById('contactOpen');
-      const close = document.getElementById('contactClose');
-      const dr = document.getElementById('contactDrawer');
-      const scr = document.getElementById('scrim');
-      function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
-      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
-      open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
-      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
+    (()=>{const o=document.getElementById('contactOpen'),c=document.getElementById('contactClose'),
+      d=document.getElementById('contactDrawer'),s=document.getElementById('scrim');
+      function show(){d.hidden=false;s.hidden=false;requestAnimationFrame(()=>{d.classList.add('is-open');s.classList.add('is-visible');document.body.style.overflow='hidden';});}
+      function hide(){d.classList.remove('is-open');s.classList.remove('is-visible');document.body.style.overflow='';setTimeout(()=>{d.hidden=true;s.hidden=true;},200);}
+      o.addEventListener('click',show); c.addEventListener('click',hide); s.addEventListener('click',hide);
+      addEventListener('keydown',e=>{if(e.key==='Escape'&&!d.hidden)hide();});
     })();
   </script>
 </body>

@@ -294,3 +294,27 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 }
 /* чуть плотнее верхний внутренний отступ внутри рамки */
 .series-block .series-inner{ padding-top:18px !important; }
+/* --- MOBILE SAFE TUNING FOR SERIES PAGE --- */
+@media (max-width: 900px){
+  /* герой чуть выше, чтобы фикс-шапка не жала контент */
+  .hero--series{
+    min-height: 56vh;
+    padding-top: 18vh; /* было 14–18, оставим с запасом */
+  }
+  /* поднимаем блок с плашками, но деликатнее, чтобы не «заезжал» на hero */
+  .series-block.series-block--lift > .series-frame{
+    margin-top: -48px !important; /* было −72/−76 — делаем менее агрессивно */
+  }
+  /* размеры заголовков секции — компактнее на мобилке */
+  .series-head{ padding-top: 6px; }
+  .section-title{ font-size: clamp(24px, 7.2vw, 34px); margin: 8px 0 6px; font-weight: 700; }
+  .section-subtitle{ font-size: clamp(14px, 4.2vw, 18px); color: #cfcfcf; }
+
+  /* сетка плиток — одна колонка, как и было */
+  .series-grid{ grid-template-columns: 1fr; }
+}
+
+/* на очень узких (айфоны SE и т.п.) ещё чуть бережнее */
+@media (max-width: 560px){
+  .series-block.series-block--lift > .series-frame{ margin-top: -36px !important; }
+}
