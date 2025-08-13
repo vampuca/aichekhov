@@ -64,7 +64,11 @@
       <h3>Связаться с нами</h3>
       <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
     </header>
-    <form class="contact-form">
+
+    <!-- ИЗМЕНЕНО: только форма — экшн на Formspree -->
+    <form class="contact-form" action="https://formspree.io/f/mwpqzewk" method="POST" accept-charset="utf-8">
+      <input type="hidden" name="_subject" value="Заявка с сайта AI Чехов — AI-контент" />
+      <input type="hidden" name="_language" value="ru" />
       <label>Имя <input type="text" name="name" required></label>
       <label>Email <input type="email" name="email" required></label>
       <label>Сообщение <textarea name="message" rows="5" required></textarea></label>

@@ -3,38 +3,33 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Пока смерть не разлучит — Серия 2</title>
-  <meta name="description" content="Серия 2 — в разработке. Триллер-сериал AI-студии им. А.П. Чехова." />
+  <title>Пока смерть не разлучит — Серия 2 (в разработке)</title>
+  <meta name="description" content="Пока смерть не разлучит — Серия 2 (в разработке). Триллер-сериал AI-студии им. А.П. Чехова." />
   <link rel="stylesheet" href="../../style.css?v=49" />
 </head>
 <body id="top">
-  <!-- Верх такой же, как на главной -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
   <nav class="top-nav" aria-label="Навигация">
-    <a href="../series/">← Сериалы</a>
+    <a href="../index.html">← Сериалы</a>
     <a href="../../#projects">Проекты</a>
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- Компактный hero -->
-  <header class="hero hero--series" style="min-height:48vh;padding-top:18vh;">
-    <div class="hero-inner">
-      <h1>Пока смерть не разлучит</h1>
-      <p class="subtitle">Серия 2 — в разработке</p>
+  <header class="hero hero--series" style="min-height:16vh; padding-top:14vh;">
+    <div class="container">
+      <h1 class="page-title" style="font-weight:500;">Пока смерть не разлучит — Серия 2</h1>
+      <p class="page-subtitle">В разработке</p>
     </div>
   </header>
 
-  <!-- Заглушка вместо плеера -->
   <main class="player-wrap">
-    <div class="coming-box">
-      <p>Эпизод в производстве. Следите за обновлениями!</p>
-      <a class="btn-ghost" href="../series/">К списку серий</a>
+    <div class="player-box" style="aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+      <p style="opacity:.8">Эпизод в производстве. Следите за обновлениями.</p>
     </div>
   </main>
 
-  <!-- Контакты + футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -51,19 +46,29 @@
     <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
   </footer>
 
-  <!-- Drawer -->
+  <!-- Drawer + форма -->
   <div class="scrim" id="scrim" hidden></div>
   <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" hidden>
     <header class="drawer-head">
       <h3>Связаться с нами</h3>
       <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
     </header>
-    <form class="contact-form">
-      <label>Имя <input type="text" name="name" required></label>
-      <label>Email <input type="email" name="email" required></label>
-      <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
+
+    <form class="contact-form" action="https://formspree.io/f/mwpqzewk" method="POST">
+      <label>Имя
+        <input type="text" name="name" required>
+      </label>
+      <label>Email
+        <input type="email" name="email" required>
+      </label>
+      <label>Сообщение
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <input type="hidden" name="_subject" value="Сообщение со страницы aichekhov.ru — Серия 2">
+      <input type="text" name="_gotcha" style="display:none">
       <button type="submit" class="contact-submit">Отправить</button>
       <p class="contact-alt">Или напишите: <a class="contact-plain" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
+      <p class="form-status" aria-live="polite" hidden></p>
     </form>
   </aside>
 
@@ -76,9 +81,26 @@
       const scr = document.getElementById('scrim');
       function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
       function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
-      open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
-      addEventListener('keydown', e => { if (e.key==='Escape' && !dr.hidden) hide(); });
+      open.addEventListener('click', show);
+      close.addEventListener('click', hide);
+      scr.addEventListener('click', hide);
+      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
     })();
+    document.querySelectorAll('.contact-form').forEach(form => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const status = form.querySelector('.form-status');
+        const data = new FormData(form);
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          if (res.ok) { status.textContent = 'Спасибо! Сообщение отправлено.'; status.hidden = false; form.reset(); }
+          else { throw new Error('Ошибка отправки.'); }
+        } catch (err) {
+          status.textContent = 'Не получилось отправить. Попробуйте позже или напишите на studio@aichekhov.ru';
+          status.hidden = false;
+        }
+      });
+    });
   </script>
 </body>
 </html>

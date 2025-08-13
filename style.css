@@ -318,3 +318,5 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 @media (max-width: 560px){
   .series-block.series-block--lift > .series-frame{ margin-top: -36px !important; }
 }
+.no-series-bg .series-frame{ background:#000 !important; }
+.no-series-bg .series-glass{ display:none !important; }
