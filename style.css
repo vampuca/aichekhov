@@ -320,3 +320,37 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 }
 .no-series-bg .series-frame{ background:#000 !important; }
 .no-series-bg .series-glass{ display:none !important; }
+/* ==== MOBILE TUNE: ABOUT (главная) ==== */
+@media (max-width: 900px){
+  /* ближе к hero */
+  .about-video{
+    margin-top: clamp(-24px, -3.2vh, -12px);
+  }
+
+  /* текст по центру и аккуратнее по ширине */
+  .about-content{
+    max-width: min(720px, 92vw);
+    margin: 0 auto;
+    padding: clamp(14px, 2.2vh, 22px) clamp(16px, 4vw, 24px);
+    text-align: center;
+  }
+  .about-content p{ text-align: inherit; }
+
+  /* видео чуть «поменьше», чтобы было больше видно кадра
+     (контейнер .about-video уже с overflow:hidden, поэтому всё аккуратно) */
+  .about-video .bg-video{
+    transform: scale(.94);
+    transform-origin: center;
+    object-position: 50% 32%; /* можно подстроить, если нужно сместить акцент */
+    transition: transform .3s ease;
+  }
+}
+
+@media (max-width: 560px){
+  .about-video{ margin-top: clamp(-28px, -4.4vh, -16px); }
+  .about-content{ padding: 16px 18px; }
+  .about-video .bg-video{
+    transform: scale(.92);
+    object-position: 50% 30%;
+  }
+}
