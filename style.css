@@ -211,38 +211,22 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   }
 }
 
-/* ===== Телефон в горизонтали (ТОЛЬКО LANDSCAPE): центр "О нас" + шире проекты ===== */
+/* ===== Телефон в горизонтали: не растягивать карточки ===== */
 @media (max-width: 900px) and (orientation: landscape){
-  /* --- О НАС: карточку ставим по центру своей секции --- */
-  .about-video{
-    display:grid;                 /* центрируем содержимое секции */
-    place-items:center;
-    margin-top: clamp(24px, 5vh, 64px) !important; /* ниже, чтобы не налезать на hero */
-  }
-  .about-content{
-    align-self:center;
-    justify-self:center;
-    margin: 0 auto;               /* по центру по горизонтали */
-    max-width: min(680px, 84vw);   /* немного уже для аккуратности в landscape */
-  }
-  .about-content p{
-    margin-left:auto; margin-right:auto;
-    /* текст оставляем как у тебя (justify), можно включить центр при желании */
-    /* text-align:center; */
-  }
+  .brand img{ width:72px }
+  .top-nav{ gap:8px; top:20px }
+  .top-nav a{ font-size:10.5px; padding:4px 6px; border-radius:8px }
+  .contact-fixed{ top:18px; padding:6px 9px; font-size:10.5px }
 
-  /* --- ПРОЕКТЫ: шире контейнер и 3 колонки --- */
   .portfolio{
-    width: min(980px, 96vw);      /* шире, но не вылезаем за экран */
-    max-width: none;
+    grid-template-columns: 1fr;
+    max-width: 680px;
     margin: 3vh auto 3.5rem;
-    padding: 0 12px;
-    display:grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: clamp(10px, 2vw, 16px);
+    padding: 0 14px;
   }
-  .portfolio .tile{
-    min-height: clamp(160px, 32vh, 240px);
+  .tile{
+    min-height: auto;
+    height: clamp(180px, 50vw, 260px);
   }
 }
 
@@ -339,7 +323,13 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 
 .no-series-bg .series-frame{ background:#000 !important; }
 .no-series-bg .series-glass{ display:none !important; }
-/* === MOBILE: центр текста в плашке "О нас" (portrait + landscape) === */
+
+/* (заметка: ниже могли быть твои мобильные тюнинги hero/about — оставляю как есть) */
+
+
+/* ====== ДОБАВЛЕНО: только мобильная версия ====== */
+
+/* 1) Мобилка (портрет + ландшафт): центрируем текст в плашке «О нас» */
 @media (max-width: 900px){
   .about-content,
   .about-content p{
@@ -351,10 +341,21 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   }
 }
 
-/* === MOBILE PORTRAIT ONLY: подтянуть секцию "О нас" ближе к hero === */
+/* 2) Мобилка (портрет): делаем плитки «Проекты» пошире за счёт меньших полей контейнера */
 @media (max-width: 900px) and (orientation: portrait){
-  .about-video{
-    /* делаем ближе к hero; при желании подстрой: -7vh ещё ближе, -5vh дальше */
-    margin-top: clamp(-44px, -6vh, -26px) !important;
+  .portfolio{
+    padding-left: clamp(6px, 2.2vw, 12px) !important;
+    padding-right: clamp(6px, 2.2vw, 12px) !important;
+    max-width: 100%;
+  }
+}
+
+/* 3) Мобилка (ландшафт): шире контейнер проектов и 3 колонки */
+@media (max-width: 900px) and (orientation: landscape){
+  .portfolio{
+    width: min(1040px, 98vw) !important;  /* было 680px — делаем заметно шире */
+    max-width: none !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: clamp(10px, 2vw, 16px) !important;
   }
 }
