@@ -320,37 +320,34 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 }
 .no-series-bg .series-frame{ background:#000 !important; }
 .no-series-bg .series-glass{ display:none !important; }
-/* ==== MOBILE TUNE: ABOUT (главная) ==== */
+//* === MOBILE TUNE v2: hero короче + "О нас" ближе и по центру === */
 @media (max-width: 900px){
-  /* ближе к hero */
+  /* 1) hero поменьше снизу — подтягиваем следующий блок */
+  .hero{
+    min-height: 52vh;                 /* было больше — делаем компактнее */
+    padding-bottom: clamp(0px, 1vh, 8px);
+  }
+
+  /* 2) секция "О нас" ближе к hero и по центру по вертикали */
   .about-video{
-    margin-top: clamp(-24px, -3.2vh, -12px);
+    margin-top: clamp(-24px, -3.5vh, -12px); /* аккуратно "подсаживаем" стык */
+    min-height: 66vh;                         /* чтобы плашка влезала красиво */
+    display: grid;
+    place-items: center;                      /* плашка строго по центру секции */
   }
 
-  /* текст по центру и аккуратнее по ширине */
+  /* 3) на всякий случай фиксируем центрирование самой плашки */
   .about-content{
-    max-width: min(720px, 92vw);
-    margin: 0 auto;
-    padding: clamp(14px, 2.2vh, 22px) clamp(16px, 4vw, 24px);
-    text-align: center;
-  }
-  .about-content p{ text-align: inherit; }
-
-  /* видео чуть «поменьше», чтобы было больше видно кадра
-     (контейнер .about-video уже с overflow:hidden, поэтому всё аккуратно) */
-  .about-video .bg-video{
-    transform: scale(.94);
-    transform-origin: center;
-    object-position: 50% 32%; /* можно подстроить, если нужно сместить акцент */
-    transition: transform .3s ease;
+    align-self: center;
+    justify-self: center;
+    /* остальной твой стиль (скругления, фон, текст-центр) остаётся как есть */
   }
 }
 
 @media (max-width: 560px){
-  .about-video{ margin-top: clamp(-28px, -4.4vh, -16px); }
-  .about-content{ padding: 16px 18px; }
-  .about-video .bg-video{
-    transform: scale(.92);
-    object-position: 50% 30%;
+  .hero{ min-height: 48vh; }
+  .about-video{
+    min-height: 64vh;
+    margin-top: clamp(-28px, -4.5vh, -16px);
   }
 }
