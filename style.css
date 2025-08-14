@@ -351,3 +351,27 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
     margin-top: clamp(-28px, -4.5vh, -16px);
   }
 }
+/* === MOBILE LANDSCAPE TUNE: "О нас" ниже + 3 колонки у проектов === */
+@media (max-width: 900px) and (orientation: landscape){
+  /* 1) "О нас" опускаем (hero не трогаем) */
+  .about-video{
+    margin-top: clamp(24px, 5vh, 64px) !important; /* было отрицательное — делаем положительным */
+    place-items: center; /* плашка по центру своей секции */
+  }
+  .about-content p{
+    text-align: center;   /* чтобы в горизонтали тоже было по центру */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 2) "Проекты" — три плитки в ряд */
+  .portfolio{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: clamp(10px, 2.2vw, 18px);
+  }
+  /* Чуть компактнее высота плиток в горизонтали, чтобы всё помещалось красиво */
+  .portfolio .tile{
+    min-height: clamp(160px, 34vh, 280px);
+  }
+}
