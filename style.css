@@ -374,4 +374,30 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   .portfolio .tile{
     min-height: clamp(160px, 34vh, 280px);
   }
+}/* === MOBILE (portrait+landscape): центр текста в плашке "О нас" === */
+@media (max-width: 900px){
+  .about-content{
+    text-align: center;
+  }
+  .about-content p{
+    text-align: inherit;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
+
+/* === MOBILE LANDSCAPE: "О нас" поуже и шрифт чуть мельче === */
+@media (max-width: 900px) and (orientation: landscape){
+  /* плашка уже и компактнее отступы внутри */
+  .about-content{
+    max-width: min(640px, 78vw);
+    padding-inline: clamp(12px, 3.2vw, 20px);
+  }
+  /* текст немного мельче и плотнее межстрочный интервал */
+  .about-content p{
+    font-size: clamp(14px, 1.9vh, 16px);
+    line-height: 1.55;
+  }
+  /* (оставляем прежний отступ секции от hero, как на прошлом шаге) */
+}
+
