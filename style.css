@@ -211,22 +211,38 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   }
 }
 
-/* ===== Телефон в горизонтали: не растягивать карточки ===== */
+/* ===== Телефон в горизонтали (ТОЛЬКО LANDSCAPE): центр "О нас" + шире проекты ===== */
 @media (max-width: 900px) and (orientation: landscape){
-  .brand img{ width:72px }
-  .top-nav{ gap:8px; top:20px }
-  .top-nav a{ font-size:10.5px; padding:4px 6px; border-radius:8px }
-  .contact-fixed{ top:18px; padding:6px 9px; font-size:10.5px }
-
-  .portfolio{
-    grid-template-columns: 1fr;
-    max-width: 680px;
-    margin: 3vh auto 3.5rem;
-    padding: 0 14px;
+  /* --- О НАС: карточку ставим по центру своей секции --- */
+  .about-video{
+    display:grid;                 /* центрируем содержимое секции */
+    place-items:center;
+    margin-top: clamp(24px, 5vh, 64px) !important; /* ниже, чтобы не налезать на hero */
   }
-  .tile{
-    min-height: auto;
-    height: clamp(180px, 50vw, 260px);
+  .about-content{
+    align-self:center;
+    justify-self:center;
+    margin: 0 auto;               /* по центру по горизонтали */
+    max-width: min(680px, 84vw);   /* немного уже для аккуратности в landscape */
+  }
+  .about-content p{
+    margin-left:auto; margin-right:auto;
+    /* текст оставляем как у тебя (justify), можно включить центр при желании */
+    /* text-align:center; */
+  }
+
+  /* --- ПРОЕКТЫ: шире контейнер и 3 колонки --- */
+  .portfolio{
+    width: min(980px, 96vw);      /* шире, но не вылезаем за экран */
+    max-width: none;
+    margin: 3vh auto 3.5rem;
+    padding: 0 12px;
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: clamp(10px, 2vw, 16px);
+  }
+  .portfolio .tile{
+    min-height: clamp(160px, 32vh, 240px);
   }
 }
 
@@ -287,6 +303,7 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 }
 .player-frame{ display:block; width:100%; aspect-ratio:16/9; border:0; background:#000 }
 .player-fallback{ text-align:center; opacity:.8; margin:14px 0 0 }
+
 /* --- SERIES: подтянуть блок к HERO независимо от дублей стилей --- */
 .series-block.series-block--lift .series-frame{ margin-top:-120px !important; }
 @media (max-width:980px){
@@ -294,6 +311,7 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 }
 /* чуть плотнее верхний внутренний отступ внутри рамки */
 .series-block .series-inner{ padding-top:18px !important; }
+
 /* --- MOBILE SAFE TUNING FOR SERIES PAGE --- */
 @media (max-width: 900px){
   /* герой чуть выше, чтобы фикс-шапка не жала контент */
@@ -318,86 +336,6 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 @media (max-width: 560px){
   .series-block.series-block--lift > .series-frame{ margin-top: -36px !important; }
 }
+
 .no-series-bg .series-frame{ background:#000 !important; }
 .no-series-bg .series-glass{ display:none !important; }
-//* === MOBILE TUNE v2: hero короче + "О нас" ближе и по центру === */
-@media (max-width: 900px){
-  /* 1) hero поменьше снизу — подтягиваем следующий блок */
-  .hero{
-    min-height: 52vh;                 /* было больше — делаем компактнее */
-    padding-bottom: clamp(0px, 1vh, 8px);
-  }
-
-  /* 2) секция "О нас" ближе к hero и по центру по вертикали */
-  .about-video{
-    margin-top: clamp(-24px, -3.5vh, -12px); /* аккуратно "подсаживаем" стык */
-    min-height: 66vh;                         /* чтобы плашка влезала красиво */
-    display: grid;
-    place-items: center;                      /* плашка строго по центру секции */
-  }
-
-  /* 3) на всякий случай фиксируем центрирование самой плашки */
-  .about-content{
-    align-self: center;
-    justify-self: center;
-    /* остальной твой стиль (скругления, фон, текст-центр) остаётся как есть */
-  }
-}
-
-@media (max-width: 560px){
-  .hero{ min-height: 48vh; }
-  .about-video{
-    min-height: 64vh;
-    margin-top: clamp(-28px, -4.5vh, -16px);
-  }
-}
-/* === MOBILE LANDSCAPE TUNE: "О нас" ниже + 3 колонки у проектов === */
-@media (max-width: 900px) and (orientation: landscape){
-  /* 1) "О нас" опускаем (hero не трогаем) */
-  .about-video{
-    margin-top: clamp(24px, 5vh, 64px) !important; /* было отрицательное — делаем положительным */
-    place-items: center; /* плашка по центру своей секции */
-  }
-  .about-content p{
-    text-align: center;   /* чтобы в горизонтали тоже было по центру */
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* 2) "Проекты" — три плитки в ряд */
-  .portfolio{
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: clamp(10px, 2.2vw, 18px);
-  }
-  /* Чуть компактнее высота плиток в горизонтали, чтобы всё помещалось красиво */
-  .portfolio .tile{
-    min-height: clamp(160px, 34vh, 280px);
-  }
-}/* === MOBILE (portrait+landscape): центр текста в плашке "О нас" === */
-@media (max-width: 900px){
-  .about-content{
-    text-align: center;
-  }
-  .about-content p{
-    text-align: inherit;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-/* === MOBILE LANDSCAPE: "О нас" поуже и шрифт чуть мельче === */
-@media (max-width: 900px) and (orientation: landscape){
-  /* плашка уже и компактнее отступы внутри */
-  .about-content{
-    max-width: min(640px, 78vw);
-    padding-inline: clamp(12px, 3.2vw, 20px);
-  }
-  /* текст немного мельче и плотнее межстрочный интервал */
-  .about-content p{
-    font-size: clamp(14px, 1.9vh, 16px);
-    line-height: 1.55;
-  }
-  /* (оставляем прежний отступ секции от hero, как на прошлом шаге) */
-}
-
