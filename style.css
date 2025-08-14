@@ -11,7 +11,7 @@
   --nav-active: #e8e8e8;
   --subtitle: #7a7a7a;
 
-  --about-section-shift: -75px;
+  --about-section-shift: -75px;    /* для десктопа можем слегка «заезжать» вверх */
   --about-text-offset: 37px;
 }
 
@@ -70,13 +70,14 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 /* ===== О нас + видео ===== */
 .about-video{
   position:relative; margin:0 3vw; min-height:100vh; --video-radius:28px;
-  margin-top: var(--about-section-shift);
-  border-radius: var(--video-radius);           /* скруглён и низ тоже */
+  margin-top: var(--about-section-shift); /* на десктопе заезжаем вверх для красоты */
+  border-radius: var(--video-radius);
   overflow: hidden;
 }
 .bg-video{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000;
   border-radius: inherit; transition:border-radius .2s ease;
+  z-index:0; /* ЯВНЫЙ ПОРЯДОК СЛОЁВ */
 }
 .video-overlay{
   position:absolute; inset:0; border-radius: inherit;
@@ -84,6 +85,7 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
     radial-gradient(1000px 420px at 50% 0%, rgba(0,0,0,0), rgba(0,0,0,.32) 70%),
     linear-gradient(180deg, rgba(0,0,0,.08) 0%, rgba(0,0,0,.32) 100%);
   transition:border-radius .2s ease;
+  z-index:1;
 }
 .about-video.unrounded{ border-radius:0 }
 .about-video.unrounded .bg-video,
@@ -93,6 +95,7 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   min-height:100vh; display:grid; align-content:start; justify-items:center;
   padding: clamp(12vh, 18vh, 22vh) 24px 24px;
   text-align:center;
+  position:relative; z-index:2; /* поверх видео и затемнения */
 }
 .about-content p{
   margin-top: var(--about-text-offset);
@@ -175,43 +178,7 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 }
 .contact-submit{ padding:12px 16px; border:0; border-radius:999px; cursor:pointer; background:#2563EB; color:var(--text); font-weight:700 }
 
-/* ===== Мобилка: без переносов, с мягким сжатием шапки ===== */
-@media (max-width: 900px){
-  .brand img{ width:94px }
-  .top-nav{ left:50%; right:auto; transform:translateX(-50%); gap:12px }
-  .top-nav a{ font-size:12.5px; padding:6px 9px; border-radius:9px }
-  .contact-fixed{ padding:8px 12px; font-size:12px }
-
-  .hero h1{ font-size:clamp(32px,10vw,64px) }
-
-  .about-content{ padding: 14vh 16px 20px; }
-  .about-content p{ margin-top: 21px; max-width:92%; }
-  .portfolio{ grid-template-columns:1fr }
-}
-@media (max-width: 760px){
-  .brand img{ width:86px }
-  .top-nav{ gap:10px; top:24px }
-  .top-nav a{ font-size:11.5px; padding:6px 8px }
-  .contact-fixed{ top:24px; padding:7px 10px; font-size:11.5px }
-}
-@media (max-width: 560px){
-  .brand img{ width:78px }
-  .top-nav{ gap:8px }
-  .top-nav a{ font-size:10.5px; padding:5px 7px; border-radius:8px }
-  .contact-fixed{ padding:6px 9px; font-size:11px }
-}
-
-/* «О нас» — мобильная типографика деликатнее */
-@media (max-width: 600px){
-  .about-content{ padding: 12vh 14px 18px; }
-  .about-content p{
-    font-size: clamp(16px, 3.6vw, 19px);
-    line-height: 1.55;
-    padding: 28px 16px 16px;
-  }
-}
-
-/* ===== Телефон в горизонтали: не растягивать карточки ===== */
+/* ===== Телефон в горизонтали (общий базис до фиксов ниже) ===== */
 @media (max-width: 900px) and (orientation: landscape){
   .brand img{ width:72px }
   .top-nav{ gap:8px; top:20px }
@@ -230,26 +197,18 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   }
 }
 
-/* ===== Страница «Сериалы» ===== */
+/* ===== Страница «Сериалы» (оставляем как было) ===== */
 .hero--series{
   min-height:64vh;
   padding-top:clamp(140px,18vh,210px);
   padding-bottom:clamp(6px,2vh,32px);
 }
-
-/* Подтянуть секцию к HERO (без завязки на класс body) */
-.series-block.series-block--lift .series-frame{ margin: top -120px; }
-@media (max-width:980px){
-  .series-block.series-block--lift .series-frame{ margin-top:-72px; }
-}
-
-/* Каркас секции сезона */
 .series-frame{
   position:relative;
   width:min(1280px,94vw);
   margin:0 auto;
   border-radius:24px;
-  background: var(--bg, transparent) center/cover no-repeat; /* фон только если задан --bg */
+  background: var(--bg, transparent) center/cover no-repeat;
   overflow:hidden;
 }
 .series-glass{
@@ -262,8 +221,6 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 .series-inner{ position:relative; padding: 28px 24px 36px; }
 .series-head .section-title{ font-weight:600; color:#ececec; font-size:clamp(28px,4.6vw,52px); margin:6px 0 8px }
 .series-head .section-subtitle{ font-weight:600; color:#d1d1d1 }
-
-/* Сетка карточек сериалов */
 .series-grid{
   margin-top:18px;
   display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
@@ -271,122 +228,142 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 @media (max-width:980px){ .series-grid{ grid-template-columns:1fr; } }
 .series-grid .tile{ min-height:240px; }
 
-/* ===== Страница серии (плеер) ===== */
-.player-wrap{
-  max-width:min(1100px,92vw);
-  margin:-2vh auto 48px;
-  padding:0 8px;
-}
-.player-wrap.no-hero{ margin:16vh auto 48px; } /* когда без собственного hero */
+.player-wrap{ max-width:min(1100px,92vw); margin:-2vh auto 48px; padding:0 8px; }
+.player-wrap.no-hero{ margin:16vh auto 48px; }
 @media (max-width:900px){ .player-wrap{ margin:-1vh auto 40px; } }
-
-.player-box{
-  border-radius:18px; overflow:hidden;
-  background:#000; border:1px solid rgba(255,255,255,.08);
-  box-shadow:0 10px 40px rgba(0,0,0,.45);
-}
+.player-box{ border-radius:18px; overflow:hidden; background:#000; border:1px solid rgba(255,255,255,.08); box-shadow:0 10px 40px rgba(0,0,0,.45) }
 .player-frame{ display:block; width:100%; aspect-ratio:16/9; border:0; background:#000 }
 .player-fallback{ text-align:center; opacity:.8; margin:14px 0 0 }
 
-/* --- SERIES: подтянуть блок к HERO независимо от дублей стилей --- */
-.series-block.series-block--lift .series-frame{ margin-top:-120px !important; }
-@media (max-width:980px){
-  .series-block.series-block--lift .series-frame{ margin-top:-72px !important; }
-}
-/* чуть плотнее верхний внутренний отступ внутри рамки */
-.series-block .series-inner{ padding-top:18px !important; }
+/* === MOBILE FIX (robust): телефоны любого размера, без hover === */
+@media (max-width: 1024px) and (hover: none){
+  /* 1) Текст в «О нас» — всегда по центру на мобилках */
+  .about-content, .about-content p{ text-align:center; }
+  .about-content p{ margin-left:auto; margin-right:auto; }
 
-/* --- MOBILE SAFE TUNING FOR SERIES PAGE --- */
-@media (max-width: 900px){
-  /* герой чуть выше, чтобы фикс-шапка не жала контент */
-  .hero--series{
-    min-height: 56vh;
-    padding-top: 18vh; /* было 14–18, оставим с запасом */
-  }
-  /* поднимаем блок с плашками, но деликатнее, чтобы не «заезжал» на hero */
-  .series-block.series-block--lift > .series-frame{
-    margin-top: -48px !important; /* было −72/−76 — делаем менее агрессивно */
-  }
-  /* размеры заголовков секции — компактнее на мобилке */
-  .series-head{ padding-top: 6px; }
-  .section-title{ font-size: clamp(24px, 7.2vw, 34px); margin: 8px 0 6px; font-weight: 700; }
-  .section-subtitle{ font-size: clamp(14px, 4.2vw, 18px); color: #cfcfcf; }
+  /* 2) Видео на мобилке чуть «дальше», кадр читаемее */
+  .about-video .bg-video{ transform: scale(.95); transform-origin:center; }
 
-  /* сетка плиток — одна колонка, как и было */
-  .series-grid{ grid-template-columns: 1fr; }
-}
+  /* 3) Портретная ориентация: «О нас» ближе к hero и компактнее */
+  @media (orientation: portrait){
+    .hero{
+      /* компактный низ героя: на новых Safari dvh/svh учитывают строку адреса */
+      padding-bottom: clamp(4px, 1.5vh, 12px);
+      min-height: 72vh;
+    }
+    @supports (min-height: 100dvh){
+      .hero{ min-height: 68dvh; }
+    }
 
-/* на очень узких (айфоны SE и т.п.) ещё чуть бережнее */
-@media (max-width: 560px){
-  .series-block.series-block--lift > .series-frame{ margin-top: -36px !important; }
-}
+    .about-video{
+      /* ВАЖНО: на мобилках никаких отрицательных отступов — всегда под hero */
+      margin-top: clamp(8px, 2vh, 16px) !important;
+      min-height: 64vh;
+      display:grid; place-items:center;
+      border-radius: 24px;
+    }
+    @supports (min-height: 100dvh){
+      .about-video{ min-height: 60dvh; }
+    }
 
-.no-series-bg .series-frame{ background:#000 !important; }
-.no-series-bg .series-glass{ display:none !important; }
+    .about-content{
+      max-width: min(640px, 88vw);
+      padding-inline: clamp(14px, 4vw, 20px);
+    }
+    .about-content p{
+      font-size: clamp(15.5px, 3.8vw, 18px);
+      line-height: 1.55;
+    }
 
-/* (заметка: ниже могли быть твои мобильные тюнинги hero/about — оставляю как есть) */
-
-
-/* ====== ДОБАВЛЕНО: только мобильная версия ====== */
-
-/* 1) Мобилка (портрет + ландшафт): центрируем текст в плашке «О нас» */
-@media (max-width: 900px){
-  .about-content,
-  .about-content p{
-    text-align: center !important;
-  }
-  .about-content p{
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-}
-
-/* 2) Мобилка (портрет): делаем плитки «Проекты» пошире за счёт меньших полей контейнера */
-@media (max-width: 900px) and (orientation: portrait){
-  .portfolio{
-    padding-left: clamp(6px, 2.2vw, 12px) !important;
-    padding-right: clamp(6px, 2.2vw, 12px) !important;
-    max-width: 100%;
-  }
-}
-
-/* 3) Мобилка (ландшафт): шире контейнер проектов и 3 колонки */
-@media (max-width: 900px) and (orientation: landscape){
-  .portfolio{
-    width: min(1040px, 98vw) !important;  /* было 680px — делаем заметно шире */
-    max-width: none !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: clamp(10px, 2vw, 16px) !important;
-  }
-}
-/* === MOBILE TUNE v2: hero короче + "О нас" ближе и по центру === */
-@media (max-width: 900px){
-  /* 1) hero поменьше снизу — подтягиваем следующий блок */
-  .hero{
-    min-height: 52vh;                 /* было больше — делаем компактнее */
-    padding-bottom: clamp(0px, 1vh, 8px);
+    /* Проекты в портрете — шире за счёт меньших внутренних полей */
+    .portfolio{ padding-left: 10px; padding-right: 10px; max-width: 100%; }
   }
 
-  /* 2) секция "О нас" ближе к hero и по центру по вертикали */
-  .about-video{
-    margin-top: clamp(-24px, -3.5vh, -12px); /* аккуратно "подсаживаем" стык */
-    min-height: 66vh;                         /* чтобы плашка влезала красиво */
-    display: grid;
-    place-items: center;                      /* плашка строго по центру секции */
-  }
+  /* 4) Горизонтальная ориентация: «О нас» ниже hero и по центру */
+  @media (orientation: landscape){
+    .about-video{
+      margin-top: clamp(16px, 4vh, 32px) !important; /* только вниз, чтобы не налезать */
+      min-height: 64vh;
+      display:grid; place-items:center;
+      border-radius: 24px;
+    }
+    @supports (min-height: 100dvh){
+      .about-video{ min-height: 62dvh; }
+    }
 
-  /* 3) на всякий случай фиксируем центрирование самой плашки */
-  .about-content{
-    align-self: center;
-    justify-self: center;
-    /* остальной твой стиль (скругления, фон, текст-центр) остаётся как есть */
+    .about-content{
+      max-width: min(680px, 84vw);
+      padding-inline: clamp(12px, 3.2vw, 20px);
+    }
+    .about-content p{
+      font-size: clamp(14px, 1.9vh, 16px);
+      line-height: 1.55;
+    }
+
+    /* Проекты в горизонтали — 3 колонки и шире контейнер */
+    .portfolio{
+      width: min(1040px, 98vw);
+      max-width: none;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(10px, 2vw, 16px);
+    }
+    .portfolio .tile{ min-height: clamp(160px, 32vh, 240px); }
   }
 }
+/* === MOBILE STABILITY FIX: телефоны (iOS/Android), портрет и горизонталь === */
+@media (max-width: 1024px) and (hover: none){
 
-@media (max-width: 560px){
-  .hero{ min-height: 48vh; }
-  .about-video{
-    min-height: 64vh;
-    margin-top: clamp(-28px, -4.5vh, -16px);
+  /* Слойность, чтобы текст не «пропадал» под видео на старых iPhone */
+  .about-video .bg-video{ z-index:0; }
+  .about-video .video-overlay{ z-index:1; }
+  .about-content{ position:relative; z-index:2; }
+
+  /* Текст «О нас» всегда по центру на мобилке */
+  .about-content, .about-content p{ text-align:center; }
+  .about-content p{ margin-left:auto; margin-right:auto; }
+
+  /* ---------- ПОРТРЕТ (вертикально) ---------- */
+  @media (orientation: portrait){
+    /* компактнее низ hero, чтобы «О нас» было ближе */
+    .hero{
+      min-height: 68svh;               /* svh учитывает адресную строку Safari */
+      padding-bottom: clamp(4px, 1.5svh, 12px);
+    }
+    /* «О нас» всегда под hero: ТОЛЬКО положительный отступ */
+    .about-video{
+      margin-top: clamp(8px, 2svh, 16px) !important;
+      min-height: 60svh;
+      display:grid; place-items:center; border-radius:24px;
+    }
+    /* видео «подальше», чтобы влезал больший фрагмент кадра */
+    .about-video .bg-video{
+      transform: scale(.90);
+      transform-origin: center;
+      object-position: 50% 32%;
+      transition: transform .2s ease, object-position .2s ease;
+    }
+    /* карточка «О нас» чуть уже и мелче типографика */
+    .about-content{
+      max-width: min(640px, 88vw);
+      padding-inline: clamp(14px, 4vw, 20px);
+    }
+    .about-content p{
+      font-size: clamp(15.5px, 3.8vw, 18px);
+      line-height: 1.55;
+    }
+  }
+
+  /* ---------- ГОРИЗОНТАЛЬ (альбомная) ---------- */
+  @media (orientation: landscape){
+    /* безопасный зазор: «О нас» не перекрывает заголовок hero */
+    .about-video{
+      margin-top: clamp(20px, 4svh, 36px) !important;
+      min-height: 62svh;
+      display:grid; place-items:center; border-radius:24px;
+    }
+    .about-video .bg-video{
+      transform: scale(.92);
+      object-position: 50% 36%;
+    }
   }
 }
