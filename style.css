@@ -359,3 +359,34 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
     gap: clamp(10px, 2vw, 16px) !important;
   }
 }
+/* === MOBILE TUNE v2: hero короче + "О нас" ближе и по центру === */
+@media (max-width: 900px){
+  /* 1) hero поменьше снизу — подтягиваем следующий блок */
+  .hero{
+    min-height: 52vh;                 /* было больше — делаем компактнее */
+    padding-bottom: clamp(0px, 1vh, 8px);
+  }
+
+  /* 2) секция "О нас" ближе к hero и по центру по вертикали */
+  .about-video{
+    margin-top: clamp(-24px, -3.5vh, -12px); /* аккуратно "подсаживаем" стык */
+    min-height: 66vh;                         /* чтобы плашка влезала красиво */
+    display: grid;
+    place-items: center;                      /* плашка строго по центру секции */
+  }
+
+  /* 3) на всякий случай фиксируем центрирование самой плашки */
+  .about-content{
+    align-self: center;
+    justify-self: center;
+    /* остальной твой стиль (скругления, фон, текст-центр) остаётся как есть */
+  }
+}
+
+@media (max-width: 560px){
+  .hero{ min-height: 48vh; }
+  .about-video{
+    min-height: 64vh;
+    margin-top: clamp(-28px, -4.5vh, -16px);
+  }
+}
