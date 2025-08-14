@@ -339,3 +339,22 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 
 .no-series-bg .series-frame{ background:#000 !important; }
 .no-series-bg .series-glass{ display:none !important; }
+/* === MOBILE: центр текста в плашке "О нас" (portrait + landscape) === */
+@media (max-width: 900px){
+  .about-content,
+  .about-content p{
+    text-align: center !important;
+  }
+  .about-content p{
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* === MOBILE PORTRAIT ONLY: подтянуть секцию "О нас" ближе к hero === */
+@media (max-width: 900px) and (orientation: portrait){
+  .about-video{
+    /* делаем ближе к hero; при желании подстрой: -7vh ещё ближе, -5vh дальше */
+    margin-top: clamp(-44px, -6vh, -26px) !important;
+  }
+}
