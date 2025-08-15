@@ -298,3 +298,67 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
     /* проекты не меняем — по задаче правим только верх и «О нас» */
   }
 }
+/* === MOBILE OVERRIDES — только телефоны (iOS/Android) === */
+@media (max-width: 1024px) and (hover: none){
+
+  /* Плашка «О нас» — текст по центру на мобилках */
+  .about-content, .about-content p{
+    text-align: center !important;
+  }
+  .about-content p{
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* -------- ПОРТРЕТ (вертикально) -------- */
+  @media (orientation: portrait){
+
+    /* Подтянуть секцию «О нас» к hero, но без налезания */
+    .about-video{
+      margin-top: clamp(4px, 1.2svh, 10px) !important; /* было больше — делаем ближе */
+      min-height: 56svh;                                /* делаем секцию короче */
+      display: grid; place-items: center;
+      border-radius: 24px;
+    }
+
+    /* Плашка «О нас» — меньше верх/низ (менее вытянута) */
+    .about-content{
+      padding-top: clamp(6vh, 9vh, 11vh);
+      padding-bottom: clamp(8px, 1.6vh, 14px);
+      max-width: min(640px, 88vw);
+      padding-inline: clamp(14px, 4vw, 20px);
+    }
+    .about-content p{
+      font-size: clamp(15.5px, 3.6vw, 18px);
+      line-height: 1.55;
+    }
+
+    /* Фон-видео «отдаляем», чтобы было видно больше кадра */
+    .about-video .bg-video{
+      transform: scale(.88);
+      transform-origin: center;
+      object-position: 50% 32%;
+    }
+
+    /* ПРОЕКТЫ: в портрете строго один столбец */
+    .portfolio{
+      grid-template-columns: 1fr !important;
+      padding-left: 3vw !important;
+      padding-right: 3vw !important;
+      max-width: 100%;
+    }
+  }
+
+  /* -------- ЛАНДШАФТ (горизонтально) -------- */
+  @media (orientation: landscape){
+    /* Здесь оставляем 3 в ряд (как и должно быть) */
+    .portfolio{
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: clamp(10px, 2vw, 16px);
+      padding-left: 3vw !important;
+      padding-right: 3vw !important;
+      width: 100%;
+      max-width: none;
+    }
+  }
+}
