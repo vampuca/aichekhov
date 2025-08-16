@@ -459,4 +459,42 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
     radial-gradient(1100px 460px at 50% 0%, rgba(0,0,0,.15) 0%, rgba(0,0,0,.45) 70%),
     linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.65) 100%);
 }
+/* Сериалы (моб. ПОРТРЕТ): ближе к hero */
+@media (max-width: 900px) and (orientation: portrait){
+  .series-block.series-block--lift > .series-frame{
+    margin-top: -64px !important; /* было мягче — делаем ближе */
+  }
+}
+
+/* Совсем узкие (SE и т.п.) — чуть бережнее */
+@media (max-width: 560px) and (orientation: portrait){
+  .series-block.series-block--lift > .series-frame{
+    margin-top: -56px !important;
+  }
+}
+/* Убрать подложку только в секции с классом .no-series-bg */
+.no-series-bg .series-frame{
+  --bg: none !important;              /* если фон задаётся через var(--bg) */
+  background: transparent !important; /* на всякий случай */
+  background-image: none !important;
+}
+.no-series-bg .series-frame::before{  /* если фон рисуется через ::before */
+  content: none !important;
+}
+.no-series-bg .series-glass{          /* «стеклянный» слой — убрать */
+  display: none !important;
+}
+
+/* Мобильная ВЕРТИКАЛЬ: подтянуть секцию ближе к hero */
+@media (max-width: 900px) and (orientation: portrait){
+  #till-death.series-block.series-block--lift > .series-frame{
+    margin-top: -64px !important;   /* ближе к hero */
+  }
+}
+/* Совсем узкие экраны — немного мягче */
+@media (max-width: 560px) and (orientation: portrait){
+  #till-death.series-block.series-block--lift > .series-frame{
+    margin-top: -56px !important;
+  }
+}
 
