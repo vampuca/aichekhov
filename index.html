@@ -222,5 +222,39 @@
     sections.forEach(sec => io.observe(sec));
   })();
   </script>
+  <script>
+    // Разворот «О нас» на весь экран, когда секция в фокусе (мобилки)
+    (function(){
+      const about = document.querySelector('.about-video');
+      if (!about) return;
+  
+      // Используем два "сторожа", чтобы точнее понимать, когда секция в центре экрана
+      const topSentinel = document.createElement('div');
+      const bottomSentinel = document.createElement('div');
+      topSentinel.style.cssText = 'position:absolute;top:15svh;left:0;width:1px;height:1px;pointer-events:none;';
+      bottomSentinel.style.cssText = 'position:absolute;bottom:15svh;left:0;width:1px;height:1px;pointer-events:none;';
+      about.appendChild(topSentinel);
+      about.appendChild(bottomSentinel);
+  
+      const opts = { root: null, threshold: 0, rootMargin: '0px' };
+      let topIn = false, bottomIn = false;
+  
+      const io = new IntersectionObserver(entries => {
+        for (const e of entries){
+          if (e.target === topSentinel)   topIn   = e.isIntersecting;
+          if (e.target === bottomSentinel) bottomIn = e.isIntersecting;
+        }
+        // Если оба "сторожа" видны — секция примерно по центру → разворачиваем
+        if (topIn && bottomIn) {
+          about.classList.add('is-expanded');
+        } else {
+          about.classList.remove('is-expanded');
+        }
+      }, opts);
+  
+      io.observe(topSentinel);
+      io.observe(bottomSentinel);
+    })();
+  </script>  
 </body>
 </html>

@@ -447,3 +447,74 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
     }
   }
 }
+/* === MOBILE: эффект разворота секции «О нас» при прокрутке === */
+@media (max-width: 1024px) and (hover: none){
+  /* плавные переходы, чтобы было «мягко» */
+  .about-video{
+    transition: margin-top .25s ease, min-height .25s ease, border-radius .25s ease;
+  }
+  .about-video .bg-video,
+  .about-video .video-overlay{
+    transition: border-radius .25s ease, transform .25s ease, opacity .25s ease;
+  }
+  .about-content{
+    transition: padding .25s ease, max-width .25s ease;
+  }
+
+  /* Состояние «развернуто» */
+  .about-video.is-expanded{
+    margin-top: 0 !important;
+    min-height: 100vh;           /* фоллбек */
+    border-radius: 0;
+  }
+  @supports (min-height: 100svh){
+    .about-video.is-expanded{ min-height: 100svh; }
+  }
+
+  .about-video.is-expanded .bg-video{ 
+    transform: scale(1);          /* подвинем кадр чуть ближе, но без перебора */
+    object-position: 50% 40%;
+    border-radius: 0;
+  }
+  .about-video.is-expanded .video-overlay{ 
+    border-radius: 0;
+    opacity: .9;                  /* чуть сильнее затемнить, чтобы текст читался */
+  }
+
+  /* Плашка текста в развороте: компактнее поля, чтобы поместилось всё */
+  .about-video.is-expanded .about-content{
+    max-width: min(680px, 90vw);
+    padding-top: clamp(8vh, 12vh, 14vh);
+    padding-bottom: clamp(10px, 2.2vh, 16px);
+  }
+
+  /* Базовые настройки для портрета, чтобы ближе к hero и короче по умолчанию */
+  @media (orientation: portrait){
+    .about-video{
+      margin-top: clamp(6px, 1.5svh, 12px) !important;
+      min-height: 56svh;
+      border-radius: 24px;
+    }
+    .about-video .bg-video{
+      transform: scale(.88);      /* «отдаляем» кадр: влезает больше */
+      object-position: 50% 32%;
+    }
+    .about-content{
+      padding-top: clamp(6vh, 9vh, 11vh);
+      padding-bottom: clamp(8px, 1.6vh, 14px);
+      max-width: min(640px, 88vw);
+      padding-inline: clamp(14px, 4vw, 20px);
+      text-align: center;
+    }
+
+    /* Проекты в портрете — строго один столбец (как просила) */
+    .portfolio{
+      grid-template-columns: 1fr !important;
+      padding-left: 3vw !important;
+      padding-right: 3vw !important;
+    }
+  }
+
+  /* В горизонтали оставляем твои настройки (3 в ряд и близко к hero),
+     «разворот» .is-expanded тоже будет работать, когда секция в фокусе */
+}
