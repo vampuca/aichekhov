@@ -418,4 +418,20 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
     min-height: auto !important;   /* ключевая строка: убирает 100vh только на моб.портрете */
   }
 }
+/* === MOBILE (телефоны): центрируем блок с текстом в секции «О нас» === */
+@media (max-width: 900px) and (hover: none){
+  /* Секция — даём ей grid, чтобы можно было ровно центрировать содержимое */
+  .about-video{
+    display: grid;
+    place-items: center;      /* и по вертикали, и по горизонтали */
+  }
+
+  /* Сам текстовый блок — по центру, аккуратные поля */
+  .about-content{
+    margin: 0 auto !important;    /* по центру контейнера */
+    text-align: center;           /* сам текст по центру */
+    max-width: min(640px, 88vw);
+    padding-inline: clamp(14px, 4vw, 20px);
+  }
+}
 
