@@ -602,3 +602,62 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
     }
   }
 }
+/* === PATCH: анти-дрожание видео на iOS/Safari + мобильный портрет === */
+
+/* 1) Анти-дрожание/фликер у границы секции */
+.about-video{
+  contain: paint;              /* изолируем перерисовку внутри секции */
+  isolation: isolate;          /* свой композитный контекст */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.about-video .bg-video,
+.about-video .video-overlay{
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);    /* удерживаем слой на GPU без “потряхиваний” */
+  will-change: transform;      /* подсказка браузеру — готовь композицию заранее */
+}
+/* Доп. страховка для старых WebKit c rounded corners */
+@supports (-webkit-overflow-scrolling: touch){
+  .about-video{ -webkit-mask-image: -webkit-radial-gradient(white, black); }
+}
+
+/* 2) Вертикальная мобильная версия — ближе к hero и короче */
+@media (max-width: 1024px) and (hover: none) and (orientation: portrait){
+
+  /* hero: компактнее нижний край, чтобы «О нас» подъехала ближе */
+  .hero{
+    padding-bottom: clamp(4px, 1.3svh, 12px) !important;
+    /* без изменения верхней части — границы hero остаются как есть */
+  }
+
+  /* «О нас»: ближе к hero и меньше «вытянутость» */
+  .about-video{
+    margin-top: clamp(6px, 1.4svh, 12px) !important;  /* ближе, но не налезает */
+    min-height: 56svh !important;                     /* секция короче */
+    border-radius: 24px;                              
+  }
+
+  /* Плашка с текстом — по центру и с меньшим “низом” */
+  .about-content{
+    text-align: center !important;
+    padding-top: clamp(6vh, 9vh, 11vh);
+    padding-bottom: clamp(8px, 1.6svh, 14px);
+    max-width: min(640px, 88vw);
+    padding-inline: clamp(14px, 4vw, 20px);
+  }
+  .about-content p{
+    margin-left: auto !important;
+    margin-right: auto !important;
+    font-size: clamp(15.5px, 3.6vw, 18px);
+    line-height: 1.55;
+  }
+
+  /* Кадр видео слегка “отдаляем” — влезает больше, меньше шанс на артефакты */
+  .about-video .bg-video{
+    transform: scale(.9);
+    transform-origin: center;
+    object-position: 50% 32%;
+  }
+}
