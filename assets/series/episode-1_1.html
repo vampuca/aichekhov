@@ -3,39 +3,72 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Пока смерть не разлучит — Серия 1</title>
-  <meta name="description" content="Пока смерть не разлучит — Серия 1. Триллер-сериал AI-студии им. А.П. Чехова." />
+  <title>Сериалы — Студия ИИ им. А.П. Чехова</title>
+  <meta name="description" content="Сериалы AI-студии им. А.П. Чехова. Сезон 2025." />
   <link rel="stylesheet" href="../../style.css?v=49" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body id="top">
-
   <!-- Верх -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
   <nav class="top-nav" aria-label="Навигация">
-    <a href="./">← Сериалы</a>
+    <a href="../../#about">О нас</a>
     <a href="../../#projects">Проекты</a>
-  </nav>  
+  </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- Пустой hero (как договаривались) -->
-  <header class="hero hero--series" style="min-height:12vh; padding-top:14vh;"></header>
-
-  <!-- Плеер -->
-  <main class="player-wrap">
-    <div class="player-box">
-      <iframe
-        class="player-frame"
-        src="https://rutube.ru/play/embed/bae541141a301d7855fc3129e3d3d76d?p=xEmVAO2625aYDUy33BzLQA"
-        title="Пока смерть не разлучит — Серия 1"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin">
-      </iframe>
+  <!-- HERO -->
+  <header class="hero hero--series">
+    <div class="hero-inner">
+      <h1>Сериалы</h1>
+      <p class="subtitle">Сезон 2025</p>
     </div>
-  </main>
+  </header>
+
+  <!-- Секция сезона -->
+  <section class="series-block series-block--lift">
+    <div class="series-frame" style="--bg:url('./background-till-death.jpg')">
+      <div class="series-glass"></div>
+      <div class="series-inner">
+        <header class="series-head">
+          <h2 class="section-title">Пока смерть не разлучит</h2>
+          <p class="section-subtitle">Триллер-сериал. Новые эпизоды по мере готовности.</p>
+        </header>
+
+        <div class="series-grid">
+          <!-- Серия 1 -->
+          <a class="tile tile-video" href="./episode-1.html" aria-label="Серия 1 — смотреть">
+            <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
+              <source src="./episode-1-preview.mp4" type="video/mp4">
+            </video>
+            <div class="tile-overlay"></div>
+            <div class="tile-title">Серия 1</div>
+            <div class="tile-badge">Смотреть</div>
+          </a>
+
+          <!-- Серия 2 -->
+          <div class="tile tile-video" aria-label="Серия 2 — в разработке">
+            <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
+              <source src="./episode-2-preview.mp4" type="video/mp4">
+            </video>
+            <div class="tile-overlay"></div>
+            <div class="tile-title">Серия 2</div>
+            <div class="tile-badge">В разработке</div>
+          </div>
+
+          <!-- Серия 3 -->
+          <div class="tile tile-empty" aria-label="Серия 3 — скоро">
+            <div class="tile-visual"><div class="tile-overlay"></div></div>
+            <div class="tile-title">Серия 3</div>
+            <div class="tile-badge">Скоро</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Контакты + футер -->
   <section class="contact-section">
@@ -61,62 +94,18 @@
       <h3>Связаться с нами</h3>
       <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
     </header>
-
-    <!-- Готовая форма Formspree -->
     <form class="contact-form" action="https://formspree.io/f/mwpqzewk" method="POST">
-      <label>Имя
-        <input type="text" name="name" required>
-      </label>
-
-      <label>Email
-        <input type="email" name="email" required>
-      </label>
-
-      <label>Сообщение
-        <textarea name="message" rows="5" required></textarea>
-      </label>
-
-      <input type="hidden" name="_subject" value="Сообщение со страницы aichekhov.ru — Серия 1">
-      <input type="text" name="_gotcha" style="display:none">
-
+      <label>Имя <input type="text" name="name" required></label>
+      <label>Email <input type="email" name="email" required></label>
+      <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
       <button type="submit" class="contact-submit">Отправить</button>
       <p class="contact-alt">Или напишите: <a class="contact-plain" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
-      <p class="form-status" aria-live="polite" hidden></p>
     </form>
   </aside>
 
-  <!-- Скрипты -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    (() => {
-      const open = document.getElementById('contactOpen');
-      const close = document.getElementById('contactClose');
-      const dr = document.getElementById('contactDrawer');
-      const scr = document.getElementById('scrim');
-      function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
-      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
-      open.addEventListener('click', show);
-      close.addEventListener('click', hide);
-      scr.addEventListener('click', hide);
-      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
-    })();
-
-    // Отправка через Formspree + статус
-    document.querySelectorAll('.contact-form').forEach(form => {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const status = form.querySelector('.form-status');
-        const data = new FormData(form);
-        try {
-          const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-          if (res.ok) { status.textContent = 'Спасибо! Сообщение отправлено.'; status.hidden = false; form.reset(); }
-          else { throw new Error('Ошибка отправки.'); }
-        } catch (err) {
-          status.textContent = 'Не получилось отправить. Попробуйте позже или напишите на studio@aichekhov.ru';
-          status.hidden = false;
-        }
-      });
-    });
+    (()=>{const o=document.getElementById('contactOpen'),c=document.getElementById('contactClose'),d=document.getElementById('contactDrawer'),s=document.getElementById('scrim');function sh(){d.hidden=false;s.hidden=false;requestAnimationFrame(()=>{d.classList.add('is-open');s.classList.add('is-visible');document.body.style.overflow='hidden'})}function hi(){d.classList.remove('is-open');s.classList.remove('is-visible');document.body.style.overflow='';setTimeout(()=>{d.hidden=true;s.hidden=true},200)}o.addEventListener('click',sh);c.addEventListener('click',hi);s.addEventListener('click',hi);addEventListener('keydown',e=>{if(e.key==='Escape'&&!d.hidden)hi()})})();
   </script>
 </body>
 </html>
