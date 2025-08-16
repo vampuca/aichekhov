@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Студия ИИ им. А.П. Чехова</title>
   <meta name="description" content="AI студия им. А.П. Чехова — графические новеллы, сериалы и экспериментальный контент. От идеи до готовой истории." />
+
+  <!-- JSON-LD: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Студия ИИ им. А.П. Чехова",
+    "alternateName": ["AI Chekhov", "AI Чехов", "ИИ Чехов", "aichekhov", "иичехов"],
+    "url": "https://aichekhov.ru"
+  }
+  </script>
+
   <link rel="preload" as="video" href="assets/video/background.mp4" type="video/mp4" />
   <link rel="stylesheet" href="style.css?v=21" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +52,7 @@
       <p>
         Мы видим в пришествии AI и генеративных моделей прорыв для индустрии развлечений, сравнимый с «Прибытием поезда». Это шанс для художника полностью управлять своим воображением и контролировать творческий процесс, освободившись от громоздкой административной цепочки традиционного производства.
         <br><br>
-        Мы приглашаем вас сделать вместе с нами шаг в будущее, где точно не будет скучно. Апчхи.
+        Мы приглашаем вас сделать вместе с нами шаг в будущее, где точно не будет скучно. 
       </p>
     </div>
   </section>
@@ -175,7 +187,6 @@
           if (resp.ok) {
             form.reset();
             status.textContent = 'Сообщение отправлено. Спасибо!';
-            // закрыть шторку через 1.2с
             setTimeout(()=>{ status.textContent=''; close(); }, 1200);
           } else {
             const data = await resp.json().catch(()=> ({}));
@@ -222,39 +233,35 @@
     sections.forEach(sec => io.observe(sec));
   })();
   </script>
+
+  <!-- Мобайл: разворот секции "О нас" при попадании в центр экрана -->
   <script>
-    // Разворот «О нас» на весь экран, когда секция в фокусе (мобилки)
-    (function(){
-      const about = document.querySelector('.about-video');
-      if (!about) return;
-  
-      // Используем два "сторожа", чтобы точнее понимать, когда секция в центре экрана
-      const topSentinel = document.createElement('div');
-      const bottomSentinel = document.createElement('div');
-      topSentinel.style.cssText = 'position:absolute;top:15svh;left:0;width:1px;height:1px;pointer-events:none;';
-      bottomSentinel.style.cssText = 'position:absolute;bottom:15svh;left:0;width:1px;height:1px;pointer-events:none;';
-      about.appendChild(topSentinel);
-      about.appendChild(bottomSentinel);
-  
-      const opts = { root: null, threshold: 0, rootMargin: '0px' };
-      let topIn = false, bottomIn = false;
-  
-      const io = new IntersectionObserver(entries => {
-        for (const e of entries){
-          if (e.target === topSentinel)   topIn   = e.isIntersecting;
-          if (e.target === bottomSentinel) bottomIn = e.isIntersecting;
-        }
-        // Если оба "сторожа" видны — секция примерно по центру → разворачиваем
-        if (topIn && bottomIn) {
-          about.classList.add('is-expanded');
-        } else {
-          about.classList.remove('is-expanded');
-        }
-      }, opts);
-  
-      io.observe(topSentinel);
-      io.observe(bottomSentinel);
-    })();
-  </script>  
+  (function(){
+    const about = document.querySelector('.about-video');
+    if (!about || matchMedia('(hover:hover)').matches) return; // только мобильные
+
+    const topSentinel = document.createElement('div');
+    const bottomSentinel = document.createElement('div');
+    topSentinel.style.cssText = 'position:absolute;top:15svh;left:0;width:1px;height:1px;pointer-events:none;';
+    bottomSentinel.style.cssText = 'position:absolute;bottom:15svh;left:0;width:1px;height:1px;pointer-events:none;';
+    about.appendChild(topSentinel);
+    about.appendChild(bottomSentinel);
+
+    const opts = { root: null, threshold: 0, rootMargin: '0px' };
+    let topIn = false, bottomIn = false;
+
+    const io = new IntersectionObserver(entries => {
+      for (const e of entries){
+        if (e.target === topSentinel)   topIn = e.isIntersecting;
+        if (e.target === bottomSentinel) bottomIn = e.isIntersecting;
+      }
+      if (topIn && bottomIn) about.classList.add('is-expanded');
+      else about.classList.remove('is-expanded');
+    }, opts);
+
+    io.observe(topSentinel);
+    io.observe(bottomSentinel);
+  })();
+  </script>
 </body>
 </html>
