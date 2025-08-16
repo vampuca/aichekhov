@@ -3,80 +3,60 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Сериалы — Студия ИИ им. А.П. Чехова</title>
-  <meta name="description" content="Сезон 2025. Сериалы AI-студии им. А.П. Чехова." />
 
-  <!-- тот же шрифт, что и на главной -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Пока смерть не разлучит — Серия 1</title>
+  <meta name="description" content="Пока смерть не разлучит — Серия 1. Триллер-сериал AI-студии им. А.П. Чехова." />
 
-  <!-- общий стиль -->
+  <!-- Canonical -->
+  <link rel="canonical" href="https://aichekhov.ru/assets/series/episode-1.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Пока смерть не разлучит — Серия 1">
+  <meta property="og:description" content="Первый эпизод триллер-сериала студии AI Chekhov.">
+  <meta property="og:url" content="https://aichekhov.ru/assets/series/episode-1.html">
+  <meta property="og:image" content="https://aichekhov.ru/assets/img/episode-1-banner-1200x630.png">
+  <meta property="og:site_name" content="AI Chekhov Studio">
+  <meta property="og:locale" content="ru_RU">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Пока смерть не разлучит — Серия 1">
+  <meta name="twitter:description" content="Первый эпизод триллер-сериала студии AI Chekhov.">
+  <meta name="twitter:image" content="https://aichekhov.ru/assets/img/episode-1-banner-1200x630.png">
+
+  <!-- Стили -->
   <link rel="stylesheet" href="../../style.css?v=49" />
-
-  <!-- превью для мгновенной анимации карточек -->
-  <link rel="preload" as="video" href="./episode-1-preview.mp4" type="video/mp4" />
-  <link rel="preload" as="video" href="./episode-2-preview.mp4" type="video/mp4" />
 </head>
-<body class="series-page" id="top">
-  <!-- верх как на главной -->
+<body id="top">
+
+  <!-- Верх -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
   <nav class="top-nav" aria-label="Навигация">
-    <a href="../../#about">О нас</a>
+    <a href="../index.html">← Сериалы</a>
     <a href="../../#projects">Проекты</a>
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- HERO -->
-  <header class="hero hero--series">
-    <div class="hero-inner">
-      <h1>Сериалы</h1>
-      <p class="subtitle">Сезон 2025</p>
+  <!-- Пустой hero -->
+  <header class="hero hero--series" style="min-height:12vh; padding-top:14vh;"></header>
+
+  <!-- Плеер -->
+  <main class="player-wrap">
+    <div class="player-box">
+      <iframe
+        class="player-frame"
+        src="https://rutube.ru/play/embed/8bcbfe54b5ac393c5ee141355fb3c0f1/?p=jf24_dm5XZqaOPenZcf7Bg"
+        title="Пока смерть не разлучит — Серия 1"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin">
+      </iframe>
     </div>
-  </header>
-
-  <!-- Секция сезона (поднята и с фоном) -->
-  <section class="series-block series-block--lift">
-    <div class="series-frame" style="--bg:url('../../assets/series/background-till-death.jpg')">
-      <div class="series-glass"></div>
-      <div class="series-inner">
-        <header class="series-head">
-          <h2 class="section-title">Пока смерть не разлучит</h2>
-          <p class="section-subtitle">Триллер-сериал.</p>
-        </header>
-
-        <div class="series-grid">
-          <!-- Серия 1 -->
-          <a class="tile tile-video" href="./episode-1.html" aria-label="Серия 1 — смотреть">
-            <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
-              <source src="./episode-1-preview.mp4" type="video/mp4" />
-            </video>
-            <div class="tile-overlay"></div>
-            <div class="tile-title">Серия 1</div>
-            <div class="tile-badge">Смотреть</div>
-          </a>
-
-          <!-- Серия 2 -->
-          <a class="tile tile-video" href="./episode-2.html" aria-label="Серия 2 — в разработке">
-            <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
-              <source src="./episode-2-preview.mp4" type="video/mp4" />
-            </video>
-            <div class="tile-overlay"></div>
-            <div class="tile-title">Серия 2</div>
-            <div class="tile-badge">В разработке</div>
-          </a>
-
-          <!-- Серия 3 -->
-          <div class="tile tile-visual" aria-label="Серия 3 — скоро">
-            <div class="tile-overlay"></div>
-            <div class="tile-title">Серия 3</div>
-            <div class="tile-badge">Скоро</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </main>
 
   <!-- Контакты + футер -->
   <section class="contact-section">
@@ -102,34 +82,62 @@
       <h3>Связаться с нами</h3>
       <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
     </header>
-    <form class="contact-form">
-      <label>Имя <input type="text" name="name" required></label>
-      <label>Email <input type="email" name="email" required></label>
-      <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
+
+    <!-- Готовая форма Formspree -->
+    <form class="contact-form" action="https://formspree.io/f/mwpqzewk" method="POST">
+      <label>Имя
+        <input type="text" name="name" required>
+      </label>
+
+      <label>Email
+        <input type="email" name="email" required>
+      </label>
+
+      <label>Сообщение
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+
+      <input type="hidden" name="_subject" value="Сообщение со страницы aichekhov.ru — Серия 1">
+      <input type="text" name="_gotcha" style="display:none">
+
       <button type="submit" class="contact-submit">Отправить</button>
       <p class="contact-alt">Или напишите: <a class="contact-plain" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
+      <p class="form-status" aria-live="polite" hidden></p>
     </form>
   </aside>
 
+  <!-- Скрипты -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // автозапуск превью на iOS
-    const kick = () => document.querySelectorAll('.tile video').forEach(v => v.play().catch(()=>{}));
-    addEventListener('touchend', kick, { once:true });
-    addEventListener('click',     kick, { once:true });
-
-    // Drawer
     (() => {
       const open = document.getElementById('contactOpen');
       const close = document.getElementById('contactClose');
       const dr = document.getElementById('contactDrawer');
       const scr = document.getElementById('scrim');
       function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
-      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; },200);}
-      open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
-      addEventListener('keydown', e => { if (e.key==='Escape' && !dr.hidden) hide(); });
+      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
+      open.addEventListener('click', show);
+      close.addEventListener('click', hide);
+      scr.addEventListener('click', hide);
+      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
     })();
+
+    // Отправка через Formspree + статус
+    document.querySelectorAll('.contact-form').forEach(form => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const status = form.querySelector('.form-status');
+        const data = new FormData(form);
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          if (res.ok) { status.textContent = 'Спасибо! Сообщение отправлено.'; status.hidden = false; form.reset(); }
+          else { throw new Error('Ошибка отправки.'); }
+        } catch (err) {
+          status.textContent = 'Не получилось отправить. Попробуйте позже или напишите на studio@aichekhov.ru';
+          status.hidden = false;
+        }
+      });
+    });
   </script>
 </body>
 </html>
