@@ -319,3 +319,25 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   /* Константный сдвиг: вид не меняется от ширины экрана */
   .about-video{ margin-top: calc(var(--about-section-shift) + 1cm) !important; }
 }
+/* === МОБИЛЬНЫЙ ПОРТРЕТ: укорачиваем нижний край hero === */
+@media (max-width: 900px) and (orientation: portrait){
+  /* Главная */
+  .hero{
+    /* был небольшой зазор; делаем ещё короче низ */
+    padding-bottom: clamp(0px, 0.2svh, 4px) !important;
+  }
+
+  /* Сериалы */
+  .hero--series{
+    padding-bottom: clamp(0px, 0.3svh, 6px) !important;
+  }
+}
+/* СЕРИАЛЫ — ДЕСКТОП: выровнять плитки по левому краю заголовка */
+@media (min-width: 981px){
+  /* заголовок и сетка живут внутри одного контейнера .series-inner с паддингом 24px.
+     Убираем центрирование сетки и прижимаем к левому полю контейнера. */
+  .series-grid{
+    max-width: none !important;
+    margin: 14px 0 0 !important;  /* было 14px auto 0; убираем auto */
+  }
+}
