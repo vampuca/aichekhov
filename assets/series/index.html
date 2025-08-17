@@ -3,15 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Сериалы — Студия ИИ им. А.П. Чехова</title>
-  <meta name="description" content="Сериалы AI-студии им. А.П. Чехова. Сезон 2025." />
-  <link rel="stylesheet" href="../../style.css?v=49" />
+  <title>Сериалы — AI-студия им. А.П. Чехова</title>
+  <meta name="description" content="Сезон 2025. «Пока смерть не разлучит» и другие проекты AI-студии им. А.П. Чехова." />
+  <link rel="stylesheet" href="../../style.css?v=58" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#000000">
+
+  <meta property="og:site_name" content="Студия ИИ им. А.П. Чехова">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Сериалы — AI-студия им. А.П. Чехова">
+  <meta property="og:description" content="Сезон 2025. «Пока смерть не разлучит» и другие проекты.">
+  <meta property="og:image" content="/assets/series/background-till-death.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body id="top">
   <!-- Верх -->
-  <a class="brand" href="../../#top" aria-label="На начало">
+  <a class="brand" href="../../#top" aria-label="На главную">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
   <nav class="top-nav" aria-label="Навигация">
@@ -28,41 +39,33 @@
     </div>
   </header>
 
-  <!-- Секция: Пока смерть не разлучит -->
-<section class="series-block series-block--lift no-series-bg" id="till-death">
-  <div class="series-frame" style="--bg:url('./background-till-death.jpg')">
-    <div class="series-glass"></div>
-    <div class="series-inner">
-      <header class="series-head">
-        <h2 class="section-title">Пока смерть не разлучит</h2>
-        <p class="section-subtitle">Триллер-сериал. Новые эпизоды по мере готовности.</p>
-      </header>
-      <!-- … плашки … -->
-    </div>
-  </div>
-</section>
+  <!-- Секция сезона -->
+  <section class="series-block series-block--lift" id="till-death">
+    <div class="series-frame" style="--bg:url('./background-till-death.jpg')">
+      <div class="series-glass"></div>
+      <div class="series-inner">
+        <header class="series-head">
+          <h2 class="section-title">Пока смерть не разлучит</h2>
+          <p class="section-subtitle">Триллер-сериал</p>
+        </header>
 
         <div class="series-grid">
           <!-- Серия 1 -->
           <a class="tile tile-video" href="./episode-1.html" aria-label="Серия 1 — смотреть">
-            <div class="tile-visual">
-              <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
-                <source src="./episode-1-preview.mp4" type="video/mp4">
-              </video>
-              <div class="tile-overlay"></div>
-            </div>
+            <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
+              <source src="./episode-1-preview.mp4" type="video/mp4">
+            </video>
+            <div class="tile-overlay"></div>
             <div class="tile-title">Серия 1</div>
             <div class="tile-badge">Смотреть</div>
           </a>
 
           <!-- Серия 2 -->
           <div class="tile tile-video" aria-label="Серия 2 — в разработке">
-            <div class="tile-visual">
-              <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
-                <source src="./episode-2-preview.mp4" type="video/mp4">
-              </video>
-              <div class="tile-overlay"></div>
-            </div>
+            <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
+              <source src="./episode-2-preview.mp4" type="video/mp4">
+            </video>
+            <div class="tile-overlay"></div>
             <div class="tile-title">Серия 2</div>
             <div class="tile-badge">В разработке</div>
           </div>
@@ -102,24 +105,48 @@
       <h3>Связаться с нами</h3>
       <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
     </header>
-    <form class="contact-form" action="https://formspree.io/f/mwpqzewk" method="POST">
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/mwpqzewk" method="POST">
       <label>Имя <input type="text" name="name" required></label>
       <label>Email <input type="email" name="email" required></label>
       <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
       <button type="submit" class="contact-submit">Отправить</button>
       <p class="contact-alt">Или напишите: <a class="contact-plain" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
+      <p id="contactStatus" class="contact-status" role="status" aria-live="polite"></p>
     </form>
   </aside>
 
   <script>
-    // год в подвале
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // открытие/закрытие формы «Пишите нам»
-    (()=>{const o=document.getElementById('contactOpen'),c=document.getElementById('contactClose'),d=document.getElementById('contactDrawer'),s=document.getElementById('scrim');
-      function sh(){d.hidden=false;s.hidden=false;requestAnimationFrame(()=>{d.classList.add('is-open');s.classList.add('is-visible');document.body.style.overflow='hidden'})}
-      function hi(){d.classList.remove('is-open');s.classList.remove('is-visible');document.body.style.overflow='';setTimeout(()=>{d.hidden=true;s.hidden=true},200)}
-      o.addEventListener('click',sh); c.addEventListener('click',hi); s.addEventListener('click',hi); addEventListener('keydown',e=>{if(e.key==='Escape'&&!d.hidden)hi()})})();
+    // iOS autoplay kick
+    const kick=()=>document.querySelectorAll('video').forEach(v=>v.play().catch(()=>{}));
+    addEventListener('touchend',kick,{once:true}); addEventListener('click',kick,{once:true});
+
+    // Drawer + отправка формы без редиректа
+    (()=> {
+      const open = document.getElementById('contactOpen');
+      const closeBtn = document.getElementById('contactClose');
+      const dr = document.getElementById('contactDrawer');
+      const scr = document.getElementById('scrim');
+      function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
+      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
+      open.addEventListener('click', show); closeBtn.addEventListener('click', hide); scr.addEventListener('click', hide);
+
+      const form = document.getElementById('contactForm');
+      const status = document.getElementById('contactStatus');
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        status.textContent = 'Отправляем…';
+        try{
+          const resp = await fetch(form.action, { method:'POST', body:new FormData(form), headers:{'Accept':'application/json'} });
+          if(resp.ok){ form.reset(); status.textContent='Спасибо! Сообщение отправлено.'; setTimeout(()=>{ status.textContent=''; hide(); }, 1200); }
+          else{
+            const data = await resp.json().catch(()=> ({}));
+            status.textContent = data.errors?.[0]?.message || 'Не удалось отправить. Попробуйте ещё раз.';
+          }
+        }catch{ status.textContent='Сеть недоступна. Повторите позже.'; }
+      });
+    })();
   </script>
 </body>
 </html>
