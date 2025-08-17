@@ -274,3 +274,12 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
     padding: 0 14px;
   }
 }
+/* СЕРИАЛЫ (десктоп): плитки строго по полю заголовка */
+@media (min-width: 981px){
+    .series-grid{
+      width: 100%;
+      max-width: none !important;   /* убираем центрирующий контейнер */
+      margin: 14px 0 0 !important;  /* левый край = паддинг родителя (.series-inner, 24px) */
+    }
+  }
+  
