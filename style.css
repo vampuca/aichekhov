@@ -343,3 +343,26 @@
     margin-top: clamp(10px, 2svh, 24px) !important;
   }
 }
+/* === MOBILE: только нужные правки =============================== */
+
+/* 1) ГЛАВНАЯ → мобильная ГОРИЗОНТАЛЬ: опустить секцию «О нас»,
+   чтобы не наезжала на hero */
+   @media (max-width: 900px) and (orientation: landscape){
+    .about-video{
+      /* зазор от hero ~1.5–2 см — можно подстроить, если нужно */
+      margin-top: clamp(12px, 2.2svh, 30px) !important;
+    }
+  }
+  
+  /* 2) УБРАТЬ системные "play"-иконки у превью-видео на плитках
+     (и главная, и /series). Видео НЕ прячем, просто скрываем оверлей. */
+  @media (max-width: 900px){
+    .tile video::-webkit-media-controls,
+    .tile video::-webkit-media-controls-enclosure,
+    .tile video::-webkit-media-controls-panel,
+    .tile video::-webkit-media-controls-start-playback-button,
+    .tile video::-webkit-media-controls-overlay-play-button{
+      display: none !important;
+    }
+  }
+  
