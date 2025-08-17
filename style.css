@@ -319,4 +319,25 @@
     /* Константный сдвиг: вид не меняется от ширины экрана */
     .about-video{ margin-top: calc(var(--about-section-shift) + 1cm) !important; }
   }
-  
+  /* === MOBILE PORTRAIT: ровно по задаче === */
+@media (max-width: 900px) and (orientation: portrait){
+
+  /* Главная: сделать низ hero короче и подтянуть секцию «О нас» ещё на ~3см */
+  .hero{
+    padding-bottom: clamp(0px, 0.4svh, 6px) !important;
+  }
+  .about-video{
+    /* базовую мобильную подтяжку оставляем и добавляем -3см */
+    margin-top: calc( clamp(-22px, -2.8svh, -12px) - 3cm ) !important;
+  }
+
+  /* Сериалы: подтянуть плитки ещё на ~2см к hero */
+  .series-block.series-block--lift > .series-frame{
+    margin-top: calc( clamp(-92px, -10svh, -64px) - 2cm ) !important;
+  }
+
+  /* Спрятать «play» у видео-превью на мобилках */
+  .tile video{ pointer-events:none; -webkit-appearance:none; appearance:none; }
+  .tile video::-webkit-media-controls,
+  .tile video::-webkit-media-controls-enclosure{ display:none !important; }
+}
