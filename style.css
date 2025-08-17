@@ -321,13 +321,6 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   .top-nav a{ font-size:10px !important; padding:4px 6px !important; border-radius:7px !important }
   .contact-fixed{ padding:5px 8px !important; font-size:10.5px !important }
 }
-/* ===== DESKTOP-ТОЛЬКО ТОЧЕЧНЫЕ ПРАВКИ ===== */
-@media (min-width: 981px){
-  /* 1) ГЛАВНАЯ: опустить «О нас» на ~2см */
-  /* 2см ≈ 76px. Добавляем к текущему сдвигу вверх (делаем его менее отрицательным) */
-  .about-video{
-    margin-top: calc(var(--about-section-shift) + 76px) !important;
-  }
 
   /* 2) СЕРИАЛЫ: плитки немного крупнее и ровно по началу заголовка */
   /* убираем искусственное центрирование и ограничение ширины сетки */
