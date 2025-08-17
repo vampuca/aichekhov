@@ -336,8 +336,10 @@
     margin-top: calc( clamp(-92px, -10svh, -64px) - 2cm ) !important;
   }
 
-  /* Спрятать «play» у видео-превью на мобилках */
-  .tile video{ pointer-events:none; -webkit-appearance:none; appearance:none; }
-  .tile video::-webkit-media-controls,
-  .tile video::-webkit-media-controls-enclosure{ display:none !important; }
+  /* === МОБИЛЬНАЯ ГОРИЗОНТАЛЬ: главная — опустить секцию «О нас» === */
+@media (max-width: 900px) and (orientation: landscape){
+  .about-video{
+    /* делаем небольшой зазор от hero, ~1.6–2 см — подбери при желании */
+    margin-top: clamp(10px, 2svh, 24px) !important;
+  }
 }
