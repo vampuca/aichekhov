@@ -341,3 +341,54 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
     margin: 14px 0 0 !important;  /* было 14px auto 0; убираем auto */
   }
 }
+/* ===== MOBILE SPACING FIX (portrait/landscape) ===== */
+
+/* Портрет: короче hero и почти без зазора до следующей секции */
+@media (max-width: 767px) and (orientation: portrait) {
+  /* сам hero делаем компактнее снизу */
+  .hero {
+    min-height: 64vh;         /* было больше — отсюда «чёрная пустота» */
+    padding-bottom: 4vh;       /* меньше «подвала» у hero */
+  }
+
+  /* первый блок после hero — почти вплотную */
+  .hero + * {
+    margin-top: 8px !important;
+  }
+
+  /* секция «О нас»: чуть компактнее поля внутри */
+  .about-video {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  /* на всякий случай выравнивание текста по центру в мобиле */
+  .about-video .about-content {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Горизонталь: добавим небольшой зазор, чтобы «О нас» не наезжал на заголовок hero */
+@media (max-width: 900px) and (orientation: landscape) {
+  .hero {
+    min-height: 60vh;       /* короче, чтобы не толкал вниз всё остальное */
+    padding-bottom: 6vh;     /* небольшой «подвал» */
+  }
+  .hero + * {
+    margin-top: 24px !important;  /* фикс-зазор под героем */
+  }
+}
+
+/* СТРАНИЦА СЕРИАЛОВ: портрет — убрать лишний зазор под героем */
+@media (max-width: 767px) and (orientation: portrait) {
+  /* как бы ни назывался первый контейнер после hero, притягиваем его к герою */
+  .hero + .series-section,
+  .hero + .series-block,
+  .hero + .series-frame,
+  .hero + .series-wrap,
+  .hero + section {
+    margin-top: 10px !important;
+  }
+}
