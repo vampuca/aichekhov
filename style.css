@@ -392,3 +392,39 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
     margin-top: 10px !important;
   }
 }
+/* ==== MOBILE PORTRAIT — fix gaps under hero on home + series ==== */
+@media (max-width: 767px) and (orientation: portrait) {
+  /* Главная: короче сам hero и почти без зазора до следующего блока */
+  .hero {
+    min-height: 56vh;       /* было выше — давало «чёрную пустоту» */
+    padding-bottom: 2vh;    /* уменьшили «подвал» hero */
+  }
+
+  /* Убрать любые внешние отступы у первого блока после hero */
+  .hero + * { margin-top: 6px !important; }
+
+  /* Точно прицельно: секция «О нас» сразу под hero */
+  .hero + .about-video { margin-top: 0 !important; }
+  .about-video { padding-top: 20px; padding-bottom: 20px; } /* компактные внутренние поля */
+
+  /* СЕРИАЛЫ: тянем плитки ближе к hero независимо от названия оболочки */
+  .hero + .series-section,
+  .hero + .series-block,
+  .hero + .series-frame,
+  .hero + .series-wrap,
+  .hero + .series,
+  .hero + .container,
+  .hero + section {
+    margin-top: 8px !important;
+    padding-top: 0 !important;
+  }
+
+  /* На случай если зазор сидит прямо на сетке плиток */
+  .series-grid,
+  .series-list,
+  .series-cards,
+  .series-tiles {
+    margin-top: 8px !important;
+    padding-top: 0 !important;
+  }
+}
