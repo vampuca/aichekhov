@@ -17,7 +17,7 @@
   --radius: 24px;
   --shadow: 0 6px 24px rgba(0,0,0,.35);
 
-  --about-section-shift: -75px;   /* базовая подтяжка секции О нас */
+  --about-section-shift: -75px;   /* базовая подтяжка секции О нас (дальше ещё усилим) */
   --about-text-offset: 37px;
 }
 
@@ -79,7 +79,9 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 /* ===== О нас + видео ===== */
 .about-video{
   position:relative; margin:0 3vw; min-height:100vh; --video-radius:28px;
-  margin-top: var(--about-section-shift);
+  /* РАНЬШЕ: margin-top: var(--about-section-shift); */
+  /* ПОДНЯТЬ на ~4 см: */
+  margin-top: calc(var(--about-section-shift) - 4cm);
   border-radius: var(--video-radius);
   overflow: hidden;
   contain: paint; isolation: isolate;
@@ -132,11 +134,7 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 }
 .tile-video .tile-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(105%) }
 .tile-visual .tile-bg-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }
-.tile-overlay{
-  position:absolute; inset:0;
-  background: none !important; /* overlay снят везде на плашках */
-  pointer-events:none;
-}
+.tile-overlay{ position:absolute; inset:0; background:none !important; pointer-events:none; }
 .tile-title{
   position:absolute; left:14px; right:14px; bottom:42px;
   font-weight:600; font-size:clamp(16px,2.2vw,22px); color:#ededed;
@@ -154,10 +152,7 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 }
 
 /* ===== Контакты / футер ===== */
-.contact-section{
-  display:flex; flex-direction:column; align-items:center; text-align:center;
-  margin-top:6vh; /* унифицировали отступ везде */
-}
+.contact-section{ display:flex; flex-direction:column; align-items:center; text-align:center; margin-top:6vh }
 .contact{
   max-width:900px; background:rgba(0,0,0,.35); backdrop-filter:saturate(120%) blur(2px);
   padding:.85rem 1rem; border-radius:12px; border:1px solid rgba(255,255,255,.08);
@@ -192,33 +187,36 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 .hero--series{
   min-height:64vh;
   padding-top:clamp(140px,18vh,210px);
-  padding-bottom:clamp(6px,2vh,32px);
+  /* при необходимости укорачиваем низ hero — немного */
+  padding-bottom:clamp(2px,1.2vh,24px);
 }
-.series-block.series-block--lift .series-frame{ margin-top:-120px; }
+
+/* РАНЬШЕ: -120/-128/-72px. ПОДНЯТЬ ещё на ~3см */
+.series-block.series-block--lift .series-frame{ margin-top: calc(-120px - 3cm); }
 @media (min-width:981px){
-  /* десктоп: ещё ближе к hero */
-  .series-block.series-block--lift .series-frame{ margin-top:-128px; }
+  .series-block.series-block--lift .series-frame{ margin-top: calc(-128px - 3cm); }
 }
 @media (max-width:980px){
-  .series-block.series-block--lift .series-frame{ margin-top:-72px; }
+  .series-block.series-block--lift .series-frame{ margin-top: calc(-72px - 3cm); }
 }
+
 .series-frame{
   position:relative; width:min(1280px,94vw); margin:0 auto; border-radius:24px;
   background: var(--bg, transparent) center/cover no-repeat; overflow:hidden;
 }
-/* стекло отключено */
 .series-glass{ display:none !important; }
-.series-inner{ position:relative; padding: 22px 24px 32px; } /* чуть компактнее вертикальные поля */
+.series-inner{ position:relative; padding: 22px 24px 32px; }
 .series-head .section-title{ font-weight:600; color:#ececec; font-size:clamp(28px,4.6vw,52px); margin:6px 0 8px }
 .series-head .section-subtitle{ font-weight:600; color:var(--subtitle) }
 
-/* сузить сетку плашек на десктопе, чтобы выравнять с заголовком */
+/* немного сузить сетку плашек на десктопе */
 @media (min-width: 981px){
   .series-grid{ max-width: 1100px; margin: 14px auto 0; }
 }
 .series-grid{ margin-top:14px; display:grid; grid-template-columns:repeat(3,1fr); gap:18px }
 @media (max-width:980px){ .series-grid{ grid-template-columns:1fr } }
 .series-grid .tile{ min-height:240px }
+.series-grid .tile .tile-overlay{ background:none !important; }
 
 /* ===== СТРАНИЦА серии (плеер) ===== */
 .player-wrap{
@@ -237,9 +235,8 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 /* === MOBILE ========================================================== */
 /* ===================================================================== */
 
-/* ПОРТРЕТ (главная): плитки В СТОЛБИК, короче низ hero и компактнее верх О нас */
+/* ПОРТРЕТ (главная): плитки столбиком; низ hero короче; О нас ближе */
 @media (max-width: 900px) and (orientation: portrait){
-  /* масштаб шапки (жёстко, чтобы точно сработало) */
   .brand img{ width:86px !important }
   .top-nav{ gap:10px !important; top:24px !important }
   .top-nav a{ font-size:11.5px !important; padding:6px 8px !important; border-radius:8px !important }
@@ -247,19 +244,18 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 
   .hero{ padding-bottom: clamp(0px, 0.6svh, 8px) !important; }
 
-  /* секция О нас — ближе к hero и ниже верхняя кромка на ~1.5см */
+  /* RAISE О нас ещё на ~4см: */
   .about-video{
     min-height: 62svh !important;
-    margin-top: clamp(-22px, -2.8svh, -12px) !important; /* ЧУТЬ меньше «нахлёст» */
+    margin-top: calc(clamp(-22px, -2.8svh, -12px) - 4cm) !important;
     display:grid; place-items:center;
   }
   .about-content{
     min-height: auto !important;
     align-self:center; justify-self:center;
-    padding-top: clamp(12svh, 16svh, 18svh) !important; /* вертикально центрируем текстовый блок */
+    padding-top: clamp(12svh, 16svh, 18svh) !important;
   }
 
-  /* Главная: портфолио в столбик */
   .portfolio{ grid-template-columns: 1fr !important; }
 }
 
@@ -280,7 +276,7 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
   .tile{ min-height: auto; height: clamp(180px, 42vw, 260px); }
 }
 
-/* «О нас» — выравнивание текста на мобилках для надёжности */
+/* «О нас» — надёжное центрирование текста на мобилках */
 @media (max-width: 900px){
   .about-video{ display:grid; place-items:center; }
   .about-content{ margin:0 auto !important; text-align:center; }
@@ -295,11 +291,12 @@ body.is-scrolled .top-nav a{ background:rgba(8,8,8,.30); border-color:rgba(255,2
 /* СЕРИАЛЫ: моб. портрет — ближе к hero и воздух ниже */
 @media (max-width: 900px) and (orientation: portrait){
   .hero--series{ padding-bottom: clamp(2px, 0.8svh, 10px) !important; }
+  /* РАНЬШЕ: clamp(-92px,-10svh,-64px); ПОДНЯТЬ ещё на ~3см */
   .series-block.series-block--lift > .series-frame{
-    margin-top: clamp(-92px, -10svh, -64px) !important;  /* сильнее подтянули */
+    margin-top: calc(clamp(-92px, -10svh, -64px) - 3cm) !important;
   }
   .series-block + .contact-section{
-    margin-top: clamp(24px, 4.5svh, 40px) !important;   /* унифицированный отступ перед email-блоком */
+    margin-top: clamp(24px, 4.5svh, 40px) !important;
   }
 }
 
