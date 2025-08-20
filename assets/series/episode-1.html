@@ -3,56 +3,62 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Пока смерть не разлучит — Серия 1</title>
-  <meta name="description" content="Пока смерть не разлучит — Серия 1. Триллер-сериал AI-студии им. А.П. Чехова." />
-  <link rel="stylesheet" href="../../style.css?v=50" />
-  <style>
-    /* Мини-стили только для «ворот» с паролем */
-    .gate{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999}
-    .gate-card{width:min(92vw,480px);background:rgba(255,255,255,.06);backdrop-filter:saturate(120%) blur(8px);
-      border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:24px 22px 20px;color:#fff}
-    .gate-card h2{margin:0 0 8px;font:600 22px/1.25 "Hanken Grotesk",system-ui, -apple-system, Segoe UI, Roboto, Arial}
-    .gate-note{margin:0 0 14px;color:#bdbdbd;font:500 14px/1.4 "Hanken Grotesk",system-ui}
-    .gate-form{display:flex;gap:10px}
-    .gate-input{flex:1;min-width:0;border-radius:12px;border:1px solid rgba(255,255,255,.18);
-      background:#0f0f10;color:#fff;padding:12px 14px;font:500 16px/1.2 "Hanken Grotesk",system-ui}
-    .gate-btn{border-radius:12px;border:1px solid rgba(255,255,255,.3);background:#151517;color:#fff;
-      padding:12px 16px;font:600 16px/1 "Hanken Grotesk",system-ui;cursor:pointer}
-    .gate-btn:active{transform:translateY(1px)}
-    .gate-error{margin:10px 2px 0;color:#ff8080;font:600 13px/1.3 "Hanken Grotesk",system-ui}
-    .player-wrap[hidden]{display:none}
-  </style>
-</head>
-<body id="top" class="page-player is-scrolled">
 
-  <!-- Верх (как на главной) -->
+  <title>Пока смерть не разлучит — Серия 1</title>
+  <meta name="description" content="Пока смерть не разлучит — Серия 1. Мистический сериал AI-студии им. А.П. Чехова." />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://aichekhov.ru/assets/series/episode-1.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Пока смерть не разлучит — Серия 1">
+  <meta property="og:description" content="Первая серия мистического сериала AI-студии им. А.П. Чехова.">
+  <meta property="og:url" content="https://aichekhov.ru/assets/series/episode-1.html">
+  <meta property="og:image" content="https://aichekhov.ru/assets/img/episode-1-banner-1200x630.png">
+  <meta property="og:site_name" content="AI-студии им. А.П. Чехова">
+  <meta property="og:locale" content="ru_RU">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Пока смерть не разлучит — Серия 1">
+  <meta name="twitter:description" content="Первая серия мистического сериала AI-студии им. А.П. Чехова.">
+  <meta name="twitter:image" content="https://aichekhov.ru/assets/img/episode-1-banner-1200x630.png">
+
+  <!-- Стили -->
+  <link rel="stylesheet" href="../../style.css?v=49" />
+</head>
+<body id="top">
+
+  <!-- Верх -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
   <nav class="top-nav" aria-label="Навигация">
-    <a href="../series/">← Сериалы</a>
+    <a href="index.html">← Сериалы</a>
     <a href="../../#projects">Проекты</a>
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- Пустой hero — оставляем пространство головы как на остальных -->
+  <!-- Пустой hero -->
   <header class="hero hero--series" style="min-height:12vh; padding-top:14vh;"></header>
 
-  <!-- Плеер (скрыт, пока не введён пароль) -->
-  <main class="player-wrap" hidden>
+  <!-- Плеер -->
+  <main class="player-wrap">
     <div class="player-box">
       <iframe
         class="player-frame"
-        src="https://rutube.ru/play/embed/8bcbfe54b5ac393c5ee141355fb3c0f1?p=jf24_dm5XZqaOPenZcf7Bg"
+        src="https://rutube.ru/play/embed/8bcbfe54b5ac393c5ee141355fb3c0f1/?p=jf24_dm5XZqaOPenZcf7Bg"
         title="Пока смерть не разлучит — Серия 1"
         allow="autoplay; fullscreen; picture-in-picture"
         allowfullscreen
         loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        referrerpolicy="strict-origin-when-cross-origin">
+      </iframe>
     </div>
   </main>
 
-  <!-- Контакты + футер (как на главной) -->
+  <!-- Контакты + футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -64,6 +70,7 @@
       </a>
     </div>
   </section>
+
   <footer class="site-footer">
     <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
   </footer>
@@ -75,34 +82,33 @@
       <h3>Связаться с нами</h3>
       <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
     </header>
-    <form class="contact-form" id="contactForm" action="https://formspree.io/f/mwpqzewk" method="POST">
-      <label>Имя <input type="text" name="name" required></label>
-      <label>Email <input type="email" name="email" required></label>
-      <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
+
+    <!-- Готовая форма Formspree -->
+    <form class="contact-form" action="https://formspree.io/f/mwpqzewk" method="POST">
+      <label>Имя
+        <input type="text" name="name" required>
+      </label>
+
+      <label>Email
+        <input type="email" name="email" required>
+      </label>
+
+      <label>Сообщение
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+
+      <input type="hidden" name="_subject" value="Сообщение со страницы aichekhov.ru — Серия 1">
+      <input type="text" name="_gotcha" style="display:none">
+
       <button type="submit" class="contact-submit">Отправить</button>
       <p class="contact-alt">Или напишите: <a class="contact-plain" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
-      <p id="contactStatus" class="contact-status" role="status" aria-live="polite"></p>
+      <p class="form-status" aria-live="polite" hidden></p>
     </form>
   </aside>
 
-  <!-- Ворота по паролю -->
-  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
-    <div class="gate-card">
-      <h2 id="gateTitle">Доступ по паролю</h2>
-      <p class="gate-note">Введите пароль, чтобы смотреть серию.</p>
-      <form class="gate-form" id="gateForm">
-        <input class="gate-input" id="gateInput" type="password" placeholder="Пароль" autocomplete="current-password" required />
-        <button class="gate-btn" type="submit">Открыть</button>
-      </form>
-      <p id="gateError" class="gate-error" aria-live="polite"></p>
-    </div>
-  </div>
-
+  <!-- Скрипты -->
   <script>
-    // Год в футере
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Открывашка контактов (как на главной)
     (() => {
       const open = document.getElementById('contactOpen');
       const close = document.getElementById('contactClose');
@@ -110,71 +116,35 @@
       const scr = document.getElementById('scrim');
       function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
       function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
-      open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
+      open.addEventListener('click', show);
+      close.addEventListener('click', hide);
+      scr.addEventListener('click', hide);
       addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
     })();
 
-    // === Ворота пароля ======================================================
-    // Пароль: 2128506
-    // SHA-256(2128506) = 01c2c72c976d670ad956ae30f5ca099947b987e3a4c24a4427ca804b6a1e9bef
-    const PASSWORD_HASH = "01c2c72c976d670ad956ae30f5ca099947b987e3a4c24a4427ca804b6a1e9bef";
-    const STORAGE_KEY   = "ep1_unlocked_v2";
-
-    const gate  = document.getElementById('gate');
-    const form  = document.getElementById('gateForm');
-    const input = document.getElementById('gateInput');
-    const error = document.getElementById('gateError');
-    const playerWrap = document.querySelector('.player-wrap');
-
-    // уже вводили ранее — не спрашиваем снова
-    if (localStorage.getItem(STORAGE_KEY) === '1') unlock();
-
-    input.focus();
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      error.textContent = '';
-      const ok = await checkPassword(input.value.trim());
-      if (ok) {
-        unlock();
-      } else {
-        error.textContent = 'Неверный пароль.';
-        input.select();
-      }
-    });
-
-    async function checkPassword(pass){
-      if (!pass) return false;
-      const enc = new TextEncoder().encode(pass);
-      const buf = await crypto.subtle.digest('SHA-256', enc);
-      const hex = [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,'0')).join('');
-      return hex === PASSWORD_HASH;
-    }
-
-    function unlock(){
-      localStorage.setItem(STORAGE_KEY, '1');
-      gate.remove();
-      playerWrap.hidden = false;
-      // фокус на плеер
-      const iframe = document.querySelector('.player-frame');
-      iframe?.focus?.();
-    }
-    // =======================================================================
-
-    // Отправка формы в Formspree без редиректа
-    (() => {
-      const f = document.getElementById('contactForm');
-      const s = document.getElementById('contactStatus');
-      if (!f) return;
-      f.addEventListener('submit', async (e)=>{
-        e.preventDefault(); s.textContent = 'Отправляем…';
-        try{
-          const r = await fetch(f.action, { method:'POST', body:new FormData(f), headers:{'Accept':'application/json'} });
-          if (r.ok){ f.reset(); s.textContent='Сообщение отправлено. Спасибо!'; setTimeout(()=>s.textContent='', 1500); }
-          else { const d = await r.json().catch(()=>({})); s.textContent = d.errors?.[0]?.message || 'Не получилось отправить.'; }
-        }catch{ s.textContent='Сеть недоступна. Повторите позже.'; }
+    // Отправка через Formspree + статус
+    document.querySelectorAll('.contact-form').forEach(form => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const status = form.querySelector('.form-status');
+        const data = new FormData(form);
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          if (res.ok) { status.textContent = 'Спасибо! Сообщение отправлено.'; status.hidden = false; form.reset(); }
+          else { throw new Error('Ошибка отправки.'); }
+        } catch (err) {
+          status.textContent = 'Не получилось отправить. Попробуйте позже или напишите на studio@aichekhov.ru';
+          status.hidden = false;
+        }
       });
-    })();
+    });
   </script>
+  
+    // Сделать шапку «как после скролла» сразу
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('is-scrolled');
+    });
+  </script>
+  
 </body>
 </html>
