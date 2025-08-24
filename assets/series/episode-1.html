@@ -5,11 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Пока смерть не разлучит — Серия 1</title>
   <meta name="description" content="Пока смерть не разлучит — Серия 1. Триллер-сериал AI-студии им. А.П. Чехова." />
-  <link rel="stylesheet" href="../../style.css?v=72" />
-</head>
-<body id="top" class="page-player is-scrolled">
+  <link rel="stylesheet" href="../../style.css?v=51" />
+  <style>
+    /* -------- Локальные правки именно для страницы серии -------- */
+    .hero--episode{
+      /* Компактный hero, но ниже, чтобы не касался логотипа/меню */
+      min-height: 8vh;
+      padding-top: 16.5vh;   /* было ~14vh → опустили */
+      padding-bottom: 0;
+    }
+    .hero--episode .hero-inner{max-width:1100px; margin-inline:auto;}
+    .hero--episode h1{
+      font-weight:300;       /* был 600 → полегче */
+      letter-spacing:0;
+      margin:0 0 6px;
+      font-size:clamp(26px, 4.6vw, 64px);
+    }
+    .hero--episode .ep-sub{
+      margin:0 0 8px;
+      color:#bdbdbd;
+      font-size:clamp(13px, 1.8vw, 18px);
+      font-weight:500;
+    }
+    /* Плеер ближе к hero */
+    .player-wrap{ margin-top:14px; }
 
-  <!-- Верх (как на главной) -->
+    /* Мобильные уточнения */
+    @media (max-width: 880px){
+      .hero--episode{
+        padding-top: 18vh;   /* на мобильных верх выше — запас под логотип/кнопки */
+        min-height:6vh;
+      }
+      .hero--episode h1{
+        font-size:clamp(24px, 6vw, 38px);
+        margin-bottom:4px;
+        font-weight:300;     /* фиксируем более лёгкий вес и здесь */
+      }
+      .hero--episode .ep-sub{
+        font-size:clamp(12px, 3.2vw, 15px);
+        margin-bottom:6px;
+      }
+      .player-wrap{ margin-top:10px; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- Верх как на главной -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
@@ -19,8 +61,13 @@
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <!-- Пустой hero — распределяем отступы как на остальных страницах -->
-  <header class="hero hero--series" style="min-height:12vh; padding-top:14vh;"></header>
+  <!-- Компактный HERO -->
+  <header class="hero hero--episode">
+    <div class="hero-inner">
+      <h1>Пока смерть не разлучит</h1>
+      <p class="ep-sub">1 серия</p>
+    </div>
+  </header>
 
   <!-- Плеер -->
   <main class="player-wrap">
@@ -36,7 +83,7 @@
     </div>
   </main>
 
-  <!-- Контакты -->
+  <!-- Контакты + футер -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -48,7 +95,6 @@
       </a>
     </div>
   </section>
-
   <footer class="site-footer">
     <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
   </footer>
@@ -70,12 +116,11 @@
     </form>
   </aside>
 
-  <!-- Скрипты -->
   <script>
-    // Год в футере
+    // год в футере
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Открывашка контактов (как на главной)
+    // Drawer + отправка в Formspree без редиректа
     (() => {
       const open = document.getElementById('contactOpen');
       const close = document.getElementById('contactClose');
@@ -85,13 +130,9 @@
       function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
       open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
       addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
-    })();
 
-    // Formspree — отправка без редиректа
-    (() => {
       const f = document.getElementById('contactForm');
       const s = document.getElementById('contactStatus');
-      if (!f) return;
       f.addEventListener('submit', async (e)=>{
         e.preventDefault(); s.textContent = 'Отправляем…';
         try{
