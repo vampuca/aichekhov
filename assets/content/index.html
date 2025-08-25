@@ -9,57 +9,44 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    .hero--contentIndex{
-      min-height: 18vh; padding-top: 16.5vh; padding-bottom: 0;
-    }
+    .hero--contentIndex{ min-height:18vh; padding-top:16.5vh; padding-bottom:0; }
     .hero--contentIndex .hero-inner{ max-width:1100px; margin-inline:auto; }
-    .hero--contentIndex h1{
-      font-weight:300; margin:0 0 6px;
-      font-size:clamp(28px, 5.2vw, 72px);
-    }
-    .hero--contentIndex .sub{
-      margin:0 0 8px; color:#bdbdbd;
-      font-size:clamp(13px, 1.8vw, 18px); font-weight:500;
-    }
+    .hero--contentIndex h1{ font-weight:300; margin:0 0 6px; font-size:clamp(28px,5.2vw,72px); }
+    .hero--contentIndex .sub{ margin:0 0 8px; color:#bdbdbd; font-size:clamp(13px,1.8vw,18px); font-weight:500; }
 
     .content-grid{
-      display:grid; grid-template-columns: repeat(3, minmax(0,1fr));
+      display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
       gap:20px; max-width:1200px; margin:16px auto 4rem; padding:0 16px;
     }
-    @media (max-width:1024px){ .content-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width:1024px){ .content-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:640px){ .content-grid{ grid-template-columns:1fr; gap:16px; margin:12px auto 3.5rem; } }
 
-    .content-grid .tile{
-      position:relative; overflow:hidden; border-radius:16px;
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 8px 30px rgba(0,0,0,.35);
-      background:#111; min-height:220px;
-    }
+    .content-grid .tile{ position:relative; overflow:hidden; border-radius:16px;
+      border:1px solid rgba(255,255,255,.08); box-shadow:0 8px 30px rgba(0,0,0,.35);
+      background:#111; min-height:220px; }
     .content-grid .tile-video .tile-bg,
-    .content-grid .tile-visual .tile-bg-img{
-      position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; display:block;
-    }
+    .content-grid .tile-visual .tile-bg-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
     .content-grid .tile .tile-overlay{ background:none; }
     .content-grid .tile .tile-title{ left:14px; right:14px; bottom:42px; }
     .content-grid .tile .tile-badge{ left:14px; bottom:10px; }
 
-    @media (max-width:767px) and (orientation: portrait){
-      .hero + .section-content{ margin-top: 8px !important; }
+    @media (max-width:767px) and (orientation:portrait){
+      .hero + .section-content{ margin-top:8px !important; }
     }
   </style>
 </head>
 <body class="page-content" id="top">
-
+  <!-- ЛОГО + НАВИГАЦИЯ -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
   <nav class="top-nav" aria-label="Навигация">
-    <a href="../../#projects">← Проекты</a>
-    <a href="../series/">Сериалы</a>
+    <a href="../../#about">О нас</a>
+    <a href="../../#projects">Проекты</a>
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
+  <!-- HERO -->
   <header class="hero hero--contentIndex">
     <div class="hero-inner">
       <h1>ИИ-контент</h1>
@@ -67,6 +54,7 @@
     </div>
   </header>
 
+  <!-- СЕТКА -->
   <section class="section-content" aria-label="ИИ-контент">
     <div class="content-grid">
       <a class="tile tile-video" href="./emancipation.html" aria-label="Эмансипация роботов — смотреть">
@@ -80,6 +68,7 @@
     </div>
   </section>
 
+  <!-- КОНТАКТЫ + ФУТЕР -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -95,6 +84,7 @@
     <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
   </footer>
 
+  <!-- DRAWER -->
   <div class="scrim" id="scrim" hidden></div>
   <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" hidden>
     <header class="drawer-head">
@@ -121,16 +111,15 @@
       function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
       function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
       open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
-      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
 
       const f = document.getElementById('contactForm');
       const s = document.getElementById('contactStatus');
       f.addEventListener('submit', async (e)=>{
-        e.preventDefault(); s.textContent = 'Отправляем…';
+        e.preventDefault(); s.textContent='Отправляем…';
         try{
-          const r = await fetch(f.action, { method:'POST', body:new FormData(f), headers:{'Accept':'application/json'} });
-          if (r.ok){ f.reset(); s.textContent='Сообщение отправлено. Спасибо!'; setTimeout(()=>s.textContent='', 1500); }
-          else { const d = await r.json().catch(()=>({})); s.textContent = d.errors?.[0]?.message || 'Не получилось отправить.'; }
+          const r = await fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}});
+          if(r.ok){ f.reset(); s.textContent='Сообщение отправлено. Спасибо!'; setTimeout(()=>s.textContent='',1500); }
+          else{ const d=await r.json().catch(()=>({})); s.textContent=d.errors?.[0]?.message||'Не получилось отправить.'; }
         }catch{ s.textContent='Сеть недоступна. Повторите позже.'; }
       });
     })();

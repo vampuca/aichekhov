@@ -21,16 +21,17 @@
   </style>
 </head>
 <body id="top">
-
+  <!-- ЛОГО + НАВИГАЦИЯ -->
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
   <nav class="top-nav" aria-label="Навигация">
     <a href="./">← ИИ-контент</a>
-    <a href="../series/">Сериалы</a>
+    <a href="../../#projects">Проекты</a>
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
+  <!-- HERO -->
   <header class="hero hero--content">
     <div class="hero-inner">
       <h1>Эмансипация роботов</h1>
@@ -38,6 +39,7 @@
     </div>
   </header>
 
+  <!-- ПЛЕЕР -->
   <main class="player-wrap">
     <div class="player-box">
       <iframe
@@ -51,6 +53,7 @@
     </div>
   </main>
 
+  <!-- КОНТАКТЫ + ФУТЕР -->
   <section class="contact-section">
     <div class="contact">
       <a class="mail-link" href="mailto:studio@aichekhov.ru">
@@ -67,6 +70,7 @@
     <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
   </footer>
 
+  <!-- DRAWER -->
   <div class="scrim" id="scrim" hidden></div>
   <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" hidden>
     <header class="drawer-head">
@@ -93,16 +97,15 @@
       function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
       function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
       open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
-      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
 
       const f = document.getElementById('contactForm');
       const s = document.getElementById('contactStatus');
       f.addEventListener('submit', async (e)=>{
-        e.preventDefault(); s.textContent = 'Отправляем…';
+        e.preventDefault(); s.textContent='Отправляем…';
         try{
-          const r = await fetch(f.action, { method:'POST', body:new FormData(f), headers:{'Accept':'application/json'} });
-          if (r.ok){ f.reset(); s.textContent='Сообщение отправлено. Спасибо!'; setTimeout(()=>s.textContent='', 1500); }
-          else { const d = await r.json().catch(()=>({})); s.textContent = d.errors?.[0]?.message || 'Не получилось отправить.'; }
+          const r = await fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}});
+          if(r.ok){ f.reset(); s.textContent='Сообщение отправлено. Спасибо!'; setTimeout(()=>s.textContent='',1500); }
+          else{ const d=await r.json().catch(()=>({})); s.textContent=d.errors?.[0]?.message||'Не получилось отправить.'; }
         }catch{ s.textContent='Сеть недоступна. Повторите позже.'; }
       });
     })();
