@@ -3,43 +3,81 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI-контент — Скоро</title>
-  <meta name="description" content="AI-контент — скоро." />
-  <link rel="stylesheet" href="../../style.css?v=soon1" />
+  <title>ИИ-контент — студия им. А.П. Чехова</title>
+  <meta name="description" content="ИИ-контент — клипы и эксперименты студии им. А.П. Чехова." />
+  <link rel="stylesheet" href="../../style.css?v=73" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
-
   <style>
-    .hero--soon{ min-height:48vh; padding-top:clamp(120px,16vh,200px); padding-bottom:clamp(8px,2vh,24px); }
-    .soon-art{ display:grid; place-items:center; width:min(1180px,94vw); margin:0 auto; }
-    .soon-figure{ width:100%; border-radius:18px; overflow:hidden; transform:translateY(-7vh); }
-    .soon-figure img{ display:block; width:100%; height:auto; }
-    @media (max-width: 900px){
-      .hero--soon{ min-height:42vh; padding-top:clamp(104px,15vh,180px); }
-      .soon-figure{ transform:translateY(-6vh); }
+    .hero--contentIndex{
+      min-height: 18vh; padding-top: 16.5vh; padding-bottom: 0;
+    }
+    .hero--contentIndex .hero-inner{ max-width:1100px; margin-inline:auto; }
+    .hero--contentIndex h1{
+      font-weight:300; margin:0 0 6px;
+      font-size:clamp(28px, 5.2vw, 72px);
+    }
+    .hero--contentIndex .sub{
+      margin:0 0 8px; color:#bdbdbd;
+      font-size:clamp(13px, 1.8vw, 18px); font-weight:500;
+    }
+
+    .content-grid{
+      display:grid; grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:20px; max-width:1200px; margin:16px auto 4rem; padding:0 16px;
+    }
+    @media (max-width:1024px){ .content-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width:640px){ .content-grid{ grid-template-columns:1fr; gap:16px; margin:12px auto 3.5rem; } }
+
+    .content-grid .tile{
+      position:relative; overflow:hidden; border-radius:16px;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 8px 30px rgba(0,0,0,.35);
+      background:#111; min-height:220px;
+    }
+    .content-grid .tile-video .tile-bg,
+    .content-grid .tile-visual .tile-bg-img{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; display:block;
+    }
+    .content-grid .tile .tile-overlay{ background:none; }
+    .content-grid .tile .tile-title{ left:14px; right:14px; bottom:42px; }
+    .content-grid .tile .tile-badge{ left:14px; bottom:10px; }
+
+    @media (max-width:767px) and (orientation: portrait){
+      .hero + .section-content{ margin-top: 8px !important; }
     }
   </style>
 </head>
-<body id="top">
+<body class="page-content" id="top">
+
   <a class="brand" href="../../#top" aria-label="На начало">
     <img src="../../assets/img/logo.png" alt="Логотип студии" />
   </a>
   <nav class="top-nav" aria-label="Навигация">
-    <a href="../../#about">О нас</a>
-    <a href="../../#projects">Проекты</a>
+    <a href="../../#projects">← Проекты</a>
+    <a href="../series/">Сериалы</a>
   </nav>
   <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
 
-  <header class="hero hero--soon">
+  <header class="hero hero--contentIndex">
     <div class="hero-inner">
-      <h1>Скоро</h1>
+      <h1>ИИ-контент</h1>
+      <p class="sub">Сезон 2025</p>
     </div>
   </header>
 
-  <section class="soon-art" aria-label="Иллюстрация">
-    <figure class="soon-figure">
-      <img src="../shared/hero-soon.webp" alt="AI — заглушка раздела" />
-    </figure>
+  <section class="section-content" aria-label="ИИ-контент">
+    <div class="content-grid">
+      <a class="tile tile-video" href="./emancipation.html" aria-label="Эмансипация роботов — смотреть">
+        <video class="tile-bg" autoplay muted loop playsinline preload="metadata">
+          <source src="./emancipation-preview.mp4" type="video/mp4" />
+        </video>
+        <div class="tile-overlay"></div>
+        <div class="tile-title">Эмансипация роботов</div>
+        <div class="tile-badge">Смотреть</div>
+      </a>
+    </div>
   </section>
 
   <section class="contact-section">
@@ -53,7 +91,6 @@
       </a>
     </div>
   </section>
-
   <footer class="site-footer">
     <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
   </footer>
@@ -64,27 +101,38 @@
       <h3>Связаться с нами</h3>
       <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
     </header>
-
-    <!-- ИЗМЕНЕНО: только форма — экшн на Formspree -->
-    <form class="contact-form" action="https://formspree.io/f/mwpqzewk" method="POST" accept-charset="utf-8">
-      <input type="hidden" name="_subject" value="Заявка с сайта AI Чехов — AI-контент" />
-      <input type="hidden" name="_language" value="ru" />
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/mwpqzewk" method="POST">
       <label>Имя <input type="text" name="name" required></label>
       <label>Email <input type="email" name="email" required></label>
       <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
       <button type="submit" class="contact-submit">Отправить</button>
       <p class="contact-alt">Или напишите: <a class="contact-plain" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
+      <p id="contactStatus" class="contact-status" role="status" aria-live="polite"></p>
     </form>
   </aside>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    (()=>{ const o=document.getElementById('contactOpen'),c=document.getElementById('contactClose'),
-      d=document.getElementById('contactDrawer'),s=document.getElementById('scrim');
-      function show(){d.hidden=false;s.hidden=false;requestAnimationFrame(()=>{d.classList.add('is-open');s.classList.add('is-visible');document.body.style.overflow='hidden';});}
-      function hide(){d.classList.remove('is-open');s.classList.remove('is-visible');document.body.style.overflow='';setTimeout(()=>{d.hidden=true;s.hidden=true;},200);}
-      o.addEventListener('click',show); c.addEventListener('click',hide); s.addEventListener('click',hide);
-      addEventListener('keydown',e=>{if(e.key==='Escape'&&!d.hidden)hide();});
+    (() => {
+      const open = document.getElementById('contactOpen');
+      const close = document.getElementById('contactClose');
+      const dr = document.getElementById('contactDrawer');
+      const scr = document.getElementById('scrim');
+      function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
+      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
+      open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
+      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
+
+      const f = document.getElementById('contactForm');
+      const s = document.getElementById('contactStatus');
+      f.addEventListener('submit', async (e)=>{
+        e.preventDefault(); s.textContent = 'Отправляем…';
+        try{
+          const r = await fetch(f.action, { method:'POST', body:new FormData(f), headers:{'Accept':'application/json'} });
+          if (r.ok){ f.reset(); s.textContent='Сообщение отправлено. Спасибо!'; setTimeout(()=>s.textContent='', 1500); }
+          else { const d = await r.json().catch(()=>({})); s.textContent = d.errors?.[0]?.message || 'Не получилось отправить.'; }
+        }catch{ s.textContent='Сеть недоступна. Повторите позже.'; }
+      });
     })();
   </script>
 </body>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Эмансипация роботов — ИИ-контент</title>
+  <meta name="description" content="Эмансипация роботов — клип ИИ-студии им. А.П. Чехова." />
+  <link rel="stylesheet" href="../../style.css?v=73" />
+  <style>
+    .hero--content{
+      min-height: 8vh; padding-top: 16.5vh; padding-bottom: 0;
+    }
+    .hero--content .hero-inner{ max-width:1100px; margin-inline:auto; }
+    .hero--content h1{
+      font-weight:300; margin:0 0 6px;
+      font-size:clamp(28px, 5.2vw, 72px);
+    }
+    .hero--content .sub{
+      margin:0 0 8px; color:#bdbdbd;
+      font-size:clamp(13px, 1.8vw, 18px); font-weight:500;
+    }
+    .player-wrap{ margin-top:14px; }
+    @media (max-width: 880px){
+      .hero--content{ padding-top:18vh; min-height:6vh; }
+      .hero--content h1{ font-size:clamp(26px, 7vw, 44px); margin-bottom:4px; font-weight:500; }
+      .hero--content .sub{ font-size:clamp(12px, 3.2vw, 15px); margin-bottom:6px; }
+      .player-wrap{ margin-top:10px; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <a class="brand" href="../../#top" aria-label="На начало">
+    <img src="../../assets/img/logo.png" alt="Логотип студии" />
+  </a>
+  <nav class="top-nav" aria-label="Навигация">
+    <a href="./">← ИИ-контент</a>
+    <a href="../series/">Сериалы</a>
+  </nav>
+  <button class="contact-fixed" id="contactOpen" aria-haspopup="dialog" aria-controls="contactDrawer">Пишите нам</button>
+
+  <header class="hero hero--content">
+    <div class="hero-inner">
+      <h1>Эмансипация роботов</h1>
+      <p class="sub">ИИ-контент</p>
+    </div>
+  </header>
+
+  <main class="player-wrap">
+    <div class="player-box">
+      <iframe
+        class="player-frame"
+        src="https://rutube.ru/play/embed/5a9cb05799ef6183918045a4bcacf54a?p=LuZIDccATwrfOFNCfzxVNA"
+        title="Эмансипация роботов — ИИ-контент"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+  </main>
+
+  <section class="contact-section">
+    <div class="contact">
+      <a class="mail-link" href="mailto:studio@aichekhov.ru">
+        <svg class="mail-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+          <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <span class="mail-text">studio@aichekhov.ru</span>
+      </a>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Студия искусственного интеллекта им. А.П. Чехова</p>
+  </footer>
+
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="drawer" id="contactDrawer" role="dialog" aria-modal="true" hidden>
+    <header class="drawer-head">
+      <h3>Связаться с нами</h3>
+      <button class="drawer-close" id="contactClose" aria-label="Закрыть">✕</button>
+    </header>
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/mwpqzewk" method="POST">
+      <label>Имя <input type="text" name="name" required></label>
+      <label>Email <input type="email" name="email" required></label>
+      <label>Сообщение <textarea name="message" rows="5" required></textarea></label>
+      <button type="submit" class="contact-submit">Отправить</button>
+      <p class="contact-alt">Или напишите: <a class="contact-plain" href="mailto:studio@aichekhov.ru">studio@aichekhov.ru</a></p>
+      <p id="contactStatus" class="contact-status" role="status" aria-live="polite"></p>
+    </form>
+  </aside>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (() => {
+      const open = document.getElementById('contactOpen');
+      const close = document.getElementById('contactClose');
+      const dr = document.getElementById('contactDrawer');
+      const scr = document.getElementById('scrim');
+      function show(){ dr.hidden=false; scr.hidden=false; requestAnimationFrame(()=>{ dr.classList.add('is-open'); scr.classList.add('is-visible'); document.body.style.overflow='hidden';});}
+      function hide(){ dr.classList.remove('is-open'); scr.classList.remove('is-visible'); document.body.style.overflow=''; setTimeout(()=>{ dr.hidden=true; scr.hidden=true; }, 200);}
+      open.addEventListener('click', show); close.addEventListener('click', hide); scr.addEventListener('click', hide);
+      addEventListener('keydown', e => { if (e.key === 'Escape' && !dr.hidden) hide(); });
+
+      const f = document.getElementById('contactForm');
+      const s = document.getElementById('contactStatus');
+      f.addEventListener('submit', async (e)=>{
+        e.preventDefault(); s.textContent = 'Отправляем…';
+        try{
+          const r = await fetch(f.action, { method:'POST', body:new FormData(f), headers:{'Accept':'application/json'} });
+          if (r.ok){ f.reset(); s.textContent='Сообщение отправлено. Спасибо!'; setTimeout(()=>s.textContent='', 1500); }
+          else { const d = await r.json().catch(()=>({})); s.textContent = d.errors?.[0]?.message || 'Не получилось отправить.'; }
+        }catch{ s.textContent='Сеть недоступна. Повторите позже.'; }
+      });
+    })();
+  </script>
+</body>
+</html>
