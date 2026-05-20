@@ -56,6 +56,105 @@
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div id="password-screen">
+  <div class="password-box">
+    <h2>Доступ ограничен</h2>
+    <p>Введите пароль</p>
+
+    <input type="password" id="password-input" placeholder="Пароль" />
+    <button id="password-button">Войти</button>
+
+    <div id="password-error">Неверный пароль</div>
+  </div>
+</div>
+
+<style>
+#password-screen{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999999;
+}
+
+.password-box{
+  width:min(420px,90vw);
+  padding:32px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  background:#111;
+  text-align:center;
+}
+
+.password-box h2{
+  margin:0 0 10px;
+  font-size:32px;
+}
+
+.password-box p{
+  margin:0 0 20px;
+  opacity:.7;
+}
+
+.password-box input{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  background:#1d1d1d;
+  color:#fff;
+  font-size:16px;
+  margin-bottom:14px;
+  box-sizing:border-box;
+}
+
+.password-box button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#fff;
+  color:#000;
+  font-weight:700;
+  cursor:pointer;
+}
+
+#password-error{
+  margin-top:12px;
+  color:#ff6b6b;
+  display:none;
+}
+</style>
+
+<script>
+const PASSWORD = "vampuca2025";
+
+const screen = document.getElementById("password-screen");
+const input = document.getElementById("password-input");
+const button = document.getElementById("password-button");
+const error = document.getElementById("password-error");
+
+function unlock() {
+  if (input.value === PASSWORD) {
+    sessionStorage.setItem("episode1_access", "granted");
+    screen.style.display = "none";
+  } else {
+    error.style.display = "block";
+  }
+}
+
+if (sessionStorage.getItem("episode1_access") === "granted") {
+  screen.style.display = "none";
+}
+
+button.addEventListener("click", unlock);
+
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") unlock();
+});
+</script>
   <!-- ВЕРХ -->
   <a class="brand" href="#top" aria-label="На начало">
     <img src="assets/img/logo.png" alt="Логотип студии" />
